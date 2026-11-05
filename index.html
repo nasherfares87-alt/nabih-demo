@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نبيه: عرض توضيحي كامل</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12211F;--muted:#4A5B58;--line:#CBD8D5;--bg:#F3F6F5;--brand:#0F766E;--okbg:#DCF3E4;--okfg:#14532D;--wbg:#FDE9C8;--wfg:#7A3E00;--ebg:#FBDADA;--efg:#8A1C1C}
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top .in{max-width:1100px;margin:auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.brand{font-size:24px;font-weight:700;color:var(--brand)}
+.demo{background:var(--wbg);color:var(--wfg);font-size:13px;padding:6px 16px;text-align:center}
+.demo button{font:inherit;font-size:13px;margin-inline-start:10px;background:#fff;border:1px solid var(--wfg);color:var(--wfg);border-radius:8px;padding:2px 10px;cursor:pointer}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+.wrap{max-width:1100px;margin:auto;padding:20px 16px 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat b{display:block;font-size:28px;color:var(--brand)}
+h1{font-size:26px;margin:0 0 8px}h2{font-size:20px;margin:0 0 10px}
+.muted{color:var(--muted);font-size:14px}
+button{font:inherit;cursor:pointer}
+.btn{font-weight:600;border:0;border-radius:10px;padding:10px 18px;background:var(--brand);color:#fff;min-height:44px}
+.btn2{font-weight:600;border:1px solid var(--brand);border-radius:10px;padding:10px 16px;background:#fff;color:var(--brand);min-height:44px}
+.btn3{font-weight:600;border:1px solid var(--efg);border-radius:10px;padding:10px 16px;background:#fff;color:var(--efg);min-height:44px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.chip{font-size:14px;border:1px solid #8AA19D;border-radius:999px;padding:6px 14px;background:#fff;color:var(--ink);min-height:36px}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.badge{display:inline-block;border-radius:999px;padding:3px 12px;font-weight:600;font-size:13px}
+.ok{background:var(--okbg);color:var(--okfg)}.pend{background:var(--wbg);color:var(--wfg)}.bad{background:var(--ebg);color:var(--efg)}.neu{background:#E7EEEC;color:var(--ink)}
+.banner{border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.banner.warn{background:var(--wbg);color:var(--wfg)}.banner.err{background:var(--ebg);color:var(--efg)}.banner.good{background:var(--okbg);color:var(--okfg)}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input[type=text],input[type=number],input[type=password],select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #8AA19D;border-radius:10px;min-height:44px;background:#fff;color:var(--ink)}
+textarea{min-height:90px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid #7CC4BC;outline-offset:1px}
+.ltr{direction:ltr;text-align:left}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #E1E9E7;flex-wrap:wrap}
+.row:last-child{border-bottom:0}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{background:#E7EEEC;text-align:right;padding:10px 12px}td{padding:10px 12px;border-top:1px solid #E1E9E7;vertical-align:top}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.role{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.st{font-size:13px;padding:4px 12px;border-radius:999px;background:#E7EEEC;color:var(--muted)}
+.st.on{background:var(--brand);color:#fff}.st.done{background:var(--okbg);color:var(--okfg)}
+.num{font-size:64px;font-weight:700;color:var(--brand);text-align:center;margin:10px 0}
+.opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.big{font-size:26px;min-width:90px}
+.prev{max-width:240px;max-height:240px;border-radius:14px;border:1px solid var(--line);display:block;margin:12px 0;object-fit:cover}
+fieldset{border:1px solid var(--line);border-radius:10px;margin:14px 0;padding:8px 14px}
+fieldset label{display:inline-block;margin:6px 14px 6px 0;font-weight:400}
+.scan{text-align:center;padding:16px}
+.face{width:120px;height:120px;margin:0 auto 12px;border-radius:50%;border:4px solid var(--brand);position:relative;overflow:hidden}
+.face:after{content:"";position:absolute;left:0;right:0;height:4px;background:var(--brand);animation:sweep 1.1s linear infinite}
+@keyframes sweep{from{top:0}to{top:116px}}
+.bar{height:10px;background:#E1E9E7;border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--brand);animation:fill 2.2s linear forwards}
+@keyframes fill{to{width:100%}}
+.code{font-size:34px;font-weight:700;letter-spacing:4px;color:var(--brand);direction:ltr;text-align:center;margin:6px 0}
+.modal{position:fixed;inset:0;background:rgba(18,33,31,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.modal .box{background:#fff;border-radius:16px;padding:22px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;max-width:92vw}
+#toast.show{opacity:1}
+details{margin-top:24px}summary{cursor:pointer;font-weight:600}
+</style>
+</head>
+<body>
+<div class="demo">نسخة عرض توضيحي: جميع البيانات افتراضية ولا يوجد ربط حقيقي بأي جهة. <button onclick="resetDemo()">إعادة ضبط العرض</button></div>
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const KEY='nabih-demo-v1';
+const SEED_IBAN='SA'+'0'.repeat(18)+'4821',SELLER_IBAN='SA'+'0'.repeat(18)+'9137',OTHER_IBAN='SA'+'1'.repeat(22);
+const $=s=>document.querySelector(s);
+const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n).toLocaleString('en-US');
+const today=()=>new Date().toISOString().slice(0,10);
+const ST={DRAFT:['neu','مسودة'],PENDING_OWNERSHIP:['pend','بانتظار مراجعة الملكية'],OWNERSHIP_VERIFIED:['ok','الملكية معتمدة'],REJECTED:['bad','مرفوضة'],SUSPENDED:['bad','معلّقة'],SOLD:['ok','مباعة']};
+const LVL={HIGH:['ok','مرتفع'],MEDIUM:['pend','متوسط'],LOW:['bad','منخفض']};
+const maskName=n=>{const p=String(n).split(' ');return p[0]+(p[1]?' '+p[1][0]+'***':'')};
+const maskIban=i=>i?'SA•• •••• •••• •••• '+i.slice(-4):'غير مسجّل';
+const normIban=s=>String(s).replace(/\s+/g,'').toUpperCase();
+const badge=(k,t)=>`<span class="badge ${k}">${t}</span>`;
+function fresh(){return{user:null,mode:null,view:'login',
+acc:{admin:{name:'مشرف النظام'},seller:{name:'أحمد الخالدي',idv:false,bankOk:false,iban:''},buyer:{name:'منى الشهري',idv:false,bankOk:false,iban:''},seed:{name:'خالد المطيري',idv:true,bankOk:true,iban:SEED_IBAN}},
+items:[{id:1,owner:'seed',title:'سيارة تويوتا كامري 2021',cat:'مركبة',price:68000,adUrl:'https://haraj.com.sa/1182345678',status:'OWNERSHIP_VERIFIED'}],
+proofs:[{id:1,item:1,type:'DOCUMENT',status:'APPROVED',reason:'',text:''}],
+invoices:[{id:1,no:'INV-000001',type:'SALE',item:1,owner:'seed',buyer:null,total:68000,date:today()}],
+inq:[{code:'NB-7K4M9Q2',item:1,inv:1,adUrl:'https://haraj.com.sa/1182345678',status:'ACTIVE',lookups:0}],
+orders:[],reports:[],codes:[],audit:[],seq:{item:1,proof:1,inv:1,svc:0,rep:0,code:0}};}
+let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){S=null}
+if(!S||!S.acc)S=fresh();
+S.tmp={};
+function save(){try{const c=Object.assign({},S);delete c.tmp;localStorage.setItem(KEY,JSON.stringify(c))}catch(e){}}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),3200)}
+const me=()=>S.acc[S.user];
+function audit(a){S.audit.unshift({t:new Date().toLocaleTimeString('en-GB'),who:S.user?S.acc[S.user].name:'-',a})}
+function go(v){S.view=v;save();render();window.scrollTo(0,0)}
+function resetDemo(){try{localStorage.removeItem(KEY)}catch(e){}S=fresh();S.tmp={};render()}
+function login(r){S.user=r;S.mode=r==='admin'?null:r;S.view=r==='admin'?'adash':'dash';audit('تسجيل دخول');save();render()}
+function logout(){S.user=null;S.mode=null;S.view='login';S.tmp={};save();render()}
+function switchMode(){S.mode=S.mode==='seller'?'buyer':'seller';S.view='dash';S.tmp={};save();render()}
+function genCode(p,n){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<n;i++)s+=A[Math.floor(Math.random()*A.length)];return p+s}
+function norm(u){try{const x=new URL(u.trim());return x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/$/,'')}catch(e){return null}}
+function copyText(t){try{navigator.clipboard.writeText(t);toast('تم النسخ')}catch(e){toast(t)}}
+
+/* ---------- التحقق من الهوية ---------- */
+function idvStart(){S.tmp.idv={step:1,outcome:'accept'};go('idv')}
+function idvSend(){const t=S.tmp.idv;const id=($('#nid')||{}).value||'';if(!/^\d{10}$/.test(id)){toast('أدخل 10 أرقام (افتراضية)');return}
+t.num=10+Math.floor(Math.random()*90);const o=new Set([t.num]);while(o.size<3)o.add(10+Math.floor(Math.random()*90));t.opts=[...o].sort(()=>Math.random()-.5);t.step=2;render()}
+function idvPick(n){const t=S.tmp.idv;if(n===t.num){t.step=3}else{toast('الرقم غير صحيح، حاول مرة أخرى');idvSend2()}render()}
+function idvSend2(){const t=S.tmp.idv;t.num=10+Math.floor(Math.random()*90);const o=new Set([t.num]);while(o.size<3)o.add(10+Math.floor(Math.random()*90));t.opts=[...o].sort(()=>Math.random()-.5)}
+function idvPhoto(i){const f=i.files&&i.files[0];if(f){S.tmp.idv.photo=URL.createObjectURL(f);S.tmp.idv.failed=false;render()}}
+function idvScan(){const t=S.tmp.idv;if(!t.photo){toast('اختر صورة أولا');return}
+const out=(document.querySelector('input[name=fo]:checked')||{}).value||'accept';t.scanning=true;t.failed=false;render();
+setTimeout(()=>{t.scanning=false;if(out==='accept'){t.step=4;me().idv=true;audit('توثيق الهوية بنجاح')}else{t.failed=true;audit('رفض التعرف على الوجه')}save();render()},2300)}
+function idvRetry(){const t=S.tmp.idv;t.failed=false;t.photo=null;render()}
+function vIdv(){const t=S.tmp.idv||(S.tmp.idv={step:1,outcome:'accept'});
+const steps=['البيانات','رقم التحقق','الوجه','النتيجة'];
+let c='';
+if(t.step===1)c=`<p class="muted">محاكاة تشبه خطوات التحقق عبر خدمات الهوية الوطنية. لا ترتبط بأي جهة حقيقية، وبياناتك الحقيقية غير مطلوبة.</p><label for="nid">رقم الهوية (افتراضي)</label><input id="nid" type="text" class="ltr" value="1000000001" inputmode="numeric" maxlength="10"><div style="margin-top:14px"><button class="btn" onclick="idvSend()">إرسال طلب التحقق</button></div>`;
+if(t.step===2)c=`<p>افتح تطبيق الهوية الوطنية على جوالك، واختر الرقم الظاهر هنا:</p><div class="num">${t.num}</div><div class="opts">${t.opts.map(n=>`<button class="btn2 big" onclick="idvPick(${n})">${n}</button>`).join('')}</div><p class="muted" style="text-align:center">في الواقع يظهر الاختيار في تطبيق الجوال، وهنا نحاكيه بالأزرار.</p>`;
+if(t.step===3)c=`<p>التحقق بالوجه: اختر صورة لوجهك أو التقطها بالكاميرا. تبقى الصورة في متصفحك فقط ولا تُرسل لأي خادم.</p>
+<label for="ph">صورة الوجه</label><input id="ph" type="file" accept="image/*" capture="user" onchange="idvPhoto(this)">
+${t.photo?`<img class="prev" src="${t.photo}" alt="الصورة المختارة">`:''}
+<fieldset><legend>نتيجة المحاكاة (يحددها مقدّم العرض)</legend><label><input type="radio" name="fo" value="accept" ${t.outcome!=='reject'?'checked':''} onchange="S.tmp.idv.outcome='accept'"> قبول التطابق</label><label><input type="radio" name="fo" value="reject" ${t.outcome==='reject'?'checked':''} onchange="S.tmp.idv.outcome='reject'"> رفض التطابق</label></fieldset>
+${t.scanning?`<div class="scan"><div class="face"></div><div class="bar"><i></i></div><p>جارٍ مطابقة الوجه مع صورة الهوية...</p></div>`:t.failed?`<div class="banner err"><span>لم يتطابق الوجه مع صورة الهوية. جرّب صورة أوضح بإضاءة جيدة.</span><button class="btn3" onclick="idvRetry()">إعادة المحاولة</button></div>`:`<button class="btn" onclick="idvScan()" ${t.photo?'':'disabled'}>بدء التعرف على الوجه</button>`}`;
+if(t.step===4)c=`<div class="banner good"><span>تم توثيق الهوية: ${h(me().name)}. تطابق الوجه ورقم الهوية.</span></div><button class="btn" onclick="go('dash')">متابعة</button>`;
+return `<h1>توثيق الهوية</h1><div class="card"><div class="steps">${steps.map((s,i)=>`<span class="st ${i+1===t.step?'on':i+1<t.step?'done':''}">${i+1}. ${s}</span>`).join('')}</div>${c}</div>`}
+
+/* ---------- التحقق من الحساب البنكي (للبائع) ---------- */
+function bankCheck(){const a=me();if(!a.idv){toast('وثّق هويتك أولا');return}
+const ib=normIban(($('#ib')||{}).value||'');if(!/^SA\d{22}$/.test(ib)){toast('الصيغة: SA ثم 22 رقما (افتراضية)');return}
+const out=(document.querySelector('input[name=bo]:checked')||{}).value||'ok';S.tmp.bank={loading:true};render();
+setTimeout(()=>{if(out==='ok'){a.bankOk=true;a.iban=ib;S.tmp.bank={done:'ok',ib};audit('توثيق الحساب البنكي')}else{S.tmp.bank={done:'bad',ib}}save();render()},1600)}
+function vBank(){const t=S.tmp.bank||{};const a=me();
+return `<h1>توثيق الحساب البنكي</h1><div class="card"><p class="muted">محاكاة استعلام من البنك: نتأكد أن الحساب باسم صاحب الهوية الموثقة (${h(maskName(a.name))}). بيانات افتراضية.</p>
+<label for="ib">رقم الآيبان (افتراضي)</label><input id="ib" type="text" class="ltr" value="${SELLER_IBAN}" maxlength="29">
+<fieldset><legend>نتيجة المحاكاة</legend><label><input type="radio" name="bo" value="ok" checked> الاسم يطابق الهوية</label><label><input type="radio" name="bo" value="bad"> الحساب باسم شخص آخر</label></fieldset>
+${t.loading?'<div class="scan"><div class="bar"><i></i></div><p>جارٍ الاستعلام من البنك...</p></div>':t.done==='ok'?`<div class="banner good"><span>تم توثيق الحساب ${h(maskIban(t.ib))}. اسم صاحب الحساب يطابق الهوية.</span><button class="btn" onclick="go('dash')">متابعة</button></div>`:`${t.done==='bad'?'<div class="banner err"><span>اسم صاحب الحساب لا يطابق الهوية الموثقة. لا يمكن اعتماد هذا الحساب.</span></div>':''}<button class="btn" onclick="bankCheck()">استعلام من البنك</button>`}</div>`}
+
+/* ---------- البائع ---------- */
+function saveItem(){const a=me();if(!a.idv){toast('وثّق هويتك أولا');idvStart();return}
+const title=$('#it').value.trim(),price=parseFloat($('#ip').value),url=$('#iu').value.trim(),pt=$('#pt').value,dec=$('#pd').value.trim();
+if(!title||!(price>0)){toast('أدخل اسم السلعة والسعر');return}
+if(url&&!norm(url)){toast('رابط الإعلان غير صالح');return}
+if(pt==='DECLARATION'&&!dec){toast('اكتب نص الإقرار');return}
+const id=++S.seq.item,pid=++S.seq.proof;
+S.items.push({id,owner:S.user,title,cat:$('#ic').value,price,adUrl:url,status:'PENDING_OWNERSHIP'});
+S.proofs.push({id:pid,item:id,type:pt,status:'UNDER_REVIEW',reason:'',text:dec});
+audit('إضافة سلعة وإثبات ملكية: '+title);toast('أُضيفت السلعة وأُرسل الإثبات للمراجعة');go('dash')}
+function resubmit(id){const it=S.items.find(i=>i.id===id);it.status='PENDING_OWNERSHIP';S.proofs.push({id:++S.seq.proof,item:id,type:'DECLARATION',status:'UNDER_REVIEW',reason:'',text:'إعادة تقديم بإقرار موثق'});audit('إعادة تقديم إثبات: '+it.title);go('dash')}
+function issueInv(id){const a=me();if(!a.idv||!a.bankOk){toast('وثّق الهوية والحساب البنكي أولا');go(a.idv?'bank':'idv');return}
+const it=S.items.find(i=>i.id===id);if(!it||it.owner!==S.user||it.status!=='OWNERSHIP_VERIFIED'){toast('لا تصدر فاتورة قبل اعتماد الملكية');return}
+if(S.inq.some(q=>q.item===id)){toast('صدرت فاتورة هذه السلعة');return}
+const iid=++S.seq.inv;const inv={id:iid,no:'INV-'+String(iid).padStart(6,'0'),type:'SALE',item:id,owner:S.user,buyer:null,total:it.price,date:today()};S.invoices.push(inv);
+let code;do{code=genCode('NB-',7)}while(S.inq.some(q=>q.code===code));
+S.inq.push({code,item:id,inv:iid,adUrl:it.adUrl,status:'ACTIVE',lookups:0});audit('إصدار فاتورة '+inv.no+' ورقم استفسار '+code);
+S.tmp.modal=iid;S.tmp.newCode=code;save();render()}
+function vSeller(){const a=me();const mine=S.items.filter(i=>i.owner===S.user);
+const rows=mine.map(it=>{const q=S.inq.find(x=>x.item===it.id);const pr=S.proofs.filter(p=>p.item===it.id).pop();const s=ST[it.status];
+let act='';
+if(it.status==='OWNERSHIP_VERIFIED'&&!q)act=`<button class="btn" onclick="issueInv(${it.id})">إصدار فاتورة</button>`;
+if(it.status==='REJECTED')act=`<span class="muted">${h(pr&&pr.reason)}</span> <button class="btn2" onclick="resubmit(${it.id})">إعادة التقديم</button>`;
+if(q)act=`<span class="badge ${q.status==='ACTIVE'?'ok':'bad'}">${q.status==='ACTIVE'?'الرقم فعّال':'الرقم معلّق'}</span> <b dir="ltr">${q.code}</b> <button class="chip" onclick="copyText('${q.code}')">نسخ</button> <button class="chip" onclick="S.tmp.modal=${q.inv};render()">الفاتورة</button>`;
+return `<tr><td>${h(it.title)}<div class="muted">${h(it.cat)} · ${fmt(it.price)} ر.س</div></td><td>${badge(s[0],s[1])}</td><td>${act||'<span class="muted">بانتظار المشرف</span>'}</td></tr>`}).join('');
+const inv=S.invoices.filter(i=>i.owner===S.user&&i.type==='SALE').length,act=S.inq.filter(q=>mine.some(i=>i.id===q.item)&&q.status==='ACTIVE').length;
+return `<h1>لوحة البائع</h1><div class="grid"><div class="stat"><b>${mine.length}</b>سلعي</div><div class="stat"><b>${mine.filter(i=>i.status==='PENDING_OWNERSHIP').length}</b>بانتظار المراجعة</div><div class="stat"><b>${inv}</b>فواتير صادرة</div><div class="stat"><b>${act}</b>أرقام استفسار فعّالة</div></div>
+<div class="card"><div class="row"><h2 style="margin:0">سلعي</h2><span><button class="btn" onclick="${a.idv?"go('additem')":"idvStart()"}">إضافة سلعة</button> <button class="btn2" onclick="go('report')">إبلاغ عن إعلان يستخدم سلعتي</button></span></div>
+${mine.length?`<div class="tw"><table><thead><tr><th>السلعة</th><th>الحالة</th><th>الإجراء</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="muted">لا توجد سلع بعد. أضف سلعة وارفع إثبات ملكيتها.</p>'}</div>`}
+function vAddItem(){return `<h1>إضافة سلعة وإثبات الملكية</h1><div class="card">
+<label for="it">اسم السلعة</label><input id="it" type="text" value="جهاز لابتوب للبيع">
+<label for="ic">الفئة</label><select id="ic"><option>مركبة</option><option>عقار</option><option selected>منتج</option><option>خدمة</option></select>
+<label for="ip">السعر (ر.س)</label><input id="ip" type="number" value="3500" min="1">
+<label for="iu">رابط الإعلان (اختياري)</label><input id="iu" type="text" class="ltr" value="https://haraj.com.sa/1199887766">
+<label for="pt">نوع الإثبات</label><select id="pt" onchange="$('#pd').parentElement.style.display=this.value==='DECLARATION'?'block':'none'"><option value="DOCUMENT">وثيقة رسمية (محاكاة رفع ملف)</option><option value="DECLARATION">إقرار موثق (عند تعذر الإثبات الرسمي)</option></select>
+<div style="display:none"><label for="pd">نص الإقرار</label><textarea id="pd">أقر أنني المالك الفعلي للسلعة.</textarea></div>
+<div style="margin-top:16px;display:flex;gap:10px"><button class="btn" onclick="saveItem()">إرسال للمراجعة</button><button class="btn2" onclick="go('dash')">إلغاء</button></div></div>`}
+
+/* ---------- المشتري ---------- */
+function doSearch(){const q=($('#q').value||'').trim();if(!q){toast('أدخل رقم استفسار أو رابط إعلان');return}
+const r={q};
+if(/^NB-/i.test(q)){r.kind='number';r.inq=S.inq.find(x=>x.code===q.toUpperCase())||null}
+else{const n=norm(q);if(!n){toast('أدخل رقم استفسار أو رابط إعلان صالحا');return}
+r.kind='link';const host=n.split('/')[0];const ok=['haraj.com.sa','tiktok.com'].some(d=>host===d||host.endsWith('.'+d));
+if(!ok){r.unsupported=true}else{r.inq=S.inq.find(x=>x.adUrl&&norm(x.adUrl)===n)||null;const tk=host.includes('tiktok');
+const it=r.inq&&S.items.find(i=>i.id===r.inq.item);
+r.fetched=it?{title:it.title,price:fmt(it.price)+' ر.س',src:host}:{title:tk?'منشور فيديو بلا بيانات سعر منظّمة':'سيارة للبيع (بيانات مجلوبة من المصدر)',price:tk?'—':'45,000 ر.س',src:host}}}
+if(r.inq){r.inq.lookups++}
+S.tmp.res=r;save();go('result')}
+function startFull(code){const a=me();if(!a.idv){toast('وثّق هويتك أولا');idvStart();return}
+const q=S.inq.find(x=>x.code===code),it=S.items.find(i=>i.id===q.item);
+if(it.owner===S.user){toast('لا يمكنك طلب التحقق على سلعتك');return}
+if(q.status!=='ACTIVE'){toast('الرقم معلّق');return}
+S.tmp.cur=code;go('pay')}
+function payFee(){const code=S.tmp.cur;const sid=++S.seq.svc;const inv={id:++S.seq.inv,no:'SVC-'+String(sid).padStart(6,'0'),type:'SERVICE_FEE',item:null,owner:null,buyer:S.user,total:10,date:today()};
+S.invoices.push(inv);S.orders.push({code,buyer:S.user,inv:inv.id,date:today()});audit('سداد رسم التحقق '+inv.no);S.tmp.svc=inv.id;save();go('rep')}
+function cred(q){const it=S.items.find(i=>i.id===q.item),ow=S.acc[it.owner];const pr=S.proofs.filter(p=>p.item===it.id&&p.status==='APPROVED').pop();
+const reps=S.reports.filter(r=>r.status==='UPHELD'&&r.code===q.code).length;
+const doc=pr&&pr.type==='DOCUMENT';
+const f=[['هوية المعلن',ow.idv?'موثقة عبر خدمة الهوية':'غير موثقة',ow.idv?1:0],['إثبات الملكية',pr?(doc?'وثيقة رسمية معتمدة':'إقرار موثق (غير رسمي)'):'غير معتمد',doc?1:pr?2:0],['الحساب البنكي',ow.bankOk?'يطابق اسم صاحب الهوية':'غير موثق',ow.bankOk?1:0],['البلاغات',reps?reps+' بلاغ مقبول':'لا يوجد',reps?0:1]];
+const sc=(ow.idv?1:0)+(ow.bankOk?1:0)+(pr?(doc?2:1):0)-reps*2;
+return{it,ow,f,lvl:sc>=4?'HIGH':sc>=2?'MEDIUM':'LOW'}}
+function makeCode(){const q=S.inq.find(x=>x.code===S.tmp.cur),c=cred(q);
+const amt=parseFloat($('#am').value),pur=$('#pu').value.trim(),ib=normIban($('#ib2').value);
+if(!(amt>0)||!pur||!ib){toast('أكمل المبلغ والغرض والحساب');return}
+const ck=[['اسم صاحب الحساب وحسابه يطابقان الحساب الموثق للمعلن',ib===c.ow.iban],['المبلغ لا يتجاوز قيمة الفاتورة ('+fmt(c.it.price)+' ر.س)',amt<=c.it.price],['رقم الاستفسار فعّال ولا توجد بلاغات قيد المراجعة',q.status==='ACTIVE'],['الغرض من التحويل مذكور',!!pur]];
+const rec={id:++S.seq.code,code:genCode('ST-',4),buyer:S.user,inq:q.code,iban:ib,amount:amt,purpose:pur,ck,status:ck.every(x=>x[1])?'VERIFIED':'MISMATCH'};
+S.codes.push(rec);S.tmp.codeId=rec.id;audit('إنشاء كود استقبل وحوّل '+rec.code+' ('+rec.status+')');save();go('chk')}
+function confirmTransfer(){const r=S.codes.find(c=>c.id===S.tmp.codeId);r.status='USED';audit('إقرار المشتري بإتمام التحويل '+r.code);go('done')}
+function vBuyer(){const my=S.orders.filter(o=>o.buyer===S.user).slice().reverse();
+return `<h1>لوحة المشتري</h1><div class="card"><h2>تحقق من إعلان قبل أن تحوّل</h2><p class="muted">الصق رابط الإعلان من أي منصة، أو أدخل رقم الاستفسار الموجود على صورته.</p>
+<label for="q">رابط الإعلان أو رقم الاستفسار</label><input id="q" type="text" class="ltr" value="NB-7K4M9Q2" onkeydown="if(event.key==='Enter')doSearch()">
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0"><span class="muted">جرّب:</span>
+<button class="chip" onclick="$('#q').value='NB-7K4M9Q2'">رقم استفسار</button><button class="chip" onclick="$('#q').value='https://haraj.com.sa/1182345678'">رابط حراج مسجّل</button><button class="chip" onclick="$('#q').value='https://tiktok.com/@seller/video/7311'">رابط تيك توك غير مسجّل</button><button class="chip" onclick="$('#q').value='https://example.com/ad/5'">منصة غير مدعومة</button></div>
+<button class="btn" onclick="doSearch()">تحقق</button></div>
+<div class="card"><h2>سجل التحقق</h2>${my.length?`<div class="tw"><table><thead><tr><th>رقم الاستفسار</th><th>التاريخ</th><th>فاتورة نبيه</th></tr></thead><tbody>${my.map(o=>{const iv=S.invoices.find(i=>i.id===o.inv);return `<tr><td dir="ltr">${o.code}</td><td>${o.date}</td><td><button class="chip" onclick="S.tmp.modal=${iv.id};render()">${iv.no}</button></td></tr>`}).join('')}</tbody></table></div>`:'<p class="muted">لا توجد عمليات تحقق بعد.</p>'}</div>`}
+function vResult(){const r=S.tmp.res;if(!r)return vBuyer();let c='';
+if(r.unsupported)c=`<div class="banner warn"><span>هذه المنصة غير مدعومة بعد في جلب بيانات الإعلان. يمكنك البحث برقم الاستفسار إن كان على صورة الإعلان.</span></div>`;
+else{
+if(r.fetched)c+=`<div class="card" style="background:var(--bg)"><b>بيانات الإعلان المجلوبة من ${h(r.fetched.src)}</b><div class="row"><span class="muted">العنوان</span><span>${h(r.fetched.title)}</span></div><div class="row"><span class="muted">السعر المعروض</span><span>${h(r.fetched.price)}</span></div></div>`;
+if(r.inq){const q=r.inq,it=S.items.find(i=>i.id===q.item);
+c+=`<div class="row"><b>رقم الاستفسار <span dir="ltr">${q.code}</span></b>${q.status==='ACTIVE'?badge('ok','مسجّل وفعّال'):badge('bad','معلّق')}</div><div class="row"><span class="muted">السلعة</span><span>${h(it.title)}</span></div>`;
+if(q.status!=='ACTIVE')c+=`<div class="banner err"><span>الرقم معلّق بسبب بلاغ قيد المراجعة. لا ننصح بأي تحويل.</span></div>`;
+else c+=`<div class="banner good"><span>الرقم مسجّل لدى نبيه ${r.kind==='link'?'والرابط مطابق للمسجّل':''}. للاطلاع على هوية المعلن ومستوى المصداقية اطلب التحقق الكامل.</span><button class="btn" onclick="startFull('${q.code}')">التحقق الكامل: 10 ريال</button></div>`}
+else c+=`<div class="banner err"><span>لا يوجد في نبيه رقم استفسار مسجّل لهذا ${r.kind==='link'?'الرابط':'الرقم'}. لا ننصح بتحويل أي مبلغ قبل التحقق من البائع.</span><button class="btn3" onclick="S.tmp.repTarget='${h(r.q).replace(/'/g,'')}';go('report')">إبلاغ عن الإعلان</button></div>`}
+return `<h1>نتيجة التحقق</h1><div class="card">${c}<p class="muted">تتحقق نبيه من وقائع محددة ولا تضمن الصفقة. بيانات المصدر للعرض فقط.</p><button class="btn2" onclick="go('dash')">بحث جديد</button></div>`}
+function vPay(){return `<h1>سداد رسم التحقق</h1><div class="card"><div class="row"><span class="muted">الخدمة</span><b>تحقق كامل من الإعلان والبائع</b></div><div class="row"><span class="muted">الرقم</span><b dir="ltr">${S.tmp.cur}</b></div><div class="row"><span class="muted">الرسم</span><b>10 ريال</b></div>
+<label for="cn">بطاقة افتراضية</label><input id="cn" type="text" class="ltr" value="4242 4242 4242 4242" disabled>
+<p class="muted">تصدر لك فاتورة من نبيه فور السداد. بوابة الدفع هنا محاكاة.</p><div style="display:flex;gap:10px"><button class="btn" onclick="payFee()">ادفع الآن (محاكاة)</button><button class="btn2" onclick="go('result')">رجوع</button></div></div>`}
+function vRep(){const q=S.inq.find(x=>x.code===S.tmp.cur),c=cred(q),l=LVL[c.lvl];
+return `<h1>تقرير التحقق</h1><div class="banner good"><span>تم السداد وصدرت فاتورة نبيه.</span><button class="chip" onclick="S.tmp.modal=${S.tmp.svc};render()">عرض الفاتورة</button></div>
+<div class="card"><div class="row"><h2 style="margin:0">${h(c.it.title)} <span class="muted" dir="ltr">${q.code}</span></h2>${badge(l[0],'مستوى المصداقية: '+l[1])}</div>
+<div class="row"><span class="muted">اسم المعلن</span><b>${h(maskName(c.ow.name))}</b></div><div class="row"><span class="muted">الحساب البنكي</span><b dir="ltr">${h(maskIban(c.ow.iban))}</b></div>
+${c.f.map(x=>`<div class="row"><span class="muted">${x[0]}</span><span>${badge(x[2]===1?'ok':x[2]===2?'pend':'bad',x[1])}</span></div>`).join('')}
+<p class="muted">المستوى يُحسب من العوامل أعلاه وليس ضمانا للصفقة.</p><button class="btn" onclick="go('code')">إنشاء كود استقبل وحوّل</button></div>`}
+function vCode(){const q=S.inq.find(x=>x.code===S.tmp.cur),it=S.items.find(i=>i.id===q.item),ow=S.acc[it.owner];
+return `<h1>استقبل وحوّل</h1><div class="card"><p class="muted">أدخل بيانات التحويل الذي تنوي تنفيذه. سنطابقها مع الحساب الموثق للمعلن والفاتورة قبل أن تحوّل.</p>
+<label for="am">المبلغ (ر.س)</label><input id="am" type="number" value="5000" min="1"><label for="pu">الغرض من التحويل</label><input id="pu" type="text" value="عربون ${h(it.title)}">
+<label for="ib2">الحساب الذي ستحوّل إليه (كما أعطاك البائع)</label><input id="ib2" type="text" class="ltr" value="${ow.iban}">
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="chip" onclick="$('#ib2').value='${ow.iban}'">حساب البائع الموثق</button><button class="chip" onclick="$('#ib2').value='${OTHER_IBAN}'">حساب مختلف (للتجربة)</button><button class="chip" onclick="$('#am').value=${it.price*2}">مبلغ أكبر من الفاتورة</button></div>
+<button class="btn" onclick="makeCode()">إنشاء الكود والتحقق</button></div>`}
+function vChk(){const r=S.codes.find(c=>c.id===S.tmp.codeId);const okAll=r.status!=='MISMATCH';
+return `<h1>التحقق من الحساب قبل التحويل</h1><div class="card"><div class="muted" style="text-align:center">كود العملية</div><div class="code">${r.code}</div>
+<div class="row"><span class="muted">الحساب</span><b dir="ltr">${h(maskIban(r.iban))}</b></div><div class="row"><span class="muted">المبلغ</span><b>${fmt(r.amount)} ر.س</b></div><div class="row"><span class="muted">الغرض</span><b>${h(r.purpose)}</b></div>
+<h2 style="margin-top:14px">نتيجة المطابقة مع البنك</h2>${r.ck.map(x=>`<div class="row"><span>${x[0]}</span>${badge(x[1]?'ok':'bad',x[1]?'مطابق':'غير مطابق')}</div>`).join('')}
+${okAll?`<div class="banner good" style="margin-top:14px"><span>البيانات متطابقة. نفّذ التحويل من تطبيق بنكك، ولا تمر الأموال عبر نبيه.</span><button class="btn" onclick="confirmTransfer()">نفّذت التحويل من بنكي (محاكاة)</button></div>`:`<div class="banner err" style="margin-top:14px"><span>تنبيه: توجد بيانات غير مطابقة. لا تحوّل قبل التأكد من البائع.</span><button class="btn3" onclick="go('code')">تعديل البيانات</button></div>`}</div>`}
+function vDone(){const q=S.inq.find(x=>x.code===S.tmp.cur),r=S.codes.find(c=>c.id===S.tmp.codeId);
+return `<h1>اكتملت الدورة</h1><div class="card"><div class="banner good"><span>تم التحقق من الإعلان والبائع، وطابقنا الحساب قبل التحويل.</span></div>
+<div class="row"><span class="muted">رقم الاستفسار</span><b dir="ltr">${q.code}</b></div><div class="row"><span class="muted">كود استقبل وحوّل</span><b dir="ltr">${r.code}</b></div><div class="row"><span class="muted">فاتورة رسم التحقق</span><button class="chip" onclick="S.tmp.modal=${S.tmp.svc};render()">عرض</button></div><div class="row"><span class="muted">فاتورة البيع</span><button class="chip" onclick="S.tmp.modal=${q.inv};render()">عرض</button></div>
+<p class="muted">تذكير: نبيه لم تستلم مبلغ الصفقة ولم تحوّله.</p><button class="btn" onclick="go('dash')">العودة للوحة</button></div>`}
+
+/* ---------- مشترك: فواتير وحساب وبلاغ ---------- */
+function vInvoices(){const sell=S.mode==='seller';const l=S.invoices.filter(i=>sell?(i.type==='SALE'&&i.owner===S.user):(i.type==='SERVICE_FEE'&&i.buyer===S.user)).slice().reverse();
+return `<h1>${sell?'فواتير البيع':'فواتير رسوم التحقق'}</h1><div class="card">${l.length?`<div class="tw"><table><thead><tr><th>الرقم</th><th>التاريخ</th><th>الإجمالي</th><th></th></tr></thead><tbody>${l.map(i=>`<tr><td dir="ltr">${i.no}</td><td>${i.date}</td><td>${fmt(i.total)} ر.س</td><td><button class="chip" onclick="S.tmp.modal=${i.id};render()">عرض</button></td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">لا توجد فواتير بعد.</p>'}</div>`}
+function vAccount(){const a=me();
+return `<h1>حسابي</h1><div class="card"><div class="row"><span class="muted">الاسم</span><b>${h(a.name)}</b></div>
+<div class="row"><span class="muted">توثيق الهوية</span><span>${a.idv?badge('ok','موثقة'):badge('pend','غير موثقة')} ${a.idv?'':'<button class="btn" onclick="idvStart()">توثيق</button>'}</span></div>
+<div class="row"><span class="muted">الحساب البنكي (للبيع)</span><span>${a.bankOk?badge('ok','موثق')+' <b dir="ltr">'+h(maskIban(a.iban))+'</b>':badge('pend','غير موثق')+' <button class="btn2" onclick="go(\'bank\')">توثيق</button>'}</span></div>
+<p class="muted">حساب واحد يعمل بصفتين: بائع ومشتري. التوثيق يُنجَز مرة واحدة ويصلح للصفتين، وتبدّل الصفة من الزر في أعلى الصفحة.</p></div>`}
+function sendReport(){const tg=$('#rt').value.trim(),rs=$('#rs').value.trim();if(!tg||!rs){toast('أكمل الرابط أو الرقم والسبب');return}
+S.reports.push({id:++S.seq.rep,kind:S.mode==='seller'?'OWNER':'BUYER',target:tg,reason:rs,by:S.user,status:'SUBMITTED'});audit('تقديم بلاغ: '+tg);toast('أُرسل البلاغ للمشرف');S.tmp.repTarget='';go('dash')}
+function vReport(){const own=S.mode==='seller';return `<h1>${own?'بلاغ مالك: إعلان يستخدم سلعتي دون إذني':'بلاغ عن إعلان مشبوه'}</h1><div class="card"><label for="rt">رابط الإعلان أو رقم الاستفسار</label><input id="rt" type="text" class="ltr" value="${h(S.tmp.repTarget||'https://haraj.com.sa/1182345678')}">
+<label for="rs">سبب البلاغ</label><textarea id="rs">${own?'الإعلان يعرض سلعة أملكها دون علمي أو إذني.':'البائع طلب عربونا قبل المعاينة.'}</textarea>
+<div style="margin-top:14px;display:flex;gap:10px"><button class="btn" onclick="sendReport()">إرسال البلاغ</button><button class="btn2" onclick="go('dash')">إلغاء</button></div></div>`}
+function vInvModal(){const i=S.invoices.find(x=>x.id===S.tmp.modal);if(!i)return '';const it=i.item&&S.items.find(x=>x.id===i.item);
+const nc=S.tmp.newCode;
+return `<div class="modal" onclick="if(event.target===this){S.tmp.modal=null;S.tmp.newCode=null;render()}"><div class="box" role="dialog" aria-label="الفاتورة"><h2>${i.type==='SALE'?'فاتورة بيع':'فاتورة رسم تحقق'} <span dir="ltr">${i.no}</span></h2>
+<div class="row"><span class="muted">التاريخ</span><b>${i.date}</b></div><div class="row"><span class="muted">المُصدِر</span><b>${i.type==='SALE'?h(maskName(S.acc[i.owner].name)):'منصة نبيه'}</b></div>${i.buyer?`<div class="row"><span class="muted">المشتري</span><b>${h(maskName(S.acc[i.buyer].name))}</b></div>`:''}${it?`<div class="row"><span class="muted">السلعة</span><b>${h(it.title)}</b></div>`:`<div class="row"><span class="muted">الخدمة</span><b>تحقق كامل من إعلان</b></div>`}
+<div class="row"><span class="muted">الإجمالي</span><b>${fmt(i.total)} ر.س</b></div><div class="row"><span class="muted">الحالة</span>${badge('ok','صادرة، لا تُعدَّل')}</div>
+${nc?`<div class="card" style="margin-top:12px;text-align:center"><div class="muted">رقم الاستفسار الجديد</div><div class="code">${nc}</div><div class="muted">ضعه على صورة إعلانك. يبحث به المشتري أو يلصق رابط الإعلان.</div><button class="chip" onclick="copyText('${nc}')">نسخ الرقم</button></div>`:''}
+<p class="muted">فاتورة توضيحية لا قيمة قانونية لها. الضريبة تُحدَّد وفق نظام العميل.</p><button class="btn" onclick="S.tmp.modal=null;S.tmp.newCode=null;render()">إغلاق</button></div></div>`}
+
+/* ---------- المشرف ---------- */
+function approveProof(id){const p=S.proofs.find(x=>x.id===id);p.status='APPROVED';const it=S.items.find(i=>i.id===p.item);it.status='OWNERSHIP_VERIFIED';audit('اعتماد إثبات ملكية: '+it.title);toast('تم الاعتماد');save();render()}
+function rejectProof(id){const r=($('#rr'+id).value||'').trim();if(!r){toast('سبب الرفض إلزامي');return}
+const p=S.proofs.find(x=>x.id===id);p.status='REJECTED';p.reason=r;const it=S.items.find(i=>i.id===p.item);it.status='REJECTED';audit('رفض إثبات ملكية: '+it.title);save();render()}
+function repAccept(id){const r=S.reports.find(x=>x.id===id);r.status='UPHELD';const n=norm(r.target)||'';
+const q=S.inq.find(x=>x.code===r.target.toUpperCase()||(x.adUrl&&norm(x.adUrl)===n));
+if(q){q.status='SUSPENDED';r.code=q.code;const it=S.items.find(i=>i.id===q.item);it.status='SUSPENDED';audit('قبول بلاغ وتعليق الرقم '+q.code)}else{audit('قبول بلاغ دون رقم مرتبط')}save();render()}
+function repReject(id){S.reports.find(x=>x.id===id).status='REJECTED';audit('رفض بلاغ');save();render()}
+function repRestore(code){const q=S.inq.find(x=>x.code===code);q.status='ACTIVE';S.items.find(i=>i.id===q.item).status='OWNERSHIP_VERIFIED';S.reports.filter(r=>r.code===code).forEach(r=>r.status='REJECTED');audit('رفع التعليق عن '+code);save();render()}
+function vAdmin(){const pend=S.proofs.filter(p=>p.status==='UNDER_REVIEW'),openR=S.reports.filter(r=>r.status==='SUBMITTED');
+const susp=S.inq.filter(q=>q.status==='SUSPENDED');
+return `<h1>لوحة المشرف</h1><div class="grid"><div class="stat"><b>${pend.length}</b>إثباتات بانتظار المراجعة</div><div class="stat"><b>${openR.length}</b>بلاغات مفتوحة</div><div class="stat"><b>${S.inq.filter(q=>q.status==='ACTIVE').length}</b>أرقام استفسار فعّالة</div><div class="stat"><b>${S.invoices.length}</b>فواتير في النظام</div></div>
+<div class="card"><h2>إثباتات الملكية</h2>${pend.length?`<div class="tw"><table><thead><tr><th>السلعة</th><th>المالك</th><th>الإثبات</th><th>الإجراء</th></tr></thead><tbody>${pend.map(p=>{const it=S.items.find(i=>i.id===p.item);return `<tr><td>${h(it.title)}<div class="muted">${fmt(it.price)} ر.س</div></td><td>${h(maskName(S.acc[it.owner].name))}</td><td>${p.type==='DOCUMENT'?'وثيقة رسمية (محاكاة)':'إقرار: '+h(p.text)}</td><td><button class="btn" onclick="approveProof(${p.id})">اعتماد</button><div style="margin-top:8px"><input id="rr${p.id}" type="text" placeholder="سبب الرفض (إلزامي)" aria-label="سبب الرفض"><button class="btn3" style="margin-top:6px" onclick="rejectProof(${p.id})">رفض</button></div></td></tr>`}).join('')}</tbody></table></div>`:'<p class="muted">لا توجد إثباتات بانتظار المراجعة.</p>'}</div>
+<div class="card"><h2>البلاغات</h2>${openR.length?openR.map(r=>`<div class="row"><span><b>${r.kind==='OWNER'?'بلاغ مالك':'بلاغ مشتري'}</b> · <span dir="ltr">${h(r.target)}</span><div class="muted">${h(r.reason)}</div></span><span><button class="btn" onclick="repAccept(${r.id})">قبول وتعليق الرقم</button> <button class="btn2" onclick="repReject(${r.id})">رفض</button></span></div>`).join(''):'<p class="muted">لا توجد بلاغات مفتوحة.</p>'}
+${susp.map(q=>`<div class="row"><span>${badge('bad','معلّق')} <b dir="ltr">${q.code}</b></span><button class="btn2" onclick="repRestore('${q.code}')">رفع التعليق</button></div>`).join('')}</div>
+<div class="card"><h2>سجل التدقيق</h2>${S.audit.slice(0,10).map(a=>`<div class="row"><span>${h(a.a)}</span><span class="muted">${h(a.who)} · ${a.t}</span></div>`).join('')||'<p class="muted">لا توجد إجراءات بعد.</p>'}</div>`}
+
+/* ---------- الإطار العام ---------- */
+function vLogin(){return `<div class="wrap"><h1>نبيه: منصة الاستفسار والفوترة الرقمية</h1><p class="muted">تحقق من الإعلان والبائع قبل أن تحوّل. اختر حسابا تجريبيا للدخول:</p>
+<div class="roles">
+<div class="role"><h2>المشرف</h2><p class="muted">مراجعة إثباتات الملكية والبلاغات وسجل التدقيق.</p><div class="muted">الدخول: admin · كلمة المرور: ••••••</div><button class="btn" onclick="login('admin')">دخول كمشرف</button></div>
+<div class="role"><h2>بائع: أحمد الخالدي</h2><p class="muted">يوثّق هويته وحسابه، يضيف سلعة، يصدر الفاتورة ويحصل على رقم الاستفسار.</p><div class="muted">الدخول: 05••••••01 · OTP: 1234</div><button class="btn" onclick="login('seller')">دخول كبائع</button></div>
+<div class="role"><h2>مشتري: منى الشهري</h2><p class="muted">يبحث برقم أو برابط، يدفع رسم التحقق، ثم يطابق الحساب قبل التحويل.</p><div class="muted">الدخول: 05••••••02 · OTP: 1234</div><button class="btn" onclick="login('buyer')">دخول كمشتري</button></div></div>
+<div class="card" style="margin-top:16px"><b>ملاحظة:</b> الحساب الواحد يعمل بصفتين: بائع ومشتري. بعد الدخول يبدّل المستخدم صفته من الزر في أعلى الصفحة، وتبقى هويته وحسابه الموثّقان كما هما.</div>
+<details><summary>دليل العرض المقترح (للمقدّم)</summary><ol><li>ادخل كبائع، ووثّق الهوية (رقم التحقق ثم الوجه: جرّب القبول والرفض)، ثم وثّق الحساب البنكي (جرّب التطابق وعدمه).</li><li>أضف سلعة مع إثبات ملكية.</li><li>ادخل كمشرف واعتمد الإثبات، وجرّب أيضا رفضه بسبب.</li><li>عد كبائع وأصدر الفاتورة، وانسخ رقم الاستفسار.</li><li>ادخل كمشتري، وابحث بالرقم أو برابط الإعلان، ثم ادفع رسم التحقق (10 ريال) وراجع التقرير.</li><li>أنشئ كود استقبل وحوّل، وجرّب «حساب مختلف» لترى التنبيه، ثم أكمل بالحساب الصحيح.</li><li>بدّل الصفة من مشتري إلى بائع لترى أن الحساب نفسه يعمل بالصفتين، وجرّب البلاغ ورفع التعليق من المشرف.</li></ol></details></div>`}
+function banners(){if(!S.user||S.user==='admin')return '';const a=me();
+if(!a.idv)return `<div class="banner warn"><span>هويتك غير موثقة. وثّقها لتعمل بائعا أو مشتريا.</span><button class="btn" onclick="idvStart()">توثيق الهوية</button></div>`;
+if(S.mode==='seller'&&!a.bankOk)return `<div class="banner warn"><span>وثّق حسابك البنكي لتتمكن من إصدار الفواتير.</span><button class="btn" onclick="go('bank')">توثيق الحساب</button></div>`;return ''}
+function header(){if(!S.user)return '';const a=me(),adm=S.user==='admin';
+const nav=adm?'':`<nav><button class="chip ${S.view==='dash'?'on':''}" onclick="go('dash')">لوحتي</button><button class="chip ${S.view==='invoices'?'on':''}" onclick="go('invoices')">الفواتير</button><button class="chip ${S.view==='account'?'on':''}" onclick="go('account')">حسابي</button></nav>`;
+return `<div class="top"><div class="in"><span class="brand">نبيه</span>${nav}<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="muted">${h(a.name)} · ${adm?'مشرف':'الصفة: '+(S.mode==='seller'?'بائع':'مشتري')}</span>${adm?'':`<button class="btn2" onclick="switchMode()">تبديل إلى ${S.mode==='seller'?'مشتري':'بائع'}</button>`}<button class="chip" onclick="logout()">خروج</button></span></div></div>`}
+function render(){let b='';
+if(!S.user){$('#app').innerHTML=vLogin();return}
+const V={dash:S.mode==='seller'?vSeller:vBuyer,adash:vAdmin,adminx:vAdmin,idv:vIdv,bank:vBank,additem:vAddItem,result:vResult,pay:vPay,rep:vRep,code:vCode,chk:vChk,done:vDone,invoices:vInvoices,account:vAccount,report:vReport};
+const f=V[S.view]||(S.user==='admin'?vAdmin:V.dash);
+try{b=f()}catch(e){b='<div class="card">حدث خطأ في العرض. اضغط «إعادة ضبط العرض» في الأعلى.</div>'}
+$('#app').innerHTML=header()+'<div class="wrap">'+(['idv','pay','rep','code','chk','done'].includes(S.view)?'':banners())+b+'</div>'+(S.tmp.modal?vInvModal():'')}
+render();
+</script>
+</body>
+</html>
