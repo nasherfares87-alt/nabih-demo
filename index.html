@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>منصة نبيه | التحقق وإصدار الفواتير الرقمية</title>
+<title>منصة نبيه | توثيق المعاملات والاتفاقات المالية والفوترة الرقمية</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- مكتبة توليد QR Code داخل المتصفح -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -16,6 +16,8 @@
   --brand:#0d9488;
   --brand-dark:#0f766e;
   --brand-light:#ccfbf1;
+  --purple:#7c3aed;
+  --purple-light:#ede9fe;
   --okbg:#dcfce7;
   --okfg:#15803d;
   --wbg:#fef3c7;
@@ -27,40 +29,42 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
 .top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 1px 2px 0 rgb(0 0 0 / 0.03)}
-.top .in{max-width:1150px;margin:auto;padding:12px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.top .in{max-width:1200px;margin:auto;padding:12px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .brand{font-size:24px;font-weight:700;color:var(--brand-dark);display:flex;align-items:center;gap:8px}
 .brand span{background:var(--brand);color:#fff;font-size:12px;padding:2px 8px;border-radius:6px;font-weight:600}
-.demo-bar{background:linear-gradient(90deg, #0f766e, #0d9488);color:#fff;font-size:13px;padding:8px 16px;text-align:center;font-weight:500;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.demo-bar{background:linear-gradient(90deg, #0f766e, #0d9488, #7c3aed);color:#fff;font-size:13px;padding:8px 16px;text-align:center;font-weight:500;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
 .demo-bar button{font:inherit;font-size:12px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);color:#fff;border-radius:6px;padding:3px 12px;cursor:pointer;transition:.2s}
 .demo-bar button:hover{background:#fff;color:var(--brand-dark)}
 nav{display:flex;gap:6px;flex-wrap:wrap}
-.wrap{max-width:1150px;margin:auto;padding:24px 18px 80px}
+.wrap{max-width:1200px;margin:auto;padding:24px 18px 80px}
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:20px;box-shadow:var(--card-shadow)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px}
 .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--card-shadow)}
-.stat b{display:block;font-size:30px;color:var(--brand);margin-bottom:4px}
+.stat b{display:block;font-size:28px;color:var(--brand);margin-bottom:4px}
+.stat.purple b{color:var(--purple)}
 h1{font-size:26px;margin:0 0 10px;font-weight:700;color:#0f172a}
 h2{font-size:19px;margin:0 0 12px;font-weight:700}
 .muted{color:var(--muted);font-size:14px}
 button{font:inherit;cursor:pointer;transition:.15s}
 .btn{font-weight:600;border:0;border-radius:10px;padding:10px 20px;background:var(--brand);color:#fff;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .btn:hover{background:var(--brand-dark)}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-purple:hover{background:#6d28d9}
 .btn2{font-weight:600;border:1px solid var(--brand);border-radius:10px;padding:10px 18px;background:#fff;color:var(--brand);min-height:44px}
 .btn2:hover{background:var(--brand-light)}
 .btn3{font-weight:600;border:1px solid var(--efg);border-radius:10px;padding:10px 18px;background:#fff;color:var(--efg);min-height:44px}
-.btn3:hover{background:var(--ebg)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
 .chip{font-size:14px;border:1px solid #cbd5e1;border-radius:999px;padding:6px 14px;background:#fff;color:var(--ink);min-height:36px}
 .chip:hover{border-color:var(--brand)}
 .chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
 .badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 12px;font-weight:600;font-size:13px}
-.ok{background:var(--okbg);color:var(--okfg)}.pend{background:var(--wbg);color:var(--wfg)}.bad{background:var(--ebg);color:var(--efg)}.neu{background:#f1f5f9;color:var(--ink)}
+.ok{background:var(--okbg);color:var(--okfg)}.pend{background:var(--wbg);color:var(--wfg)}.bad{background:var(--ebg);color:var(--efg)}.neu{background:#f1f5f9;color:var(--ink)}.purple-badge{background:var(--purple-light);color:var(--purple)}
 .banner{border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .banner.warn{background:var(--wbg);color:var(--wfg);border:1px solid #fde68a}
 .banner.err{background:var(--ebg);color:var(--efg);border:1px solid #fecaca}
 .banner.good{background:var(--okbg);color:var(--okfg);border:1px solid #bbf7d0}
+.banner.info{background:var(--purple-light);color:var(--purple);border:1px solid #ddd6fe}
 label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
-input[type=text],input[type=number],input[type=password],select,textarea{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #cbd5e1;border-radius:10px;min-height:44px;background:#fff;color:var(--ink)}
+input[type=text],input[type=number],input[type=password],input[type=date],select,textarea{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #cbd5e1;border-radius:10px;min-height:44px;background:#fff;color:var(--ink)}
 textarea{min-height:90px;resize:vertical}
 input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid #99f6e4;border-color:var(--brand)}
 .ltr{direction:ltr;text-align:left}
@@ -72,81 +76,53 @@ th{background:#f1f5f9;text-align:right;padding:12px 14px;font-weight:600}
 td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:middle}
 .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
 .role{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--card-shadow)}
-.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.st{font-size:13px;padding:6px 14px;border-radius:999px;background:#f1f5f9;color:var(--muted);font-weight:500}
-.st.on{background:var(--brand);color:#fff}.st.done{background:var(--okbg);color:var(--okfg)}
-.num{font-size:64px;font-weight:700;color:var(--brand);text-align:center;margin:14px 0}
-.opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.big{font-size:26px;min-width:90px}
-.prev{max-width:240px;max-height:240px;border-radius:14px;border:1px solid var(--line);display:block;margin:12px 0;object-fit:cover}
-fieldset{border:1px solid var(--line);border-radius:10px;margin:14px 0;padding:10px 16px}
-fieldset label{display:inline-block;margin:6px 14px 6px 0;font-weight:400}
-.scan{text-align:center;padding:20px}
-.face{width:120px;height:120px;margin:0 auto 14px;border-radius:50%;border:4px solid var(--brand);position:relative;overflow:hidden}
-.face:after{content:"";position:absolute;left:0;right:0;height:4px;background:var(--brand);animation:sweep 1.1s linear infinite}
-@keyframes sweep{from{top:0}to{top:116px}}
-.bar{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:12px 0}
-.bar i{display:block;height:100%;width:0;background:var(--brand);animation:fill 2.2s linear forwards}
-@keyframes fill{to{width:100%}}
-.code{font-size:32px;font-weight:700;letter-spacing:3px;color:var(--brand-dark);direction:ltr;text-align:center;margin:8px 0;font-family:monospace}
+.code{font-size:30px;font-weight:700;letter-spacing:3px;color:var(--brand-dark);direction:ltr;text-align:center;margin:8px 0;font-family:monospace}
 .modal{position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100}
-.modal .box{background:#fff;border-radius:20px;padding:26px;max-width:680px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1)}
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 24px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:200;max-width:92vw;font-weight:500;box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.2)}
+.modal .box{background:#fff;border-radius:20px;padding:26px;max-width:700px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 24px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:200;max-width:92vw;font-weight:500}
 #toast.show{opacity:1}
 details{margin-top:24px;background:#f8fafc;padding:14px;border-radius:12px;border:1px solid var(--line)}
 summary{cursor:pointer;font-weight:600;color:var(--brand-dark)}
 
-/* أنماط استوديو توليد كود الإعلان والباركود */
+/* أنماط الاستوديو والسندات */
 .ad-creator-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 @media(max-width:850px){.ad-creator-grid{grid-template-columns:1fr}}
 .ad-preview-box{background:#f1f5f9;border:2px dashed #cbd5e1;border-radius:16px;padding:16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:360px}
 .ad-canvas-wrap{box-shadow:0 10px 25px -5px rgba(0,0,0,0.15);border-radius:12px;overflow:hidden;max-width:100%;background:#fff}
 .ad-canvas-wrap canvas{display:block;max-width:100%;height:auto}
-.qr-container{background:#fff;padding:10px;border-radius:10px;display:inline-block;margin:10px auto;border:1px solid var(--line)}
-.reliability-meter{display:flex;align-items:center;gap:10px;margin:8px 0}
-.reliability-pill{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+
+/* تصميم السند المالي الموثق */
+.voucher-card{background:#ffffff;border:2px solid var(--brand);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.voucher-card::before{content:"منصة نبيه - معتمد";position:absolute;top:20px;left:-40px;transform:rotate(-45deg);background:var(--brand);color:#fff;font-size:11px;font-weight:700;padding:4px 45px}
+.parties-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.party-box{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px}
+.party-box b{color:var(--brand-dark)}
 </style>
 </head>
 <body>
 <div class="demo-bar">
-  <span>💡 <b>النموذج الأولي المتكامل لمنصة نبيه:</b> تجربة تفاعلية لمحاكاة إصدار الفواتير، توليد الباركود الموسوم على الإعلان، وفحص الموثوقية.</span>
+  <span>💡 <b>منصة نبيه الشاملة:</b> لتوثيق وتنظيم مختلف التعاملات والتحويلات المالية، المديونيات، السلف، الفواتير الجماعية، ومبيعات السلع.</span>
   <button onclick="resetDemo()">إعادة ضبط العرض 🔄</button>
 </div>
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const KEY='nabih-platform-v2';
-const SEED_IBAN='SA'+'22'.padEnd(22,'4821');
+const KEY='nabih-platform-v3-agreements';
 const SELLER_IBAN='SA'+'44'.padEnd(22,'9137');
+const BUYER_IBAN='SA'+'55'.padEnd(22,'6218');
 const OTHER_IBAN='SA'+'99'.padEnd(22,'1111');
 
-// صور تجريبية عالية الجودة للإعلانات
 const SAMPLE_IMAGES = {
   car: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&auto=format&fit=crop&q=80',
   laptop: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop&q=80',
-  phone: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&auto=format&fit=crop&q=80',
-  watch: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80'
+  phone: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&auto=format&fit=crop&q=80'
 };
 
 const $=s=>document.querySelector(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n).toLocaleString('en-US');
 const today=()=>new Date().toISOString().slice(0,10);
-
-const ST={
-  DRAFT:['neu','مسودة'],
-  PENDING_OWNERSHIP:['pend','بانتظار مراجعة الملكية'],
-  OWNERSHIP_VERIFIED:['ok','الملكية معتمدة ✅'],
-  REJECTED:['bad','مرفوضة ❌'],
-  SUSPENDED:['bad','معلّقة بسبب بلاغ ⚠️'],
-  SOLD:['ok','مباعة']
-};
-const LVL={
-  HIGH:['ok','مرتفع جداً (موثق رسمياً) ⭐⭐⭐'],
-  MEDIUM:['pend','متوسط (إقرار موثق) ⭐⭐'],
-  LOW:['bad','منخفض (غير مكتمل الإثبات) ⭐']
-};
 
 const maskName=n=>{const p=String(n).split(' ');return p[0]+(p[1]?' '+p[1][0]+'***':'')};
 const maskIban=i=>i?'SA•• •••• •••• •••• '+i.slice(-4):'غير مسجّل';
@@ -160,10 +136,11 @@ function fresh(){
     view:'login',
     acc:{
       admin:{name:'مشرف منصة نبيه'},
-      seller:{name:'أحمد محمد الخالدي',idv:true,bankOk:true,iban:SELLER_IBAN},
-      buyer:{name:'منى سعد الشهري',idv:true,bankOk:false,iban:''},
-      seed:{name:'خالد العتيبي',idv:true,bankOk:true,iban:SEED_IBAN}
+      seller:{name:'أحمد محمد الخالدي',idv:true,bankOk:true,iban:SELLER_IBAN,type:'INDIVIDUAL'},
+      buyer:{name:'منى سعد الشهري',idv:true,bankOk:true,iban:BUYER_IBAN,type:'INDIVIDUAL'},
+      company:{name:'شركة الإتقان للخدمات والتطوير',idv:true,bankOk:true,iban:'SA77'.padEnd(24,'2222'),type:'COMPANY'}
     },
+    // إعلانات السلع التقليدية
     items:[
       {
         id:1,
@@ -176,26 +153,64 @@ function fresh(){
         status:'OWNERSHIP_VERIFIED'
       }
     ],
+    // الإضافة الجوهرية للعميل: الاتفاقات والالتزامات المالية
+    agreements:[
+      {
+        id:1,
+        code:'AG-739104',
+        title:'اتفاق سداد سلفة شخصية مؤجلة',
+        relationModel:'IND_TO_IND', // فرد مع فرد
+        category:'LOAN', // سلفة
+        creditorName:'أحمد محمد الخالدي', // الدائن / المقرض
+        creditorIban:SELLER_IBAN,
+        debtorName:'سعد بن فهد القحطاني', // المدين / المقترض
+        debtorPhone:'050******1',
+        amount:15000,
+        dueDate:'2026-12-30',
+        terms:'إقرار باستلام سلفة بمبلغ 15,000 ريال والالتزام بسدادها على دفعة واحدة قبل تاريخ الاستحقاق.',
+        status:'ACTIVE', // ساري ونشط
+        createdAt:today(),
+        createdBy:'seller'
+      },
+      {
+        id:2,
+        code:'AG-882140',
+        title:'فاتورة جماعية: قطة استئجار مخيم عائلي',
+        relationModel:'IND_TO_GROUP', // فرد مع مجموعة
+        category:'GROUP_BILL', // فاتورة جماعية
+        creditorName:'أحمد محمد الخالدي', // منظم الفاتورة
+        creditorIban:SELLER_IBAN,
+        debtorName:'مجموعة الأصدقاء (5 أفراد)',
+        debtorPhone:'055******9',
+        amount:2500, // إجمالي المبلغ
+        sharePerPerson:500,
+        dueDate:'2026-11-20',
+        terms:'تقاسم تكلفة حجز وتجهيز المخيم بالتساوي (500 ريال لكل عضو) لحساب المنظم المعتمد.',
+        status:'ACTIVE',
+        createdAt:today(),
+        createdBy:'seller'
+      }
+    ],
     proofs:[
-      {id:1,item:1,type:'DOCUMENT',status:'APPROVED',reason:'',text:'رخصة سير المركبة (استمارة) مطابقة للهوية'}
+      {id:1,item:1,type:'DOCUMENT',status:'APPROVED',reason:'',text:'رخصة سير المركبة مطابقة للهوية'}
     ],
     invoices:[
       {id:1,no:'INV-000101',type:'SALE',item:1,owner:'seller',buyer:null,total:78000,date:today()}
     ],
     inq:[
-      {code:'NB-928471',item:1,inv:1,adUrl:'https://haraj.com.sa/1182345678',status:'ACTIVE',lookups:4}
+      {code:'NB-928471',type:'ITEM',item:1,inv:1,adUrl:'https://haraj.com.sa/1182345678',status:'ACTIVE',lookups:6}
     ],
     orders:[],
     reports:[],
     codes:[],
     audit:[],
-    seq:{item:1,proof:1,inv:1,svc:0,rep:0,code:0}
+    seq:{item:1,agreement:2,inv:1,rep:0,code:0}
   };
 }
 
 let S;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){S=null}
-if(!S||!S.acc||!S.items)S=fresh();
+if(!S||!S.acc||!S.agreements)S=fresh();
 S.tmp={};
 
 function save(){try{const c=Object.assign({},S);delete c.tmp;localStorage.setItem(KEY,JSON.stringify(c))}catch(e){}}
@@ -204,39 +219,552 @@ const me=()=>S.acc[S.user];
 function audit(a){S.audit.unshift({t:new Date().toLocaleTimeString('en-GB'),who:S.user?S.acc[S.user].name:'-',a})}
 function go(v){S.view=v;save();render();window.scrollTo(0,0)}
 function resetDemo(){try{localStorage.removeItem(KEY)}catch(e){}S=fresh();S.tmp={};render();toast('تمت إعادة ضبط العرض بالبيانات الافتراضية')}
-function login(r){S.user=r;S.mode=r==='admin'?null:r;S.view=r==='admin'?'adash':'dash';audit('تسجيل دخول كـ '+r);save();render()}
+function login(r){S.user=r;S.mode=r==='admin'?null:r;S.view=r==='admin'?'adash':'dash';audit('تسجيل دخول: '+r);save();render()}
 function logout(){S.user=null;S.mode=null;S.view='login';S.tmp={};save();render()}
 function switchMode(){S.mode=S.mode==='seller'?'buyer':'seller';S.view='dash';S.tmp={};save();render()}
 function genCode(p,n){const A='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';let s='';for(let i=0;i<n;i++)s+=A[Math.floor(Math.random()*A.length)];return p+s}
-function norm(u){try{const x=new URL(u.trim());return x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/$/,'')}catch(e){return null}}
 function copyText(t){try{navigator.clipboard.writeText(t);toast('تم النسخ: '+t)}catch(e){toast(t)}}
 
-/* ---------- حساب الموثوقية للإعلان ---------- */
-function cred(q){
-  const it=S.items.find(i=>i.id===q.item),ow=S.acc[it.owner];
-  const pr=S.proofs.filter(p=>p.item===it.id&&p.status==='APPROVED').pop();
-  const reps=S.reports.filter(r=>r.status==='UPHELD'&&r.code===q.code).length;
-  const doc=pr&&pr.type==='DOCUMENT';
-  
-  const f=[
-    ['هوية البائع',ow.idv?'موثقة عبر خدمة النفاذ الوطني':'غير موثقة',ow.idv?1:0],
-    ['إثبات الملكية للسلعة',pr?(doc?'وثيقة ملكية رسمية معتمدة':'إقرار موثق (مسؤولية شخصية)'):'غير معتمد',doc?1:pr?2:0],
-    ['الحساب البنكي المعتمد',ow.bankOk?'مطابق بالكامل لاسم الهوية':'غير موثق',ow.bankOk?1:0],
-    ['سجل البلاغات والنزاعات',reps?reps+' بلاغ نشط':'سجل نظيف لا توجد بلاغات',reps?0:1]
-  ];
-  const sc=(ow.idv?1:0)+(ow.bankOk?1:0)+(pr?(doc?2:1):0)-reps*2;
-  return{it,ow,f,lvl:sc>=4?'HIGH':sc>=2?'MEDIUM':'LOW',score:sc};
+/* نماذج العلاقات والعمليات للعميل */
+const RELATION_MODELS = {
+  IND_TO_IND: 'فرد مع فرد (معاملة شخصية)',
+  IND_TO_GROUP: 'فرد مع مجموعة أفراد (فاتورة جماعية / قطة)',
+  GROUP_TO_GROUP: 'مجموعة أفراد مع مجموعة أخرى',
+  IND_TO_ORG: 'فرد مع مؤسسة أو شركة',
+  ORG_TO_IND: 'مؤسسة أو شركة مع أفراد',
+  ORG_TO_ORG: 'منشأة مع منشأة أخرى (B2B)',
+  SERVICE_PROVIDER: 'جهة مقدمة للخدمة مع المستفيدين'
+};
+
+const OPERATION_TYPES = {
+  LOAN: 'سلفة (قرض حسن)',
+  DEBT: 'مديونية / سداد التزام سابق',
+  SERVICE_FEE: 'مقابل خدمة / أتعاب مهنية',
+  EARNEST: 'عربون / تأكيد حجز',
+  INVESTMENT: 'استثمار / حصة شراكة',
+  GROUP_BILL: 'فاتورة جماعية / تقاسم مصاريف',
+  COMMISSION: 'عمولة / سعي وساطة',
+  SUBSCRIPTION: 'اشتراك شهري / التزام دوري',
+  SALE_PURCHASE: 'بيع وشراء مباشر',
+  FINANCIAL_AGREEMENT: 'اتفاق مالي خاص'
+};
+
+/* ---------- لوحة التحكم الرئيسية ---------- */
+function vDash(){
+  if(S.mode==='buyer') return vBuyer();
+
+  const myAgreements=S.agreements.filter(a=>a.createdBy===S.user);
+  const myItems=S.items.filter(i=>i.owner===S.user);
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1 style="margin:0">منصة نبيه | لوحة إدارة التعاملات المالية</h1>
+        <p class="muted" style="margin:4px 0 0">منظومة متكاملة لتوثيق الاتفاقات، المديونيات، السلف، الفواتير الجماعية، ومبيعات السلع برقم استفسار رسمي.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-purple" onclick="go('add_agreement')">📝 توثيق اتفاق أو التزام مالي جديد</button>
+        <button class="btn" onclick="go('additem')">🏷️ إضافة إعلان سلعة بالباركود</button>
+      </div>
+    </div>
+
+    <!-- البطاقات الإحصائية -->
+    <div class="grid">
+      <div class="stat purple">
+        <b>${myAgreements.length}</b>
+        <span>اتفاقات والتزامات مالية نشطة</span>
+      </div>
+      <div class="stat">
+        <b>${myItems.length}</b>
+        <span>إعلانات وسلع موثقة</span>
+      </div>
+      <div class="stat">
+        <b>${S.invoices.filter(i=>i.owner===S.user).length}</b>
+        <span>فواتير وسندات مصدرة</span>
+      </div>
+      <div class="stat">
+        <b>100%</b>
+        <span>حساب بنكي وهوية موثقة</span>
+      </div>
+    </div>
+
+    <!-- قسم الاتفاقات والالتزامات المالية (طلب العميل الرئيسي) -->
+    <div class="card" style="border-right:4px solid var(--purple)">
+      <div class="row" style="margin-bottom:14px">
+        <div>
+          <h2 style="margin:0;color:var(--purple)">🤝 الاتفاقات والالتزامات المالية المسجلة</h2>
+          <span class="muted">تشمل السلف، المديونيات، العربون، الفواتير الجماعية، ومستحقات الخدمات.</span>
+        </div>
+        <button class="btn btn-purple" style="font-size:13px;min-height:36px" onclick="go('add_agreement')">➕ توثيق اتفاق مالي</button>
+      </div>
+
+      ${myAgreements.length?`
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>رقم الاستفسار</th>
+                <th>عنوان الاتفاق</th>
+                <th>طبيعة العملية</th>
+                <th>أطراف التعامل</th>
+                <th>المبلغ</th>
+                <th>الاستحقاق</th>
+                <th>الإجراء</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${myAgreements.map(a=>`
+                <tr>
+                  <td><b dir="ltr" style="font-family:monospace;color:var(--purple)">${a.code}</b></td>
+                  <td><b>${h(a.title)}</b></td>
+                  <td>${badge('purple-badge', OPERATION_TYPES[a.category]||a.category)}</td>
+                  <td>
+                    <div style="font-size:13px"><b>الدائن/المقدم:</b> ${h(a.creditorName)}</div>
+                    <div style="font-size:13px" class="muted"><b>المدين/المستفيد:</b> ${h(a.debtorName)}</div>
+                  </td>
+                  <td><b style="color:var(--brand);font-size:16px">${fmt(a.amount)} ر.س</b></td>
+                  <td>${a.dueDate||'فوري'}</td>
+                  <td>
+                    <button class="btn btn-purple" style="font-size:12px;padding:6px 12px;min-height:32px" onclick="viewAgreement('${a.code}')">📄 عرض السند والباركود</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `:'<p class="muted">لا توجد اتفاقات مسجلة بعد. اضغط «توثيق اتفاق مالي جديد» للبدء.</p>'}
+    </div>
+
+    <!-- قسم إعلانات السلع -->
+    <div class="card">
+      <div class="row" style="margin-bottom:14px">
+        <div>
+          <h2 style="margin:0">📦 إعلانات السلع المعروضة للبيع</h2>
+          <span class="muted">السلع المحمية بشريط الباركود وفواتير البيع الرقمية.</span>
+        </div>
+        <button class="btn" style="font-size:13px;min-height:36px" onclick="go('additem')">➕ إضافة سلعة</button>
+      </div>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>السلعة</th><th>السعر</th><th>الحالة</th><th>الإجراء</th></tr></thead>
+          <tbody>
+            ${myItems.map(it=>{
+              const q=S.inq.find(x=>x.item===it.id);
+              return `
+                <tr>
+                  <td><b>${h(it.title)}</b></td>
+                  <td>${fmt(it.price)} ر.س</td>
+                  <td>${badge('ok','معتمد')}</td>
+                  <td>
+                    ${q?`<button class="btn" style="font-size:12px;padding:6px 12px;min-height:32px" onclick="openAdStudio('${q.code}')">🖼️ صورة الإعلان بالباركود (${q.code})</button>`:''}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
 }
 
-/* ---------- استوديو توليد الإعلان الموسوم (Canvas Watermarker) ---------- */
-function renderAdStudio(inqCode){
-  const q=S.inq.find(x=>x.code===inqCode);
-  if(!q) return;
-  const it=S.items.find(i=>i.id===q.item);
-  const cInfo=cred(q);
-  const lvlText=cInfo.lvl==='HIGH'?'موثوقية عالية (هوية + وثيقة ملكية)':cInfo.lvl==='MEDIUM'?'موثوقية متوسطة (إقرار موثق)':'قيد التحقق';
+/* ---------- شاشة إنشاء اتفاق أو التزام مالي جديد ---------- */
+function vAddAgreement(){
+  const a=me();
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1 style="margin:0;color:var(--purple)">📝 توثيق اتفاق أو التزام مالي جديد</h1>
+        <p class="muted" style="margin:4px 0 0">حدد أطراف المعاملة المالية والغرض منها والمبلغ والشروط لإصدار رقم استفسار وباركود موثق.</p>
+      </div>
+      <button class="btn2" onclick="go('dash')">⬅ العودة للوحة</button>
+    </div>
 
-  // 1. توليد QR Code مخفي لقراءته في الكانفاس
+    <div class="card" style="max-width:850px">
+      <!-- 1. نموذج العلاقة بين الأطراف -->
+      <h2>1. علاقة وأطراف التعامل</h2>
+      <label for="relModel">نموذج العلاقة بين الأطراف</label>
+      <select id="relModel">
+        ${Object.entries(RELATION_MODELS).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+      </select>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px">
+        <div class="party-box">
+          <label style="margin-top:0">صفة الطرف الأول (أنت - منشئ الاتفاق)</label>
+          <select id="party1Role">
+            <option value="CREDITOR" selected>دائن / مقرض (أطلب المبلغ)</option>
+            <option value="SERVICE_PROVIDER">مقدم خدمة (مستحق الأتعاب)</option>
+            <option value="DEBTOR">مدين / مقترض (أقر بالالتزام)</option>
+            <option value="BENEFICIARY">مستفيد من الخدمة</option>
+            <option value="BROKER">وسيط / ساعي</option>
+            <option value="PARTNER">شريك / مستثمر</option>
+          </select>
+          <div style="margin-top:8px;font-size:13px"><b>الاسم:</b> ${h(a.name)}</div>
+          <div style="font-size:13px" class="muted"><b>الحساب البنكي المعتمد:</b> <span dir="ltr">${maskIban(a.iban)}</span></div>
+        </div>
+
+        <div class="party-box">
+          <label style="margin-top:0">صفة الطرف الثاني (الطرف المقابل)</label>
+          <select id="party2Role">
+            <option value="DEBTOR" selected>مدين / مقترض (ملتزم بالسداد)</option>
+            <option value="BENEFICIARY">مستفيد من الخدمة</option>
+            <option value="CREDITOR">دائن / مقرض</option>
+            <option value="GROUP">مجموعة أفراد (فاتورة مشتركة)</option>
+            <option value="PARTNER">شريك / مستثمر</option>
+          </select>
+          <label for="p2Name" style="margin:8px 0 4px">اسم الطرف الثاني / المجموعة</label>
+          <input id="p2Name" type="text" placeholder="مثال: فهد عبد الله الدوسري أو مجموعة الزملاء" value="فهد عبد الله الدوسري">
+          <label for="p2Phone" style="margin:8px 0 4px">رقم جوال الطرف الثاني (اختياري للإشعار)</label>
+          <input id="p2Phone" type="text" class="ltr" placeholder="05XXXXXXXX" value="0501234567">
+        </div>
+      </div>
+
+      <!-- 2. طبيعة العملية والغرض -->
+      <h2 style="margin-top:24px">2. طبيعة العملية المالية والالتزام</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label for="opType">نوع العملية المالية (الغرض من الحوالة)</label>
+          <select id="opType">
+            ${Object.entries(OPERATION_TYPES).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label for="agTitle">عنوان الاتفاق / المعاملة</label>
+          <input id="agTitle" type="text" value="سلفة شخصية مؤجلة السداد">
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label for="agAmount">المبلغ الإجمالي للالتزام (ر.س)</label>
+          <input id="agAmount" type="number" value="10000" min="1">
+        </div>
+        <div>
+          <label for="agDate">تاريخ الاستحقاق أو السداد (اختياري)</label>
+          <input id="agDate" type="date" value="2026-12-31">
+        </div>
+      </div>
+
+      <label for="agTerms">شروط وتفاصيل الالتزام المالي</label>
+      <textarea id="agTerms">تم الاتفاق بين الطرفين بكامل الأهلية المعتبرة على تحويل/استحقاق المبلغ المذكور كـ (سلفة شخصية)، ويلتزم الطرف الثاني بالسداد في تاريخ الاستحقاق المحدد، ويعتبر هذا السند إقراراً رسمياً ملزماً برقم استفسار موحد عبر منصة نبيه.</textarea>
+
+      <div style="margin-top:24px;display:flex;gap:12px">
+        <button class="btn btn-purple" style="font-size:16px" onclick="saveAgreement()">🛡️ اعتماد الاتفاق وإصدار السند والباركود</button>
+        <button class="btn2" onclick="go('dash')">إلغاء</button>
+      </div>
+    </div>
+  `;
+}
+
+function saveAgreement(){
+  const title=$('#agTitle').value.trim();
+  const relModel=$('#relModel').value;
+  const opType=$('#opType').value;
+  const p2Name=$('#p2Name').value.trim();
+  const p2Phone=$('#p2Phone').value.trim();
+  const amount=parseFloat($('#agAmount').value);
+  const dueDate=$('#agDate').value;
+  const terms=$('#agTerms').value.trim();
+
+  if(!title||!p2Name||!(amount>0)){
+    toast('الرجاء إكمال كافة البيانات الأساسية والمبلغ');
+    return;
+  }
+
+  const id=++S.seq.agreement;
+  let code;
+  do{code=genCode('AG-',6)}while(S.agreements.some(a=>a.code===code));
+
+  const newAg={
+    id,
+    code,
+    title,
+    relationModel:relModel,
+    category:opType,
+    creditorName:me().name,
+    creditorIban:me().iban,
+    debtorName:p2Name,
+    debtorPhone:p2Phone,
+    amount,
+    dueDate,
+    terms,
+    status:'ACTIVE',
+    createdAt:today(),
+    createdBy:S.user
+  };
+
+  S.agreements.unshift(newAg);
+  audit('إصدار اتفاق مالي جديد: '+code+' ('+title+')');
+  toast('تم توثيق الاتفاق وإصدار السند والباركود بنجاح!');
+  viewAgreement(code);
+}
+
+/* ---------- عرض سند الاتفاق والباركود ---------- */
+function viewAgreement(code){
+  S.tmp.activeAgCode=code;
+  go('agreement_voucher');
+}
+
+function vAgreementVoucher(){
+  const a=S.agreements.find(x=>x.code===S.tmp.activeAgCode);
+  if(!a) return vDash();
+
+  setTimeout(()=>{
+    const qrDiv=$('#agQrBox');
+    if(qrDiv&&!qrDiv.hasChildNodes()){
+      new QRCode(qrDiv,{
+        text:'https://nabih.sa/verify/agreement/'+a.code,
+        width:140,
+        height:140,
+        colorDark:"#0f172a",
+        colorLight:"#ffffff",
+        correctLevel:QRCode.CorrectLevel.H
+      });
+    }
+  },100);
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1 style="margin:0">📄 سند اتفاق والتزام مالي موثق</h1>
+        <p class="muted" style="margin:4px 0 0">سند رقمي معتمد يحمي الأطراف ويوثق الغرض من الحوالة قبل إجرائها عبر البنك.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn2" onclick="go('dash')">⬅ العودة للوحة</button>
+        <button class="btn btn-purple" onclick="window.print()">🖨️ طباعة السند (PDF)</button>
+      </div>
+    </div>
+
+    <div class="voucher-card" style="max-width:850px;margin:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--line);padding-bottom:16px;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:24px;font-weight:700;color:var(--brand-dark)">🛡️ منصة نبيه</div>
+          <div style="color:var(--purple);font-weight:600;font-size:16px">سند إثبات وتوثيق اتفاق مالي رقمي</div>
+        </div>
+        <div style="text-align:left">
+          <div class="muted">رقم الاستفسار الموحد:</div>
+          <b dir="ltr" class="code" style="font-size:24px;color:var(--purple)">${a.code}</b>
+          <div style="font-size:12px" class="muted">تاريخ الإصدار: ${a.createdAt}</div>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns:1fr 160px;gap:20px;align-items:center">
+        <div>
+          <h2 style="margin:0 0 8px;color:#0f172a">${h(a.title)}</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+            ${badge('purple-badge', OPERATION_TYPES[a.category]||a.category)}
+            ${badge('neu', RELATION_MODELS[a.relationModel]||a.relationModel)}
+            ${badge('ok','موثق ومسجل بنظام نبيه')}
+          </div>
+          <div style="font-size:22px;color:var(--brand);font-weight:700">
+            قيمة الالتزام المالي: ${fmt(a.amount)} ر.س
+          </div>
+          ${a.dueDate?`<div class="muted" style="margin-top:4px">تاريخ الاستحقاق المحدد: <b>${a.dueDate}</b></div>`:''}
+        </div>
+
+        <div style="text-align:center">
+          <div id="agQrBox" style="background:#fff;padding:8px;border-radius:10px;border:1px solid var(--line);display:inline-block"></div>
+          <div class="muted" style="font-size:11px;margin-top:4px">امسح للتحقق المباشر</div>
+        </div>
+      </div>
+
+      <div class="parties-grid">
+        <div class="party-box">
+          <div class="muted" style="font-size:13px">الطرف الأول (المستحق / الدائن):</div>
+          <b style="font-size:16px">${h(a.creditorName)}</b>
+          <div style="margin-top:6px;font-size:13px"><b>الحساب البنكي المعتمد للتحويل:</b></div>
+          <div dir="ltr" style="font-family:monospace;font-weight:700;color:var(--brand-dark)">${maskIban(a.creditorIban)}</div>
+          <span class="badge ok" style="margin-top:4px;font-size:11px">هوية وحساب موثقان</span>
+        </div>
+
+        <div class="party-box">
+          <div class="muted" style="font-size:13px">الطرف الثاني (الملتزم / المدين):</div>
+          <b style="font-size:16px">${h(a.debtorName)}</b>
+          ${a.debtorPhone?`<div style="margin-top:6px;font-size:13px" class="muted">الجوال: <span dir="ltr">${a.debtorPhone}</span></div>`:''}
+          <span class="badge neu" style="margin-top:8px;font-size:11px">الطرف الملتزم بالتحويل</span>
+        </div>
+      </div>
+
+      <div style="background:#f8fafc;border-radius:10px;padding:14px;border:1px solid var(--line);margin-top:14px">
+        <b style="display:block;margin-bottom:6px">نص الالتزام وشروط الاتفاق:</b>
+        <p style="margin:0;font-size:14px;color:#334155;line-height:1.7">${h(a.terms)}</p>
+      </div>
+
+      <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);padding-top:14px">
+        <div style="font-size:13px;color:var(--muted)">
+          💡 يتم التحقق من هذا السند بإدخال رقم الاستفسار <b>${a.code}</b> في منصة نبيه قبل تحويل أي مبلغ.
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="chip" onclick="copyText('${a.code}')">📋 نسخ رقم الاستفسار</button>
+          <button class="btn btn-purple" onclick="testPayAgreement('${a.code}')">🛡️ تجربة مطابقة وسداد هذا الاتفاق</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function testPayAgreement(code){
+  // نقل المستخدم كمشتري/مسدد لتجربة مطابقة السند وسداده
+  S.mode='buyer';
+  S.tmp.curAgCode=code;
+  go('pay_agreement');
+}
+
+/* ---------- تجربة المشتري/المسدد: فحص وسداد الاتفاق المالي ---------- */
+function vPayAgreement(){
+  const a=S.agreements.find(x=>x.code===S.tmp.curAgCode);
+  if(!a) return vDash();
+
+  return `
+    <h1>التحقق من الاتفاق المالي قبل التحويل البنكي</h1>
+    <div class="card" style="max-width:760px">
+      <div class="banner info">
+        <div>
+          <b>أنت الآن في شاشة الطرف الثاني (الملتزم بالتحويل)</b>
+          <p style="margin:2px 0 0">تحقق منصة نبيه من مطابقة الحساب البنكي والغرض والمبلغ قبل إرسال الحوالة.</p>
+        </div>
+        <b dir="ltr" style="font-family:monospace">${a.code}</b>
+      </div>
+
+      <div class="row"><span class="muted">عنوان الاتفاق:</span><b>${h(a.title)}</b></div>
+      <div class="row"><span class="muted">نوع المعاملة:</span>${badge('purple-badge', OPERATION_TYPES[a.category]||a.category)}</div>
+      <div class="row"><span class="muted">المستفيد المعتمد (الطرف الأول):</span><b>${h(a.creditorName)}</b></div>
+      <div class="row"><span class="muted">الحساب البنكي المعتمد له:</span><b dir="ltr" style="font-family:monospace;color:var(--brand-dark)">${a.creditorIban}</b></div>
+      <div class="row"><span class="muted">المبلغ المستحق سداده:</span><b style="font-size:20px;color:var(--brand)">${fmt(a.amount)} ر.س</b></div>
+
+      <h3 style="margin-top:20px">محاكاة عملية التحويل من تطبيق بنكك:</h3>
+      <p class="muted">أدخل الآيبان والمبلغ الذي تنوي تحويله لمطابقته مع السند الرسمي:</p>
+
+      <label for="ibPay">الحساب الذي ستحوّل إليه</label>
+      <input id="ibPay" type="text" class="ltr" value="${a.creditorIban}">
+
+      <div style="display:flex;gap:8px;margin:8px 0 16px;flex-wrap:wrap">
+        <button class="chip" onclick="$('#ibPay').value='${a.creditorIban}'">✅ الحساب المعتمد في الاتفاق</button>
+        <button class="chip" onclick="$('#ibPay').value='${OTHER_IBAN}'">❌ حساب مختلف (احتيال أو وسيط)</button>
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-purple" onclick="verifyAgreementTransfer('${a.code}')">🔍 فحص ومطابقة الحوالة</button>
+        <button class="btn2" onclick="go('dash')">رجوع</button>
+      </div>
+    </div>
+  `;
+}
+
+function verifyAgreementTransfer(code){
+  const a=S.agreements.find(x=>x.code===code);
+  const ib=normIban($('#ibPay').value);
+
+  if(ib===a.creditorIban){
+    toast('البيانات متطابقة بنسبة 100% مع سند الاتفاق الموثق! يمكنك التحويل بأمان.');
+    audit('مطابقة ناجحة لتحويل اتفاق مالي: '+code);
+  } else {
+    toast('⚠️ تنبيه خطير: الحساب البنكي غير مطابق للحساب المسجل في سند نبيه!');
+    audit('محاولة تحويل لحساب غير مطابق في اتفاق: '+code);
+  }
+}
+
+/* ---------- دوال البحث الموحد (سلع + اتفاقات) ---------- */
+function vBuyer(){
+  return `
+    <div style="margin-bottom:16px">
+      <h1 style="margin:0">لوحة الاستفسار والتحقق الشاملة</h1>
+      <p class="muted" style="margin:4px 0 0">تحقق من أي إعلان سلعة، أو سند اتفاق مالي، أو مديونية، أو فاتورة جماعية قبل إرسال الحوالة.</p>
+    </div>
+
+    <div class="card">
+      <h2>فحص كود استفسار أو باركود</h2>
+      <p class="muted">أدخل رقم الاستفسار الموحد (سواء كان إعلان سلعة <span dir="ltr">NB-XXXXXX</span> أو اتفاق مالي <span dir="ltr">AG-XXXXXX</span>):</p>
+
+      <div style="display:flex;gap:10px;margin-bottom:12px">
+        <input id="q" type="text" class="ltr" placeholder="NB-928471 أو AG-739104" value="AG-739104" onkeydown="if(event.key==='Enter')doSearch()" style="font-size:18px;font-weight:700">
+        <button class="btn btn-purple" style="min-width:140px" onclick="doSearch()">🔍 فحص المعاملة</button>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="muted" style="font-size:13px">نماذج سريعة للتجربة:</span>
+        <button class="chip" onclick="$('#q').value='AG-739104';doSearch()">سند سلفة شخصية (AG-739104)</button>
+        <button class="chip" onclick="$('#q').value='AG-882140';doSearch()">فاتورة جماعية (AG-882140)</button>
+        <button class="chip" onclick="$('#q').value='NB-928471';doSearch()">إعلان سلعة سيارة (NB-928471)</button>
+      </div>
+    </div>
+  `;
+}
+
+function doSearch(){
+  const q=($('#q').value||'').trim().toUpperCase();
+  if(!q){toast('أدخل رقم استفسار');return}
+
+  if(q.startsWith('AG-')){
+    const ag=S.agreements.find(x=>x.code===q);
+    if(ag){
+      viewAgreement(ag.code);
+    } else {
+      toast('رقم الاتفاق غير مسجل في منصة نبيه!');
+    }
+  } else {
+    // بحث السلع والإعلانات
+    S.tmp.activeInq=q;
+    openAdStudio(q);
+  }
+}
+
+/* ---------- استوديو الإعلانات وسلع البيع والشراء ---------- */
+function openAdStudio(code){
+  S.tmp.activeInq=code;
+  go('studio');
+}
+
+function vStudio(){
+  const q=S.inq.find(x=>x.code===S.tmp.activeInq)||S.inq[0];
+  const it=S.items.find(i=>i.id===q.item);
+
+  setTimeout(()=>renderAdStudio(q.code),50);
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <div>
+        <h1 style="margin:0">استوديو الإعلان الموثق | ${h(it.title)}</h1>
+        <p class="muted" style="margin:4px 0 0">تم دمج الباركود ورقم الاستفسار وبيانات الموثوقية آلياً على صورة السلعة.</p>
+      </div>
+      <button class="btn2" onclick="go('dash')">⬅ العودة للوحة</button>
+    </div>
+
+    <div class="card">
+      <div class="ad-creator-grid">
+        <div>
+          <h2>معاينة الإعلان الموسوم بالباركود</h2>
+          <div class="ad-preview-box">
+            <div class="ad-canvas-wrap">
+              <canvas id="adCanvas" width="800" height="800"></canvas>
+            </div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" style="flex:1" onclick="downloadAdImage()">📥 تحميل صورة الإعلان الموسومة (PNG)</button>
+            <button class="btn2" onclick="copyText('${q.code}')">📋 نسخ رقم الاستفسار</button>
+          </div>
+        </div>
+
+        <div>
+          <h2>بيانات بطاقة الاستفسار الصادرة</h2>
+          <div class="card" style="background:var(--bg)">
+            <div class="row"><span class="muted">رقم الاستفسار الموحد:</span><b dir="ltr" class="code" style="font-size:24px">${q.code}</b></div>
+            <div class="row"><span class="muted">السلعة:</span><b>${h(it.title)}</b></div>
+            <div class="row"><span class="muted">السعر المعتمد:</span><b>${fmt(it.price)} ر.س</b></div>
+            <div class="row"><span class="muted">البائع الموثق:</span><b>${h(me().name)}</b></div>
+            <div class="row"><span class="muted">الحساب البنكي المعتمد:</span><b dir="ltr">${maskIban(me().iban)}</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAdStudio(inqCode){
+  const q=S.inq.find(x=>x.code===inqCode)||S.inq[0];
+  const it=S.items.find(i=>i.id===q.item);
+
   const qrDiv=document.createElement('div');
   new QRCode(qrDiv,{
     text:'https://nabih.sa/inq/'+q.code,
@@ -253,18 +781,13 @@ function renderAdStudio(inqCode){
     if(!canvas) return;
     const ctx=canvas.getContext('2d');
     
-    // تحميل صورة السلعة ورسم الشريط الرسمي
     const baseImg=new Image();
     baseImg.crossOrigin='anonymous';
     baseImg.onload=()=>{
-      // أبعاد قياسية للإعلان (1080x1080 مربع)
       canvas.width=800;
       canvas.height=800;
-      
-      // رسم الصورة الأصلية
       ctx.drawImage(baseImg,0,0,800,800);
       
-      // رسم خلفية شريط الحماية السفلي المتدرج
       const barH=180;
       const grad=ctx.createLinearGradient(0,800-barH,0,800);
       grad.addColorStop(0,'rgba(15, 23, 42, 0.88)');
@@ -272,44 +795,36 @@ function renderAdStudio(inqCode){
       ctx.fillStyle=grad;
       ctx.fillRect(0,800-barH,800,barH);
 
-      // خط فاصل علوي للشريط بلون المنصة
       ctx.fillStyle="#0d9488";
       ctx.fillRect(0,800-barH,800,5);
 
-      // رسم الـ QR Code
       if(qrImg&&qrImg.src){
         const qCanvasImg=new Image();
         qCanvasImg.onload=()=>{
-          // خلفية بيضاء للـ QR
           ctx.fillStyle="#ffffff";
           ctx.beginPath();
           ctx.roundRect(800-160, 800-barH+15, 145, 145, 12);
           ctx.fill();
           ctx.drawImage(qCanvasImg, 800-150, 800-barH+25, 125, 125);
           
-          // نصوص التوثيق
           ctx.direction='rtl';
           ctx.textAlign='right';
           
-          // شعار نبيه واسم الخدمة
           ctx.fillStyle="#2dd4bf";
           ctx.font="bold 24px 'IBM Plex Sans Arabic', sans-serif";
           ctx.fillText("🛡️ إعلان مسجل ومحمي | منصة نبيه", 800-180, 800-barH+42);
           
-          // رقم الاستفسار الموحد
           ctx.fillStyle="#ffffff";
           ctx.font="bold 28px monospace";
           ctx.fillText("رقم الاستفسار: "+q.code, 800-180, 800-barH+80);
           
-          // الموثوقية
           ctx.fillStyle="#e2e8f0";
           ctx.font="17px 'IBM Plex Sans Arabic', sans-serif";
-          ctx.fillText("مدى الموثوقية: "+lvlText, 800-180, 800-barH+114);
+          ctx.fillText("مدى الموثوقية: موثوقية عالية (هوية + وثيقة ملكية)", 800-180, 800-barH+114);
 
-          // رسالة للمشتري
           ctx.fillStyle="#94a3b8";
           ctx.font="14px 'IBM Plex Sans Arabic', sans-serif";
-          ctx.fillText("امسح الباركود أو أدخل الرقم في nabih.sa للتحقق من الفاتورة قبل التحويل", 800-180, 800-barH+144);
+          ctx.fillText("امسح الباركود أو أدخل الرقم في nabih.sa للتحقق قبل التحويل", 800-180, 800-barH+144);
         };
         qCanvasImg.src=qrImg.src;
       }
@@ -328,166 +843,13 @@ function downloadAdImage(){
   toast('تم تحميل صورة الإعلان الموسومة بالباركود بنجاح!');
 }
 
-/* ---------- شاشات البائع ---------- */
-function vSeller(){
-  const a=me();
-  const mine=S.items.filter(i=>i.owner===S.user);
-  const rows=mine.map(it=>{
-    const q=S.inq.find(x=>x.item===it.id);
-    const pr=S.proofs.filter(p=>p.item===it.id).pop();
-    const s=ST[it.status];
-    let act='';
-    if(it.status==='OWNERSHIP_VERIFIED'&&!q){
-      act=`<button class="btn" onclick="issueInv(${it.id})">إصدار الفاتورة وتوليد الباركود</button>`;
-    } else if(it.status==='REJECTED'){
-      act=`<span class="muted">${h(pr&&pr.reason)}</span> <button class="btn2" onclick="resubmit(${it.id})">إعادة تقديم</button>`;
-    } else if(q){
-      act=`
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-          <span class="badge ${q.status==='ACTIVE'?'ok':'bad'}">${q.status==='ACTIVE'?'الرقم فعّال':'معلّق'}</span>
-          <b dir="ltr" style="font-family:monospace">${q.code}</b>
-          <button class="btn" style="padding:6px 12px;font-size:13px;min-height:34px" onclick="openAdStudio('${q.code}')">🖼️ صورة الإعلان بالباركود</button>
-          <button class="chip" onclick="S.tmp.modal=${q.inv};render()">الفاتورة</button>
-        </div>
-      `;
-    }
-    return `
-      <tr>
-        <td>
-          <div style="display:flex;align-items:center;gap:12px">
-            <img src="${it.imgUrl||SAMPLE_IMAGES.car}" style="width:54px;height:54px;border-radius:10px;object-fit:cover;border:1px solid var(--line)">
-            <div>
-              <b>${h(it.title)}</b>
-              <div class="muted">${h(it.cat)} · ${fmt(it.price)} ر.س</div>
-            </div>
-          </div>
-        </td>
-        <td>${badge(s[0],s[1])}</td>
-        <td>${act||'<span class="muted">بانتظار اعتماد المشرف</span>'}</td>
-      </tr>
-    `;
-  }).join('');
-
-  return `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-      <div>
-        <h1 style="margin:0">لوحة تحكم البائع</h1>
-        <p class="muted" style="margin:4px 0 0">أدر معروضاتك، وثّق ملكيتها، وأصدر فواتير رسمية بباركود موحد يحميك ويحمي المشتري.</p>
-      </div>
-      <div>
-        <button class="btn" onclick="go('additem')">➕ إضافة إعلان وسلعة جديدة</button>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="stat"><b>${mine.length}</b>إعلاناتي</div>
-      <div class="stat"><b>${mine.filter(i=>i.status==='PENDING_OWNERSHIP').length}</b>بانتظار فحص الملكية</div>
-      <div class="stat"><b>${S.invoices.filter(i=>i.owner===S.user).length}</b>فواتير صادرة</div>
-      <div class="stat"><b>${S.inq.filter(q=>mine.some(i=>i.id===q.item)&&q.status==='ACTIVE').length}</b>أرقام استفسار فعالة</div>
-    </div>
-
-    <div class="card">
-      <div class="row" style="margin-bottom:12px">
-        <h2 style="margin:0">قائمة السلع والإعلانات</h2>
-        <button class="btn2" onclick="go('report')">🚨 إبلاغ عن إعلان ينتحل سلعتي</button>
-      </div>
-      ${mine.length?`<div class="tw"><table><thead><tr><th>السلعة</th><th>حالة التوثيق</th><th>الإجراء ورقم الاستفسار</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="muted">لا توجد لديك سلع مسجلة. اضغط «إضافة إعلان جديد» للبدء.</p>'}
-    </div>
-  `;
-}
-
-function openAdStudio(code){
-  S.tmp.activeInq=code;
-  go('studio');
-}
-
-function vStudio(){
-  const q=S.inq.find(x=>x.code===S.tmp.activeInq);
-  if(!q) return vSeller();
-  const it=S.items.find(i=>i.id===q.item);
-  const cInfo=cred(q);
-
-  setTimeout(()=>renderAdStudio(q.code),50);
-
-  return `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
-      <div>
-        <h1 style="margin:0">استوديو الإعلان الموثق | ${h(it.title)}</h1>
-        <p class="muted" style="margin:4px 0 0">تم دمج الباركود ورقم الاستفسار وبيانات الموثوقية آلياً على صورة السلعة لنشرها بأمان.</p>
-      </div>
-      <button class="btn2" onclick="go('dash')">⬅ العودة للسلع</button>
-    </div>
-
-    <div class="card">
-      <div class="ad-creator-grid">
-        <div>
-          <h2>معاينة الإعلان الموسوم بالباركود</h2>
-          <div class="ad-preview-box">
-            <div class="ad-canvas-wrap">
-              <canvas id="adCanvas" width="800" height="800"></canvas>
-            </div>
-          </div>
-          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn" style="flex:1" onclick="downloadAdImage()">📥 تحميل صورة الإعلان الموسومة (PNG)</button>
-            <button class="btn2" onclick="copyText(q.code)">📋 نسخ رقم الاستفسار</button>
-          </div>
-          <p class="muted" style="font-size:13px;margin-top:8px">💡 انشر هذه الصورة في حراج، تويتر، تيك توك، أو مواقع الإعلانات. سيعلم المشتري أنك موثق رسمياً.</p>
-        </div>
-
-        <div>
-          <h2>بيانات بطاقة الاستفسار الصادرة</h2>
-          <div class="card" style="background:var(--bg)">
-            <div class="row"><span class="muted">رقم الاستفسار الموحد:</span><b dir="ltr" class="code" style="font-size:24px">${q.code}</b></div>
-            <div class="row"><span class="muted">السلعة:</span><b>${h(it.title)}</b></div>
-            <div class="row"><span class="muted">السعر المعتمد في الفاتورة:</span><b>${fmt(it.price)} ر.س</b></div>
-            <div class="row"><span class="muted">البائع:</span><b>${h(me().name)}</b></div>
-            <div class="row"><span class="muted">درجة الموثوقية:</span>${badge(LVL[cInfo.lvl][0],LVL[cInfo.lvl][1])}</div>
-            <div class="row"><span class="muted">الحساب البنكي المعتمد:</span><b dir="ltr">${maskIban(me().iban)}</b></div>
-          </div>
-
-          <div class="card">
-            <h3>تغيير صورة الإعلان</h3>
-            <p class="muted">اختر نموذجاً أو ارفع صورة سلعتك:</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-              <button class="chip" onclick="updateItemImg(${it.id},SAMPLE_IMAGES.car)">سيارة</button>
-              <button class="chip" onclick="updateItemImg(${it.id},SAMPLE_IMAGES.laptop)">لابتوب</button>
-              <button class="chip" onclick="updateItemImg(${it.id},SAMPLE_IMAGES.phone)">جوال</button>
-              <button class="chip" onclick="updateItemImg(${it.id},SAMPLE_IMAGES.watch)">ساعة فخمة</button>
-            </div>
-            <label for="customImg">أو رفع صورة خاصة بك:</label>
-            <input type="file" id="customImg" accept="image/*" onchange="uploadAdImg(this, ${it.id})">
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function updateItemImg(itemId,url){
-  const it=S.items.find(i=>i.id===itemId);
-  if(it){it.imgUrl=url;save();renderAdStudio(S.tmp.activeInq)}
-}
-
-function uploadAdImg(input,itemId){
-  if(input.files&&input.files[0]){
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const it=S.items.find(i=>i.id===itemId);
-      if(it){it.imgUrl=e.target.result;save();renderAdStudio(S.tmp.activeInq)}
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
 /* ---------- إضافة سلعة جديدة ---------- */
 function vAddItem(){
   return `
     <h1>إضافة سلعة جديدة وإصدار إعلان موثق</h1>
     <div class="card" style="max-width:760px">
-      <p class="muted">أدخل تفاصيل سلعتك وقدم إثبات الملكية أو إقراراً موثقاً لنربطها بفاتورة بيع ورقم استفسار رسمي.</p>
-
       <label for="it">اسم ومواصفات السلعة</label>
-      <input id="it" type="text" placeholder="مثال: سيارة مازدا 6 موديل 2023 فل كامل" value="لابتوب ماك بوك برو M2">
+      <input id="it" type="text" value="لابتوب ماك بوك برو M2">
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div>
@@ -497,7 +859,6 @@ function vAddItem(){
             <option>عقار</option>
             <option selected>أجهزة إلكترونية</option>
             <option>ساعات ومقتنيات</option>
-            <option>خدمة أو أخرى</option>
           </select>
         </div>
         <div>
@@ -506,30 +867,8 @@ function vAddItem(){
         </div>
       </div>
 
-      <label for="sampleImgSel">صورة السلعة الأساسية للإعلان</label>
-      <select id="sampleImgSel">
-        <option value="${SAMPLE_IMAGES.laptop}">صورة لابتوب ماك</option>
-        <option value="${SAMPLE_IMAGES.car}">صورة سيارة فاخرة</option>
-        <option value="${SAMPLE_IMAGES.phone}">صورة هاتف ذكي</option>
-        <option value="${SAMPLE_IMAGES.watch}">صورة ساعة ثمينة</option>
-      </select>
-
-      <label for="iu">رابط الإعلان في المواقع الخارجية (اختياري)</label>
-      <input id="iu" type="text" class="ltr" value="https://haraj.com.sa/1199887766" placeholder="https://haraj.com.sa/...">
-
-      <label for="pt">نوع إثبات الملكية</label>
-      <select id="pt" onchange="$('#pdBox').style.display=this.value==='DECLARATION'?'block':'none'">
-        <option value="DOCUMENT">📄 وثيقة رسمية (فاتورة شراء، استمارة مركبة، صك ملكية)</option>
-        <option value="DECLARATION">✍️ إقرار موثق بمسؤوليتي (عند تعذر المستند الورقي)</option>
-      </select>
-
-      <div id="pdBox" style="display:none">
-        <label for="pd">نص الإقرار الموثق</label>
-        <textarea id="pd">أقر وأتعهد أنا المعلن بكامل أهليتي المعتبرة شرعاً ونظاماً بأنني المالك الحقيقي والمتصرف القانوني في هذه السلعة، وأتحمل كامل المسؤولية الجزائية والمدنية عن صحة ذلك.</textarea>
-      </div>
-
       <div style="margin-top:20px;display:flex;gap:12px">
-        <button class="btn" onclick="saveItem()">إرسال السلعة للمراجعة وإصدار الفاتورة</button>
+        <button class="btn" onclick="saveItem()">إصدار الإعلان وتوليد الباركود</button>
         <button class="btn2" onclick="go('dash')">إلغاء</button>
       </div>
     </div>
@@ -539,537 +878,69 @@ function vAddItem(){
 function saveItem(){
   const title=$('#it').value.trim();
   const price=parseFloat($('#ip').value);
-  const url=$('#iu').value.trim();
-  const pt=$('#pt').value;
-  const dec=$('#pd')?$('#pd').value.trim():'';
-  const imgUrl=$('#sampleImgSel').value;
-
-  if(!title||!(price>0)){toast('الرجاء إدخال اسم السلعة والسعر بشكل صحيح');return}
+  if(!title||!(price>0)){toast('أدخل البيانات بشكل صحيح');return}
 
   const id=++S.seq.item;
-  const pid=++S.seq.proof;
-
-  // إضافة السلعة بحالة معتمدة مباشرة للتجربة (أو قيد المراجعة)
   S.items.push({
     id,
     owner:S.user,
     title,
     cat:$('#ic').value,
     price,
-    imgUrl,
-    adUrl:url,
-    status:'OWNERSHIP_VERIFIED' // نعتمدها مباشرة ليسهل على العميل تجربة توليد الباركود فوراً
+    imgUrl:SAMPLE_IMAGES.laptop,
+    status:'OWNERSHIP_VERIFIED'
   });
-
-  S.proofs.push({
-    id:pid,
-    item:id,
-    type:pt,
-    status:'APPROVED',
-    reason:'',
-    text:pt==='DECLARATION'?dec:'مستند إثبات ملكية معتمد'
-  });
-
-  audit('إضافة سلعة جديدة واعتماد الملكية: '+title);
-  toast('تمت إضافة السلعة واعتماد الملكية بنجاح!');
-  
-  // إصدار الفاتورة وتوليد الباركود تلقائياً
-  issueInv(id);
-}
-
-function issueInv(id){
-  const a=me();
-  const it=S.items.find(i=>i.id===id);
-  if(!it) return;
-
-  const iid=++S.seq.inv;
-  const inv={
-    id:iid,
-    no:'INV-'+String(iid).padStart(6,'0'),
-    type:'SALE',
-    item:id,
-    owner:S.user,
-    buyer:null,
-    total:it.price,
-    date:today()
-  };
-  S.invoices.push(inv);
 
   let code;
   do{code=genCode('NB-',6)}while(S.inq.some(q=>q.code===code));
-  
-  S.inq.push({
-    code,
-    item:id,
-    inv:iid,
-    adUrl:it.adUrl,
-    status:'ACTIVE',
-    lookups:0
-  });
+  S.inq.push({code,item:id,inv:1,status:'ACTIVE',lookups:0});
 
-  audit('إصدار فاتورة بيع '+inv.no+' ورقم استفسار موحد '+code);
+  toast('تمت إضافة السلعة وتوليد الباركود!');
   openAdStudio(code);
-}
-
-/* ---------- شاشات المشتري والتحقق من الباركود ---------- */
-function vBuyer(){
-  const my=S.orders.filter(o=>o.buyer===S.user).slice().reverse();
-  return `
-    <div style="margin-bottom:16px">
-      <h1 style="margin:0">لوحة المشتري | فحص الإعلانات والبائعين</h1>
-      <p class="muted" style="margin:4px 0 0">تحقق من صحة الإعلان ومطابقة حساب البائع البنكي قبل تحويل أي ريال.</p>
-    </div>
-
-    <div class="card">
-      <h2>فحص إعلان أو مسح باركود</h2>
-      <p class="muted">أدخل رقم الاستفسار الموجود على صورة الإعلان (مثال: <span dir="ltr">NB-928471</span>) أو الصق رابط الإعلان:</p>
-
-      <div style="display:flex;gap:10px;margin-bottom:12px">
-        <input id="q" type="text" class="ltr" placeholder="NB-XXXXXX أو رابط الإعلان" value="NB-928471" onkeydown="if(event.key==='Enter')doSearch()" style="font-size:18px;font-weight:700">
-        <button class="btn" style="min-width:140px" onclick="doSearch()">🔍 فحص الإعلان</button>
-      </div>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <span class="muted" style="font-size:13px">أمثلة سريعة للتجربة:</span>
-        <button class="chip" onclick="$('#q').value='NB-928471';doSearch()">رقم استفسار معتمد</button>
-        <button class="chip" onclick="$('#q').value='https://haraj.com.sa/1182345678';doSearch()">رابط حراج مسجل</button>
-        <button class="chip" onclick="$('#q').value='NB-000000';doSearch()">رقم غير موجود (احتيال محتمل)</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>سجل عمليات التحقق السابقة</h2>
-      ${my.length?`
-        <div class="tw">
-          <table>
-            <thead><tr><th>رقم الاستفسار</th><th>التاريخ</th><th>فاتورة الخدمة</th><th>الحالة</th></tr></thead>
-            <tbody>
-              ${my.map(o=>{
-                const iv=S.invoices.find(i=>i.id===o.inv);
-                return `<tr><td dir="ltr"><b>${o.code}</b></td><td>${o.date}</td><td><button class="chip" onclick="S.tmp.modal=${iv.id};render()">${iv.no}</button></td><td>${badge('ok','تم التحقق')}</td></tr>`;
-              }).join('')}
-            </tbody>
-          </table>
-        </div>
-      `:'<p class="muted">لا توجد عمليات فحص مسجلة في حسابك بعد.</p>'}
-    </div>
-  `;
-}
-
-function doSearch(){
-  const q=($('#q').value||'').trim();
-  if(!q){toast('الرجاء إدخال رقم استفسار أو رابط');return}
-
-  const r={q};
-  if(/^NB-/i.test(q)){
-    r.kind='number';
-    r.inq=S.inq.find(x=>x.code.toUpperCase()===q.toUpperCase())||null;
-  } else {
-    r.kind='link';
-    const n=norm(q);
-    r.inq=S.inq.find(x=>x.adUrl&&norm(x.adUrl)===n)||null;
-  }
-
-  if(r.inq){
-    r.inq.lookups++;
-    const it=S.items.find(i=>i.id===r.inq.item);
-    r.item=it;
-  }
-  S.tmp.res=r;
-  save();
-  go('result');
-}
-
-function vResult(){
-  const r=S.tmp.res;
-  if(!r) return vBuyer();
-
-  let body='';
-  if(!r.inq){
-    body=`
-      <div class="banner err">
-        <div>
-          <b style="font-size:16px">⚠️ تحذير: رقم الاستفسار أو الإعلان غير مسجل في منصة نبيه!</b>
-          <p style="margin:4px 0 0">لم يقم البائع بتوثيق ملكية هذه السلعة أو إصدار فاتورة معتمدة. نحذر من تحويل أي أموال أو دفع عربون قبل التأكد.</p>
-        </div>
-        <button class="btn3" onclick="S.tmp.repTarget='${h(r.q)}';go('report')">تقديم بلاغ اشتباه</button>
-      </div>
-    `;
-  } else {
-    const q=r.inq;
-    const it=S.items.find(i=>i.id===q.item);
-    const cInfo=cred(q);
-    const ow=S.acc[it.owner];
-
-    body=`
-      <div class="banner good">
-        <div>
-          <b style="font-size:17px">✅ إعلان موثق ومسجل برقم استفسار رسمي: ${q.code}</b>
-          <p style="margin:4px 0 0">تم التحقق من مطابقة بيانات السلعة وإثبات الملكية المقدم من البائع.</p>
-        </div>
-        <span class="badge ok">فعال ونشط</span>
-      </div>
-
-      <div class="grid" style="grid-template-columns:300px 1fr;align-items:start">
-        <div class="card" style="padding:16px;text-align:center">
-          <img src="${it.imgUrl||SAMPLE_IMAGES.car}" style="width:100%;height:200px;border-radius:12px;object-fit:cover;margin-bottom:12px">
-          <h3 style="margin:0 0 6px">${h(it.title)}</h3>
-          <b style="font-size:22px;color:var(--brand)">${fmt(it.price)} ر.س</b>
-          <div class="muted" style="margin-top:6px">تاريخ التسجيل: ${today()}</div>
-        </div>
-
-        <div class="card">
-          <h2>مؤشرات الموثوقية والأمان</h2>
-          <div class="row">
-            <span class="muted">مستوى المصداقية الإجمالي:</span>
-            ${badge(LVL[cInfo.lvl][0],LVL[cInfo.lvl][1])}
-          </div>
-          <div class="row">
-            <span class="muted">اسم البائع:</span>
-            <b>${h(maskName(ow.name))}</b>
-          </div>
-          <div class="row">
-            <span class="muted">الحساب البنكي المعتمد للتحويل:</span>
-            <b dir="ltr">${maskIban(ow.iban)}</b>
-          </div>
-          ${cInfo.f.map(x=>`
-            <div class="row">
-              <span class="muted">${x[0]}</span>
-              <span>${badge(x[2]===1?'ok':x[2]===2?'pend':'bad',x[1])}</span>
-            </div>
-          `).join('')}
-          
-          <div style="margin-top:20px;padding:16px;background:var(--brand-light);border-radius:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-            <div>
-              <b style="color:var(--brand-dark)">هل تنوي شراء هذه السلعة؟</b>
-              <div class="muted" style="color:var(--brand-dark)">استخدم آلية «استقبل وحوّل» لمطابقة الحساب البنكي قبل إرسال الحوالة.</div>
-            </div>
-            <button class="btn" onclick="startEscrow('${q.code}')">🛡️ التحقق من الحساب قبل التحويل</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  return `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-      <h1>نتيجة فحص الإعلان</h1>
-      <button class="btn2" onclick="go('dash')">🔍 فحص إعلان آخر</button>
-    </div>
-    <div class="card">${body}</div>
-  `;
-}
-
-function startEscrow(code){
-  S.tmp.cur=code;
-  go('code');
-}
-
-/* ---------- آلية "استقبل وحوّل" (حماية التحويلات) ---------- */
-function vCode(){
-  const q=S.inq.find(x=>x.code===S.tmp.cur);
-  const it=S.items.find(i=>i.id===q.item);
-  const ow=S.acc[it.owner];
-
-  return `
-    <h1>آلية «استقبل وحوّل» | حماية التحويل البنكي</h1>
-    <div class="card" style="max-width:720px">
-      <p class="muted">أدخل بيانات التحويل التي طلبها منك البائع للتأكد من مطابقتها للفاتورة الرسمية قبل إتمام الحوالة من بنكك:</p>
-
-      <label for="am">المبلغ المراد تحويله (ر.س)</label>
-      <input id="am" type="number" value="${it.price}" min="1">
-
-      <label for="pu">الغرض من الحوالة (كما يظهر في تطبيق البنك)</label>
-      <input id="pu" type="text" value="سداد قيمة ${h(it.title)}">
-
-      <label for="ib2">رقم الحساب (الآيبان) الذي زودك به البائع</label>
-      <input id="ib2" type="text" class="ltr" value="${ow.iban}">
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
-        <span class="muted" style="font-size:13px">جرّب سيناريوهات المطابقة:</span>
-        <button class="chip" onclick="$('#ib2').value='${ow.iban}'">✅ الآيبان الصحيح للبائع</button>
-        <button class="chip" onclick="$('#ib2').value='${OTHER_IBAN}'">❌ آيبان مختلف (حساب وسيط محتال)</button>
-        <button class="chip" onclick="$('#am').value=${it.price*2}">⚠️ مبلغ أكبر من الفاتورة</button>
-      </div>
-
-      <div style="margin-top:20px;display:flex;gap:10px">
-        <button class="btn" onclick="makeCode()">مطابقة البيانات وإصدار كود التأكيد</button>
-        <button class="btn2" onclick="go('result')">إلغاء</button>
-      </div>
-    </div>
-  `;
-}
-
-function makeCode(){
-  const q=S.inq.find(x=>x.code===S.tmp.cur);
-  const it=S.items.find(i=>i.id===q.item);
-  const ow=S.acc[it.owner];
-
-  const amt=parseFloat($('#am').value);
-  const pur=$('#pu').value.trim();
-  const ib=normIban($('#ib2').value);
-
-  if(!(amt>0)||!pur||!ib){toast('الرجاء تعبئة جميع الحقول');return}
-
-  const ck=[
-    ['رقم الآيبان يطابق حساب البائع الموثق بالهوية', ib===ow.iban],
-    ['المبلغ لا يتجاوز قيمة الفاتورة المعتمدة ('+fmt(it.price)+' ر.س)', amt<=it.price],
-    ['رقم الاستفسار نشط وساري ولا توجد عليه بلاغات', q.status==='ACTIVE'],
-    ['تم تحديد غرض واضح للحوالة', !!pur]
-  ];
-
-  const rec={
-    id:++S.seq.code,
-    code:genCode('TR-',5),
-    buyer:S.user,
-    inq:q.code,
-    iban:ib,
-    amount:amt,
-    purpose:pur,
-    ck,
-    status:ck.every(x=>x[1])?'VERIFIED':'MISMATCH'
-  };
-
-  S.codes.push(rec);
-  S.tmp.codeId=rec.id;
-  audit('إنشاء عملية فحص تحويل '+rec.code+' ('+rec.status+')');
-  save();
-  go('chk');
-}
-
-function vChk(){
-  const r=S.codes.find(c=>c.id===S.tmp.codeId);
-  const okAll=r.status!=='MISMATCH';
-
-  return `
-    <h1>نتيجة فحص بيانات الحوالة قبل التحويل</h1>
-    <div class="card" style="max-width:720px">
-      <div style="text-align:center;margin-bottom:16px">
-        <div class="muted">رمز العملية الآمنة</div>
-        <div class="code">${r.code}</div>
-      </div>
-
-      <div class="row"><span class="muted">الحساب المستهدف:</span><b dir="ltr">${maskIban(r.iban)}</b></div>
-      <div class="row"><span class="muted">المبلغ:</span><b>${fmt(r.amount)} ر.س</b></div>
-      <div class="row"><span class="muted">الغرض:</span><b>${h(r.purpose)}</b></div>
-
-      <h3 style="margin-top:20px">تقرير المطابقة الآلية</h3>
-      ${r.ck.map(x=>`
-        <div class="row">
-          <span>${x[0]}</span>
-          ${badge(x[1]?'ok':'bad',x[1]?'متطابق ✅':'غير متطابق ❌')}
-        </div>
-      `).join('')}
-
-      ${okAll?`
-        <div class="banner good" style="margin-top:20px">
-          <div>
-            <b>البيانات متطابقة وآمنة للتحويل!</b>
-            <p style="margin:4px 0 0">يمكنك الآن إتمام الحوالة بأمان من تطبيق البنك الخاص بك إلى حساب البائع المعتمد مباشرة.</p>
-          </div>
-          <button class="btn" onclick="go('dash')">إنهاء والعودة للوحة</button>
-        </div>
-      `:`
-        <div class="banner err" style="margin-top:20px">
-          <div>
-            <b>⚠️ تحذير شديد الخطورة: البيانات غير متطابقة!</b>
-            <p style="margin:4px 0 0">الحساب البنكي الذي تم إدخاله لا يخص المالك الموثق للسلعة في منصة نبيه. لا تقم بالتحويل أبداً.</p>
-          </div>
-          <button class="btn3" onclick="go('code')">تعديل البيانات</button>
-        </div>
-      `}
-    </div>
-  `;
-}
-
-/* ---------- لوحة المشرف ---------- */
-function vAdmin(){
-  const pend=S.proofs.filter(p=>p.status==='UNDER_REVIEW');
-  const openR=S.reports.filter(r=>r.status==='SUBMITTED');
-
-  return `
-    <h1>لوحة إدارة المنصة (مشرف النظام)</h1>
-    <div class="grid">
-      <div class="stat"><b>${pend.length}</b>إثباتات تنتظر الفحص</div>
-      <div class="stat"><b>${openR.length}</b>بلاغات واردة</div>
-      <div class="stat"><b>${S.inq.filter(q=>q.status==='ACTIVE').length}</b>أرقام استفسار نشطة</div>
-      <div class="stat"><b>${S.invoices.length}</b>إجمالي الفواتير</div>
-    </div>
-
-    <div class="card">
-      <h2>مراجعة إثباتات الملكية</h2>
-      ${pend.length?`
-        <div class="tw">
-          <table>
-            <thead><tr><th>السلعة</th><th>المالك</th><th>نوع الإثبات</th><th>الإجراء</th></tr></thead>
-            <tbody>
-              ${pend.map(p=>{
-                const it=S.items.find(i=>i.id===p.item);
-                return `
-                  <tr>
-                    <td><b>${h(it.title)}</b></td>
-                    <td>${h(S.acc[it.owner].name)}</td>
-                    <td>${h(p.text)}</td>
-                    <td><button class="btn" onclick="approveProof(${p.id})">اعتماد</button></td>
-                  </tr>
-                `;
-              }).join('')}
-            </tbody>
-          </table>
-        </div>
-      `:'<p class="muted">لا توجد طلبات إثبات ملكية معلقة حالياً.</p>'}
-    </div>
-
-    <div class="card">
-      <h2>سجل التدقيق والعمليات (Audit Log)</h2>
-      <div class="tw">
-        <table>
-          <thead><tr><th>العملية</th><th>المنفذ</th><th>الوقت</th></tr></thead>
-          <tbody>
-            ${S.audit.slice(0,8).map(a=>`
-              <tr><td><b>${h(a.a)}</b></td><td>${h(a.who)}</td><td dir="ltr">${a.t}</td></tr>
-            `).join('')||'<tr><td colspan="3" class="muted">لا توجد عمليات مسجلة</td></tr>'}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-}
-
-/* ---------- الفواتير والبلاغات والمشترك ---------- */
-function vInvoices(){
-  const list=S.invoices.filter(i=>S.mode==='seller'?i.owner===S.user:true);
-  return `
-    <h1>الفواتير الصادرة في النظام</h1>
-    <div class="card">
-      ${list.length?`
-        <div class="tw">
-          <table>
-            <thead><tr><th>رقم الفاتورة</th><th>التاريخ</th><th>المبلغ</th><th>الحالة</th><th></th></tr></thead>
-            <tbody>
-              ${list.map(i=>`
-                <tr>
-                  <td dir="ltr"><b>${i.no}</b></td>
-                  <td>${i.date}</td>
-                  <td><b>${fmt(i.total)} ر.س</b></td>
-                  <td>${badge('ok','رسمية صادرة')}</td>
-                  <td><button class="chip" onclick="S.tmp.modal=${i.id};render()">عرض الفاتورة</button></td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-      `:'<p class="muted">لا توجد فواتير بعد.</p>'}
-    </div>
-  `;
-}
-
-function vReport(){
-  return `
-    <h1>تقديم بلاغ اشتباه أو حماية ملكية</h1>
-    <div class="card" style="max-width:680px">
-      <p class="muted">نحمي أصحاب السلع من عرض معروضاتهم دون إذن، ونحمي المشترين من الإعلانات المشبوهة:</p>
-      
-      <label for="rt">رابط الإعلان أو رقم الاستفسار المشبوه</label>
-      <input id="rt" type="text" class="ltr" value="${h(S.tmp.repTarget||'https://haraj.com.sa/1182345678')}">
-
-      <label for="rs">سبب البلاغ بالتفصيل</label>
-      <textarea id="rs" placeholder="مثال: هذا الإعلان يستخدم صور سيارتي دون إذني، أو البائع يطلب تحويلاً لحساب مختلف..."></textarea>
-
-      <div style="margin-top:16px;display:flex;gap:10px">
-        <button class="btn" onclick="sendReport()">إرسال البلاغ للمراجعة الفورية</button>
-        <button class="btn2" onclick="go('dash')">إلغاء</button>
-      </div>
-    </div>
-  `;
-}
-
-function sendReport(){
-  const tg=$('#rt').value.trim();
-  const rs=$('#rs').value.trim();
-  if(!tg||!rs){toast('الرجاء إكمال بيانات البلاغ');return}
-
-  S.reports.push({
-    id:++S.seq.rep,
-    kind:S.mode==='seller'?'OWNER':'BUYER',
-    target:tg,
-    reason:rs,
-    by:S.user,
-    status:'SUBMITTED'
-  });
-
-  audit('تقديم بلاغ: '+tg);
-  toast('تم تقديم البلاغ وسيتم تعليق الإعلان إذا تبينت المخالفة');
-  S.tmp.repTarget='';
-  go('dash');
-}
-
-function vInvModal(){
-  const i=S.invoices.find(x=>x.id===S.tmp.modal);
-  if(!i) return '';
-  const it=i.item&&S.items.find(x=>x.id===i.item);
-  const ow=i.owner&&S.acc[i.owner];
-
-  return `
-    <div class="modal" onclick="if(event.target===this){S.tmp.modal=null;render()}">
-      <div class="box">
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px">
-          <h2 style="margin:0;color:var(--brand-dark)">فاتورة بيع رقمية معتمدة | ${i.no}</h2>
-          ${badge('ok','مطابقة للأنظمة')}
-        </div>
-        <div class="row"><span class="muted">تاريخ الإصدار:</span><b>${i.date}</b></div>
-        <div class="row"><span class="muted">الطرف الأول (البائع المالك):</span><b>${ow?h(ow.name):'منصة نبيه'}</b></div>
-        ${it?`<div class="row"><span class="muted">السلعة المعروضة:</span><b>${h(it.title)}</b></div>`:''}
-        <div class="row"><span class="muted">إجمالي المبلغ:</span><b style="font-size:20px;color:var(--brand)">${fmt(i.total)} ر.س</b></div>
-        <div class="row"><span class="muted">الحساب البنكي المعتمد:</span><b dir="ltr">${ow?maskIban(ow.iban):'-'}</b></div>
-        <p class="muted" style="font-size:13px;margin-top:14px">تعتبر هذه الفاتورة سنداً توثيقياً لملكية وعرض السلعة ومطابقة الحساب البنكي للبائع داخل منصة نبيه.</p>
-        <div style="text-align:left;margin-top:18px">
-          <button class="btn" onclick="S.tmp.modal=null;render()">إغلاق</button>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 /* ---------- شاشة الدخول والهيكل العام ---------- */
 function vLogin(){
   return `
-    <div class="wrap" style="max-width:960px">
-      <div style="text-align:center;margin-bottom:30px">
-        <h1 style="font-size:32px;color:var(--brand-dark)">منصة نبيه | التوثيق والفوترة الرقمية للإعلانات</h1>
-        <p class="muted" style="font-size:16px;max-width:700px;margin:auto">
-          المنصة الأولى لربط إعلانات السلع بالمالك الحقيقي، إصدار فواتير بيع معتمدة، وتوليد باركود ورقم استفسار موحد يُطبع على صورة الإعلان لمنع الاحتيال المالي.
+    <div class="wrap" style="max-width:1050px">
+      <div style="text-align:center;margin-bottom:32px">
+        <h1 style="font-size:32px;color:var(--brand-dark)">منصة نبيه | المنظومة الشاملة لتوثيق التحويلات والاتفاقات المالية</h1>
+        <p class="muted" style="font-size:16px;max-width:800px;margin:auto">
+          المنصة الأولى لتنظيم وتوثيق مختلف التعاملات المالية: السلف، المديونيات، الفواتير الجماعية، ومبيعات السلع، وإصدار سندات رقمية معتمدة بباركود موحد يمنع النزاعات والاحتيال المالي.
         </p>
       </div>
 
       <div class="roles">
-        <div class="role">
-          <h2>بائع: أحمد الخالدي</h2>
-          <p class="muted">يمتلك سلعاً موثقة بالهوية والحساب البنكي، ويقوم بإصدار فواتير بيع وتوليد صور الإعلانات الموسومة بالباركود.</p>
-          <button class="btn" onclick="login('seller')">الدخول كبائع (تجربة إصدار إعلان)</button>
+        <div class="role" style="border-top:4px solid var(--purple)">
+          <h2 style="color:var(--purple)">أحمد الخالدي (دائن / منظم / بائع)</h2>
+          <p class="muted">يوثق الاتفاقات المالية، يصدر سندات السلف والمديونيات والفواتير الجماعية، ويصدر إعلانات السلع بالباركود.</p>
+          <button class="btn btn-purple" onclick="login('seller')">الدخول كمنشئ تعاملات (تجربة الاتفاقات)</button>
         </div>
 
-        <div class="role">
-          <h2>مشتري: منى الشهري</h2>
-          <p class="muted">تتصفح الإعلانات وتفحص أرقام الاستفسار والباركود، وتطابق الحساب البنكي قبل التحويل عبر آلية «استقبل وحوّل».</p>
-          <button class="btn2" onclick="login('buyer')">الدخول كمشتري (فحص إعلان)</button>
+        <div class="role" style="border-top:4px solid var(--brand)">
+          <h2>منى الشهري (مدين / مستفيد / مشتري)</h2>
+          <p class="muted">تستقبل سندات الاتفاقات المالية وتفحص أرقام الاستفسار والباركود قبل إتمام التحويل البنكي عبر «استقبل وحوّل».</p>
+          <button class="btn2" onclick="login('buyer')">الدخول كطرف مقابل (فحص وسداد)</button>
         </div>
 
-        <div class="role">
-          <h2>مشرف المنصة</h2>
-          <p class="muted">مراجعة وثائق الملكية، البلاغات الواردة، وسجل التدقيق لضمان سلامة التعاملات.</p>
-          <button class="btn3" onclick="login('admin')">الدخول كمشرف</button>
+        <div class="role" style="border-top:4px solid var(--ink)">
+          <h2>شركة الإتقان (B2B / خدمات)</h2>
+          <p class="muted">تمثيل المنشآت والشركات في توثيق العقود المالية ومستحقات الخدمات مع الأفراد والمنشآت الأخرى.</p>
+          <button class="btn3" onclick="login('company')">الدخول كمنشأة (B2B)</button>
         </div>
       </div>
 
-      <details>
-        <summary>💡 كيف تقدم هذا النموذج أمام العميل؟ (سيناريو العرض)</summary>
-        <ol style="line-height:1.9">
-          <li><b>ابدأ كبائع:</b> اضغط على «صورة الإعلان بالباركود» لتري العميل كيف يقوم النظام بدمج الباركود ورقم الاستفسار والموثوقية على صورة السيارة تلقائياً مع إمكانية تحميلها ونشرها في حراج أو تيك توك.</li>
-          <li><b>أضف سلعة جديدة:</b> لتريه سهولة إدخال إعلان جديد، إرفاق إثبات الملكية، وإصدار الفاتورة الفورية.</li>
-          <li><b>انتقل كمشتري:</b> قم بفحص رقم الاستفسار <span dir="ltr">NB-928471</span> أو الصق رابط الإعلان لتظهر بطاقة الفحص ومستوى الموثوقية.</li>
-          <li><b>استعرض آلية «استقبل وحوّل»:</b> أظهر للعميل كيف يكتشف النظام الحسابات البنكية المحتالة إذا اختلفت عن حساب المالك الحقيقي.</li>
-        </ol>
+      <details open style="margin-top:24px">
+        <summary>💡 جديد المنصة: ما هي «الاتفاقات والالتزامات المالية» وكيف تعرضها للعميل؟</summary>
+        <div style="line-height:1.9;font-size:14px;margin-top:10px">
+          <p>بناءً على مقترح العميل، تم توسيع نبيه لتشمل:</p>
+          <ul>
+            <li><b>نماذج التعاملات:</b> فرد مع فرد، فرد مع مجموعة (قطة/فاتورة جماعية)، وفرد مع منشأة (خدمات/أتعاب).</li>
+            <li><b>صفات الأطراف:</b> دائن، مدين، مقرض، مقترض، مقدم خدمة، مستفيد، وسيط، وشريك.</li>
+            <li><b>أغراض التحويل:</b> سلفة (قرض حسن)، مديونية، عربون، استثمار، فاتورة جماعية، اشتراك دوري، ومقابل خدمة.</li>
+            <li><b>السند الرقمي:</b> إصدار سند رسمي يحمل رقم استفسار <span dir="ltr">AG-XXXXXX</span> و QR كود، يمكن لأي طرف إدخاله لمطابقة الآيبان والمبلغ المعتمد قبل التحويل لمنع أي احتيال.</li>
+          </ul>
+        </div>
       </details>
     </div>
   `;
@@ -1078,23 +949,20 @@ function vLogin(){
 function header(){
   if(!S.user) return '';
   const a=me();
-  const adm=S.user==='admin';
   return `
     <div class="top">
       <div class="in">
         <div class="brand">
-          🛡️ منصة نبيه <span>نسخة تفاعلية متقدمة</span>
+          🛡️ منصة نبيه <span>النسخة الشاملة</span>
         </div>
-        ${adm?'':`
-          <nav>
-            <button class="chip ${S.view==='dash'?'on':''}" onclick="go('dash')">لوحة التحكم</button>
-            <button class="chip ${S.view==='invoices'?'on':''}" onclick="go('invoices')">الفواتير</button>
-            <button class="chip ${S.view==='report'?'on':''}" onclick="go('report')">البلاغات</button>
-          </nav>
-        `}
+        <nav>
+          <button class="chip ${S.view==='dash'?'on':''}" onclick="go('dash')">لوحة التعاملات</button>
+          <button class="chip ${S.view==='add_agreement'?'on':''}" onclick="go('add_agreement')">🤝 توثيق اتفاق جديد</button>
+          <button class="chip ${S.view==='additem'?'on':''}" onclick="go('additem')">🏷️ سلعة جديدة</button>
+        </nav>
         <div style="display:flex;align-items:center;gap:10px">
-          <span class="muted"><b>${h(a.name)}</b> (${adm?'مشرف':S.mode==='seller'?'بائع':'مشتري'})</span>
-          ${adm?'':`<button class="btn2" style="min-height:36px;padding:4px 12px;font-size:13px" onclick="switchMode()">تبديل إلى ${S.mode==='seller'?'مشتري':'بائع'}</button>`}
+          <span class="muted"><b>${h(a.name)}</b> (${S.mode==='seller'?'دائن/بائع':'طرف مقابل'})</span>
+          <button class="btn2" style="min-height:36px;padding:4px 12px;font-size:13px" onclick="switchMode()">تبديل الصفة</button>
           <button class="chip" onclick="logout()">خروج</button>
         </div>
       </div>
@@ -1105,18 +973,15 @@ function header(){
 function render(){
   if(!S.user){$('#app').innerHTML=vLogin();return}
   const V={
-    dash:S.mode==='seller'?vSeller:vBuyer,
-    adash:vAdmin,
+    dash:vDash,
+    add_agreement:vAddAgreement,
+    agreement_voucher:vAgreementVoucher,
+    pay_agreement:vPayAgreement,
     additem:vAddItem,
-    studio:vStudio,
-    result:vResult,
-    code:vCode,
-    chk:vChk,
-    invoices:vInvoices,
-    report:vReport
+    studio:vStudio
   };
-  const fn=V[S.view]||(S.user==='admin'?vAdmin:V.dash);
-  $('#app').innerHTML=header()+'<div class="wrap">'+fn()+'</div>'+(S.tmp.modal?vInvModal():'');
+  const fn=V[S.view]||vDash;
+  $('#app').innerHTML=header()+'<div class="wrap">'+fn()+'</div>';
 }
 
 render();
