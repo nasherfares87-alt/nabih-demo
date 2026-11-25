@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>السجل التراكمي لاحتراف C# و ASP.NET Core - منصة نبيه</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+  
+  @page {
+    size: A4;
+    margin: 16mm 14mm 18mm 14mm;
+    @bottom-center {
+      content: "منصة نبيه | السجل اليومي التراكمي للأوامر والدروس - صفحة " counter(page);
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+      font-size: 8.5pt;
+      color: #64748b;
+    }
+  }
+
+  body {
+    font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+    color: #0f172a;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    font-size: 10pt;
+  }
+
+  .cover {
+    background: linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #0d9488 100%);
+    color: #ffffff;
+    padding: 30px 24px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 16px -4px rgba(13, 148, 136, 0.25);
+  }
+
+  .cover h1 {
+    font-size: 22pt;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .cover .subtitle {
+    font-size: 12pt;
+    color: #99f6e4;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .cover .meta {
+    font-size: 9pt;
+    color: #ccfbf1;
+    display: flex;
+    gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  h2 {
+    color: #0f766e;
+    font-size: 14pt;
+    border-bottom: 2px solid #ccfbf1;
+    padding-bottom: 4px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3 {
+    color: #1e293b;
+    font-size: 11.5pt;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    margin: 0 0 8px 0;
+    text-align: justify;
+  }
+
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+  }
+
+  .card.highlight {
+    background: #f0fdfa;
+    border-color: #99f6e4;
+    border-right: 4px solid #0d9488;
+  }
+
+  .card.purple {
+    background: #faf5ff;
+    border-color: #e9d5ff;
+    border-right: 4px solid #9333ea;
+  }
+
+  .card.gold {
+    background: #fffbeb;
+    border-color: #fde68a;
+    border-right: 4px solid #f59e0b;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 9pt;
+  }
+
+  th {
+    background: #0f766e;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 7px 10px;
+    text-align: right;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #ffffff;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Fira Code', Consolas, Monaco, monospace;
+    font-size: 8.5pt;
+    line-height: 1.45;
+    overflow-x: auto;
+    margin: 10px 0;
+    border: 1px solid #334155;
+  }
+
+  code {
+    font-family: 'Fira Code', Consolas, Monaco, monospace;
+    background: #f1f5f9;
+    color: #0f766e;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 8.5pt;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+  .badge-primary { background: #ccfbf1; color: #0f766e; }
+  .badge-dark { background: #334155; color: #f8fafc; }
+
+  .page-break {
+    page-break-after: always;
+  }
+</style>
+</head>
+<body>
+
+  <!-- الغلاف الرئيسي -->
+  <div class="cover">
+    <h1>السجل التراكمي الشامل | منصة نبيه</h1>
+    <div class="subtitle">المسار اليومي الموحد: أوامر النظام + الدروس البرمجية + المعمارية</div>
+    <div class="meta">
+      <span>📌 إعداد: شريكك البرمجي الذكي (Antigravity)</span>
+      <span>🏛️ المشروع: منصة نبيه (SRS v0.2)</span>
+      <span>📅 التحديث: 15 نوفمبر 2026 (اكتمال المراحل 1-4 ورفع الباك-إند على GitHub بنجاح)</span>
+    </div>
+  </div>
+
+  <!-- السجل التراكمي للأوامر -->
+  <h2>📌 السجل التراكمي لجميع الأوامر (من أول يوم وحتى اليوم)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 32%;">الأمر (Command)</th>
+        <th style="width: 18%;">اليوم / المرحلة</th>
+        <th>الوظيفة والهدف في المشروع</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>dotnet --version</code></td>
+        <td>اليوم 1 (التأسيس)</td>
+        <td>فحص بيئة .NET SDK المثبتة بالجهاز ودعم .NET 10.</td>
+      </tr>
+      <tr>
+        <td><code>dotnet new webapi -n nabieh</code></td>
+        <td>اليوم 1 (التأسيس)</td>
+        <td>إنشاء مشروع Web API متكامل بنواة دوت نت الرسمية.</td>
+      </tr>
+      <tr>
+        <td><code>code .</code></td>
+        <td>اليوم 1 (التأسيس)</td>
+        <td>فتح مجلد المشروع الحالي فوراً داخل برنامج VS Code.</td>
+      </tr>
+      <tr>
+        <td><code>dotnet build</code></td>
+        <td>أمر يومي دائم</td>
+        <td>فحص وتجميع الأكواد والتأكد من خلو المشروع من أخطاء الـ Syntax والأنواع.</td>
+      </tr>
+      <tr>
+        <td><code>dotnet run</code></td>
+        <td>أمر يومي دائم</td>
+        <td>تشغيل خادم الويب محلياً واستقبال طلبات المتصفح والجوال.</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl + C</code></td>
+        <td>أمر يومي دائم</td>
+        <td>إيقاف السيرفر في PowerShell قبل التعديل أو تثبيت الحزم الجديدة.</td>
+      </tr>
+      <tr>
+        <td><code>dotnet add package Swashbuckle.AspNetCore</code></td>
+        <td>اليوم 2 (سواجر)</td>
+        <td>تثبيت محرك Swagger لاختبار وتوثيق الـ APIs من المتصفح تفاعلياً.</td>
+      </tr>
+      <tr>
+        <td><code>dotnet add package Microsoft.EntityFrameworkCore.Sqlite</code></td>
+        <td>اليوم 3 (قواعد البيانات)</td>
+        <td>تثبيت مشغل SQLite لحفظ قاعدة البيانات الحقيقية في ملف <code>nabieh.db</code>.</td>
+      </tr>
+      <tr>
+        <td><code>Move-Item "bin\Debug\net10.0\Data" .</code></td>
+        <td>اليوم 3 (إدارة الملفات)</td>
+        <td>أمر نقل مجلد Data وإعادته للمستوى الرئيسي للمشروع في PowerShell.</td>
+      </tr>
+      <tr>
+        <td><code>Remove-Item "nabieh.db*" -Force</code></td>
+        <td>اليوم 4 (تحديث الجداول)</td>
+        <td>حذف قاعدة البيانات القديمة لتحديث الجداول الجديدة (الاتفاقات والفواتير).</td>
+      </tr>
+      <tr>
+        <td><code>New-Item -Path "Services\file.cs" -ItemType File -Force</code></td>
+        <td>اليوم 4 (إنشاء ملفات)</td>
+        <td>إنشاء ملفات برمجية جديدة من PowerShell مباشرة لتفادي أخطاء الحروف غير المرئية.</td>
+      </tr>
+      <tr>
+        <td><code>http://localhost:5135/swagger</code></td>
+        <td>رابط دائم</td>
+        <td>واجهة الاختبار التفاعلية وإدخال واسترجاع البيانات من السيرفر.</td>
+      </tr>
+      <tr>
+        <td><code>New-Item -Path "Services\VerificationService.cs" -ItemType File -Force</code></td>
+        <td>اليوم 5 (المرحلة 3)</td>
+        <td>إنشاء خدمة البحث والتحقق ومحرك «استقبل وحوّل» بأمان بدون أخطاء التسمية.</td>
+      </tr>
+      <tr>
+        <td><code>New-Item -Path "Controllers\VerificationController.cs" -ItemType File -Force</code></td>
+        <td>اليوم 5 (المرحلة 3)</td>
+        <td>إنشاء وحدة التحكم الخاصة باستقبال طلبات البحث وسداد الرسم وكود ST-.</td>
+      </tr>
+      <tr>
+        <td><code>New-Item -Path "Services\StudioService.cs" -ItemType File -Force</code></td>
+        <td>اليوم 6 (المرحلة 4)</td>
+        <td>إنشاء محرك استوديو الإعلان المائي وتوليد سندات التوثيق المطبوعة.</td>
+      </tr>
+      <tr>
+        <td><code>http://localhost:5135/api/Studio/watermark/NB-XXXXXXX</code></td>
+        <td>اليوم 6 (المرحلة 4)</td>
+        <td>رابط استعراض وتنزيل شارة الإعلان المائية الرسمية مع رمز QR.</td>
+      </tr>
+      <tr>
+        <td><code>http://localhost:5135/api/Studio/voucher/agreement/AG-XXXXXX</code></td>
+        <td>اليوم 6 (المرحلة 4)</td>
+        <td>رابط استعراض وطباعة سند توثيق الاتفاق المالي (PDF/A4).</td>
+      </tr>
+      <tr>
+        <td><code>Remove-Item "nabieh.db*" -Force</code></td>
+        <td>اليوم 5 (تحديث الجداول)</td>
+        <td>تحديث قاعدة البيانات لإضافة جدولي <code>TransferCodes</code> و<code>VerificationOrders</code>.</td>
+      </tr>
+      <tr>
+        <td><code>git init -b main</code></td>
+        <td>اليوم 7 (GitHub)</td>
+        <td>تهيئة مستودع Git محلي جديد للمشروع وجعل الفرع الرئيسي main.</td>
+      </tr>
+      <tr>
+        <td><code>git commit -m "..."</code></td>
+        <td>اليوم 7 (GitHub)</td>
+        <td>حفظ وتوثيق حالة المشروع والمراحل المنجزة في سجل Git.</td>
+      </tr>
+      <tr>
+        <td><code>git push -u origin main</code></td>
+        <td>اليوم 7 (GitHub)</td>
+        <td>رفع النسخة الاحتياطية الكاملة للمشروع إلى مستودع GitHub في السحابة.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 4: المرحلة الثانية - الاتفاقات المالية والفواتير -->
+  <h2>📖 الدرس الرابع (المرحلة 2): هندسة الاتفاقات المالية، الفواتير الرسمية، وحل الـ JSON Cycle</h2>
+  
+  <div class="card gold">
+    <b>المنجز الهندسي لليوم الرابع (المرحلة 2 - SRS v0.2):</b>
+    <ul>
+      <li><b>تطبيق معيار AC-09 والقاعدة 11:</b> الاتفاق لا يصبح نافذاً (<code>ACTIVE</code>) إلا بموافقة جميع الأطراف المقابلة. وقبل ذلك يظهر تحذير: «غير مؤكد من الطرف الثاني».</li>
+      <li><b>تطبيق معيار AC-13 والقاعدة 14:</b> تثبيت آيبان المستفيد المعتمد وقت تفعيل الاتفاق ومنع تغييره لاحقاً.</li>
+      <li><b>تطبيق معيار AC-11:</b> التحقق البرمجي الصارم من أن مجموع حصص المشاركين في الفواتير الجماعية (<code>GROUP_BILL</code>) يطابق إجمالي الفاتورة تماماً.</li>
+      <li><b>تطبيق معيار AC-01 و AC-04 (القاعدة 4 و 5 و 8):</b> حظر إصدار فاتورة بيع لسلعة غير معتمدة، ترقيم الفواتير تسلسلياً (<code>INV-000001</code>)، وتوليد كود <code>NB-XXXXXXX</code> خالي من الأحرف الملتبسة (<code>0, 1, O, I</code>).</li>
+    </ul>
+  </div>
+
+  <h3>1. دورة حياة الاتفاق المالي (State Machine):</h3>
+  <pre><code>// المسار الإلزامي:
+إنشاء الاتفاق (DRAFT -> PENDING_ACCEPTANCE) 
+   └── توليد كود AG-XXXXXX
+       └── دعوة الأطراف برقم الجوال
+           └── قبول الأطراف المقابلة (AC-09)
+               └── تثبيت آيبان المستفيد المعتمد (AC-13)
+                   └── تفعيل الاتفاق (ACTIVE)
+                       └── إصدار سند توثيق الاتفاق الرسمي (A4 / PDF)</code></pre>
+
+  <h3>2. الدرس البرمجي الذهبي: حل مشكلة الـ JSON Infinite Loop</h3>
+  <p>عندما ترتبط السلعة بـ إثبات الملكية، ويرتبط الإثبات بالسلعة، أو يرتبط الاتفاق بأطرافه والأطراف باتفاقهم، يقع محول الـ JSON في حلقة دائرية لا نهائية (Object Cycle). الحل الاحترافي المعتمد في <code>Program.cs</code>:</p>
+
+  <span class="badge badge-dark">Program.cs</span>
+  <pre><code>builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // يتجاهل التكرار الدائري تلقائياً دون انهيار السيرفر
+        options.JsonSerializerOptions.ReferenceHandler = 
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });</code></pre>
+
+  <div class="card highlight">
+    <b>نماذج الأوامر الصادرة في اليوم الرابع:</b>
+    <pre><code>// فاتورة بيع السلعة المعتمدة:
+{
+  "invoiceNumber": "INV-000001",
+  "inquiryCode": "NB-M3EHE7Q",
+  "itemTitle": "سيارة تويوتا كامري 2023",
+  "subtotal": 85000,
+  "taxAmount": 12750,
+  "total": 97750,
+  "status": "ISSUED"
+}
+
+// إنشاء اتفاق مالي نشط:
+{
+  "inquiryCode": "AG-658BA6",
+  "totalAmount": 50000,
+  "status": "ACTIVE",
+  "payeeIban": "SA4400000000000000009137"
+}</code></pre>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 5: المرحلة الثالثة -->
+  <h2>📖 درس اليوم (المرحلة 3): محرك التحقق، حماية SSRF، واستقبل وحوّل (ST-)</h2>
+
+  <div class="card gold">
+    <b>المنجز الهندسي للدرس الخامس (SRS v0.2):</b>
+    <ul>
+      <li><b>تطبيق معيار AC-08 والقاعدة 20 (SSRF Protection):</b> تحليل الروابط عبر <code>Uri</code>، تطبيعها بإزالة وسوم التتبع (<code>utm_*</code>, <code>fbclid</code>)، السماح فقط بالمنصات المعتمدة عبر HTTPS، وحظر عناوين الشبكة الداخلية مثل <code>127.0.0.1</code> و<code>localhost</code>.</li>
+      <li><b>تطبيق معيار AC-07 والقاعدة 9:</b> الفصل التام بين الاستعلام المجاني (حالة أولية فقط) والتقرير الكامل بعد سداد رسم الخدمة وإصدار فاتورة <code>SVC-000001</code>.</li>
+      <li><b>تطبيق معيار AC-06 والقاعدة 7:</b> منع المالك برمجياً من طلب التحقق أو إنشاء كود تحويل على سلعته.</li>
+      <li><b>تطبيق معيار AC-15 والقاعدة 16/18:</b> إخفاء الاسم والآيبان جزئياً (<code>SA•• •••• •••• •••• 9137</code>)، وحساب المصداقية بشفافية، وفحص كود <code>ST-XXXX</code> لإنتاج <code>VERIFIED</code> أو <code>MISMATCH</code>.</li>
+    </ul>
+  </div>
+
+  <h3>1. الدرس الأمني: تطبيع الروابط ومنع هجمات SSRF (AC-08)</h3>
+  <p>عند السماح للمستخدم بإدخال رابط إعلان، قد يدخل رابطاً يحتوي على وسوم تتبع مزعجة أو رابطاً خبيثاً يستهدف السيرفر الداخلي (Server-Side Request Forgery). نستخدم فئتي <code>Uri</code> و<code>IPAddress</code> لبناء خط دفاع صارم:</p>
+
+  <span class="badge badge-dark">VerificationService.cs</span>
+  <pre><code>// 1. اشتراط بروتوكول HTTPS فقط ومنع العناوين المحلية/الخاصة
+if (IsInternalOrPrivateHost(uri.Host))
+    throw new ArgumentException("مرفوض أمنياً: يحظر الوصول للعناوين الداخلية.");
+
+// 2. إزالة وسوم التتبع من الرابط ليطابق الإعلان المسجل
+// مثال: ?utm_source=whatsapp&fbclid=123 تُحذف تلقائياً</code></pre>
+
+  <h3>2. القاعدة الذهبية: إخفاء البيانات الحساسة (Data Masking)</h3>
+  <p>في أي استجابة عامة أو تقرير تحقق (AC-16)، نُخفي الجزء الأوسط من الآيبان ونُبقي الرمز الدولي وآخر 4 خانات فقط باستخدام ميزة <b>C# Ranges (<code>..2</code> و <code>^4..</code>)</b>:</p>
+
+  <pre><code>// تحويل SA4400000000000000009137 إلى SA•• •••• •••• •••• 9137
+return $"{clean[..2]}•• •••• •••• •••• {clean[^4..]}";</code></pre>
+
+  <div class="card purple">
+    <b>ملاحظة معمارية مهمة:</b> استخدمنا <code>Random.Shared</code> بدلاً من <code>new Random()</code> لأنها فئة آمنة لتعدد الطلبات المتزامنة (Thread-Safe) في .NET 10 وتمنع تكرار الكود عند الطلبات السريعة.
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 6: دورة حياة السلع والبلاغات الكاملة -->
+  <h2>📖 درس اليوم (المرحلة 4): الدليل العملي الشامل لدورة حياة السلع والبلاغات (من الألف إلى الياء)</h2>
+
+  <div class="card highlight">
+    <b>سؤال جوهري: أيهما يسبق الآخر: Proof أم Review؟ وكيف أحصل على Reviewer ID؟</b>
+    <ul>
+      <li><b>الترتيب الحتمي:</b> رفع إثبات الملكية (<code>Proof</code>) يسبق دائماً مراجعة المشرف (<code>Review</code>)؛ لأن المشرف لا يستطيع مراجعة أو اعتماد شيء لم يُرفع بعد! إذا حاولت استدعاء <code>review</code> قبل <code>proof</code> سيرد النظام بخطأ <code>400: لا يوجد إثبات ملكية مرفوع</code>.</li>
+      <li><b>ما هو Reviewer ID؟</b> هو المعرّف الفريد (UUID) لحساب المشرف أو الإداري المخوّل بالاعتماد. في بيئة التطوير والاختبار لدينا، نستخدم معرّف المستخدم المعتمد في النظام: <code>11111111-1111-1111-1111-111111111111</code>.</li>
+    </ul>
+  </div>
+
+  <h3>🔄 المخطط التسلسلي لدورة حياة السلعة في الأنظمة المالية (State Machine):</h3>
+  <table style="font-size: 8.5pt;">
+    <thead>
+      <tr>
+        <th>المرحلة</th>
+        <th>نقطة النهاية (Endpoint)</th>
+        <th>الحالة الناتجة</th>
+        <th>المعنى والنظام المالي</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>1. الإنشاء</b></td>
+        <td><code>POST /api/Items</code></td>
+        <td><code>DRAFT</code></td>
+        <td>مسودة خاصة بالبائع، لم يطّلع عليها أحد، ويمكن حذفها بحرية.</td>
+      </tr>
+      <tr>
+        <td><b>2. رفع الإثبات</b></td>
+        <td><code>POST /api/Items/{id}/proof</code></td>
+        <td><code>PENDING_OWNERSHIP</code></td>
+        <td>تتحول السلعة تلقائياً لطابور المراجعة الإدارية مع حفظ وثيقة الملكية.</td>
+      </tr>
+      <tr>
+        <td><b>3. قرار المشرف</b></td>
+        <td><code>POST /api/Items/{id}/review</code></td>
+        <td><code>OWNERSHIP_VERIFIED</code> أو <code>REJECTED</code></td>
+        <td>الاعتماد يعطي الضوء الأخضر للفوترة؛ والرفض يتطلب سبباً إلزامياً (AC-05).</td>
+      </tr>
+      <tr>
+        <td><b>4. الفوترة وتوليد الرمز</b></td>
+        <td><code>POST /api/Invoices/sale</code></td>
+        <td><code>INV-000001</code> + <code>NB-XXXXXXX</code></td>
+        <td>صدور الفاتورة الرسمية وتثبيت كود الاستفسار. <b>يُمنع بعدها حذف السلعة</b> لحماية السجلات المالية (القاعدة 3).</td>
+      </tr>
+      <tr>
+        <td><b>5. الاستعلام وسداد الرسم</b></td>
+        <td><code>GET /lookup</code> ثم <code>POST /pay-fee</code></td>
+        <td><code>SVC-000001</code> + تقرير المصداقية</td>
+        <td>استعلام مجاني ثم سداد 10 ريال لفك إخفاء الاسم والآيبان واحتساب المصداقية.</td>
+      </tr>
+      <tr>
+        <td><b>6. استقبل وحوّل</b></td>
+        <td><code>POST /transfer-code</code></td>
+        <td><code>ST-XXXX</code> (VERIFIED / MISMATCH)</td>
+        <td>مطابقة الآيبان والمبلغ والغرض قبل التحويل البنكي خارج المنصة.</td>
+      </tr>
+      <tr>
+        <td><b>7. تقديم بلاغ</b></td>
+        <td><code>POST /api/Reports</code></td>
+        <td><code>SUBMITTED</code></td>
+        <td>مشتري أو مالك يبلغ عن اشتباه؛ يسجل فوراً في سجل التدقيق.</td>
+      </tr>
+      <tr>
+        <td><b>8. قرار البلاغ والتعليق</b></td>
+        <td><code>POST /api/Reports/{id}/review</code></td>
+        <td><code>UPHELD</code> &rarr; <code>SUSPENDED</code></td>
+        <td>قبول البلاغ يعلّق السلعة ورقم الاستفسار ويخصم (-2) من المصداقية (AC-17).</td>
+      </tr>
+      <tr>
+        <td><b>9. رفع التعليق</b></td>
+        <td><code>POST /api/Reports/lift-suspension/{code}</code></td>
+        <td><code>OWNERSHIP_VERIFIED</code></td>
+        <td>المشرف يرفع التعليق بعد التحقق مع توثيق السبب الإلزامي في سجل التدقيق.</td>
+      </tr>
+      <tr>
+        <td><b>10. الحذف أو الإلغاء</b></td>
+        <td><code>DELETE /api/Items/{id}</code> أو <code>POST /withdraw</code></td>
+        <td>حذف السلعة / سحب البلاغ</td>
+        <td>تُحذف السلعة قبل الفوترة فقط؛ أما بعد الفوترة فالإجراء هو التعليق لمنع التلاعب المالي.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>📋 الأكواد الجاهزة للنسخ خطوة بخطوة في Swagger:</h3>
+  <pre><code>// 1. إنشاء السلعة (DRAFT):
+POST /api/Items
+{
+  "ownerId": "11111111-1111-1111-1111-111111111111",
+  "title": "دراجة نارية موديل 2026",
+  "description": "موتور بايك صناعة المملكة",
+  "category": "مركبة نارية",
+  "price": 35000,
+  "adUrl": "https://haraj.com.sa/11182102406"
+}
+
+// 2. رفع الإثبات (PENDING_OWNERSHIP):
+POST /api/Items/{id}/proof
+{
+  "proofType": "DOCUMENT",
+  "declarationText": "رخصة سير واستمارة مطابقة للمالك",
+  "filePath": "/uploads/proofs/bike_2026.pdf"
+}
+
+// 3. اعتماد المشرف (OWNERSHIP_VERIFIED):
+POST /api/Items/{id}/review
+{
+  "reviewerId": "11111111-1111-1111-1111-111111111111",
+  "isApproved": true
+}
+
+// 4. إصدار فاتورة البيع الرسمية وتوليد كود NB-:
+POST /api/Invoices/sale
+{
+  "itemId": "{id}",
+  "buyerId": "22222222-2222-2222-2222-222222222222",
+  "taxRate": 0.15
+}
+
+// 5. تقديم بلاغ اشتباه كمشتري:
+POST /api/Reports
+{
+  "reporterId": "22222222-2222-2222-2222-222222222222",
+  "inquiryCode": "NB-XXXXXXX",
+  "reportKind": "BUYER",
+  "reason": "اشتباه في تطابق بيانات الإعلان مع حساب غير موثق"
+}
+
+// 6. قبول البلاغ وتعليق السلعة (SUSPENDED):
+POST /api/Reports/{reportId}/review
+{
+  "reviewerId": "11111111-1111-1111-1111-111111111111",
+  "upheld": true,
+  "actionTaken": "SUSPEND_ITEM",
+  "reviewNote": "تم التحقق من الشكوى وتعليق الرقم لحين مراجعة المستندات"
+}
+
+// 7. رفع التعليق بقرار المشرف المسجل:
+POST /api/Reports/lift-suspension/NB-XXXXXXX
+{
+  "adminId": "11111111-1111-1111-1111-111111111111",
+  "reason": "تمت مراجعة الوثيقة الأصلية مع البائع والتأكد من سلامة الحساب"
+}</code></pre>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 7: استوديو الإعلان ورمز QR وسند توثيق الاتفاق -->
+  <h2>📖 درس اليوم (المرحلة 4 - الجزء 2): استوديو الإعلان (QR/SVG) وسند توثيق الاتفاق المالي (PDF/A4)</h2>
+
+  <div class="card gold">
+    <b>المنجز الهندسي للدرس السابع (SRS v0.2):</b>
+    <ul>
+      <li><b>تطبيق معيار AC-20 والقاعدة 24:</b> توليد شارة إعلان مائية متجهة (SVG) عالية الدقة تحمل شعار نبيه ورقم الاستفسار الموحد (<code>NB-</code>) ورمز QR يقود مباشرة لصفحة التحقق.</li>
+      <li><b>تطبيق القاعدة 23 (الصياغة النظامية):</b> اعتماد مسمى «سند توثيق اتفاق» وتضمين التنبيه القانوني بعدم استلام أو تحويل المنصة لأموال الصفقات لتفادي أي نزاعات قضائية.</li>
+      <li><b>تطبيق معيار AC-14 والقاعدة 17 (الخصوصية المشروطة):</b> إذا كان المستعلم طرفاً في الاتفاق تظهر الشروط كاملة؛ وإذا كان خارجياً تظهر البيانات مقنعة جزئياً (<code>SA•• 9137</code> و<code>أحمد خ***</code>) مع حجب الشروط الخاصة وهوية الطرف الملتزم.</li>
+      <li><b>هندسة رمز QR المتجه النقي:</b> توليد باركود نقطي قياسي (QR Matrix) بـ C# خالص دون الحاجة لمكتبات خارجية ثقيلة، مدمج بصيغة SVG سريعة التحميل وقابلة للطباعة.</li>
+    </ul>
+  </div>
+
+  <h3>1. استوديو وسم الإعلان المائي (Ad Watermark Studio - AC-20):</h3>
+  <p>يحتاج البائع عند نشر إعلانه في منصات الوساطة (مثل حراج، مستعمل، تيك توك، X) إلى إثبات مصداقية سلعته للمشترين. يتيح الاستوديو عبر <code>GET /api/Studio/watermark/{NB-XXXXXXX}</code> استخراج شارة مائية رسمية متجهة (SVG) عالية الدقة كما تظهر أدناه:</p>
+
+  <!-- معاينة بصرية حية لشارة الإعلان المائية الرسمية مع رمز QR الفعلي -->
+  <div style="margin: 14px 0; text-align: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" style="max-width: 680px; height: auto;" dir="rtl">
+      <defs>
+        <linearGradient id="lessonBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#042f2e" />
+          <stop offset="50%" stop-color="#0f766e" />
+          <stop offset="100%" stop-color="#115e59" />
+        </linearGradient>
+      </defs>
+      <rect x="5" y="5" width="750" height="270" rx="18" fill="url(#lessonBgGrad)" stroke="#2dd4bf" stroke-width="2"/>
+      
+      <!-- إطار رمز QR مع باركود نقطي حقيقي -->
+      <rect x="25" y="25" width="150" height="230" rx="12" fill="#ffffff"/>
+      <g transform="translate(35, 35)">
+        <!-- Finder top-left -->
+        <rect x="0" y="0" width="42" height="42" fill="#042f2e"/>
+        <rect x="6" y="6" width="30" height="30" fill="#ffffff"/>
+        <rect x="12" y="12" width="18" height="18" fill="#042f2e"/>
+        <!-- Finder top-right -->
+        <rect x="88" y="0" width="42" height="42" fill="#042f2e"/>
+        <rect x="94" y="6" width="30" height="30" fill="#ffffff"/>
+        <rect x="100" y="12" width="18" height="18" fill="#042f2e"/>
+        <!-- Finder bottom-left -->
+        <rect x="0" y="88" width="42" height="42" fill="#042f2e"/>
+        <rect x="6" y="94" width="30" height="30" fill="#ffffff"/>
+        <rect x="12" y="100" width="18" height="18" fill="#042f2e"/>
+        <!-- Data points -->
+        <rect x="48" y="6" width="6" height="6" fill="#042f2e"/>
+        <rect x="60" y="6" width="6" height="6" fill="#042f2e"/>
+        <rect x="72" y="6" width="6" height="6" fill="#042f2e"/>
+        <rect x="48" y="18" width="12" height="6" fill="#042f2e"/>
+        <rect x="66" y="24" width="12" height="6" fill="#042f2e"/>
+        <rect x="48" y="36" width="6" height="12" fill="#042f2e"/>
+        <rect x="60" y="48" width="18" height="6" fill="#042f2e"/>
+        <rect x="6" y="54" width="36" height="6" fill="#042f2e"/>
+        <rect x="88" y="54" width="36" height="6" fill="#042f2e"/>
+        <rect x="48" y="66" width="12" height="12" fill="#042f2e"/>
+        <rect x="66" y="78" width="12" height="6" fill="#042f2e"/>
+        <rect x="48" y="90" width="6" height="6" fill="#042f2e"/>
+        <rect x="60" y="90" width="18" height="6" fill="#042f2e"/>
+        <rect x="88" y="72" width="6" height="12" fill="#042f2e"/>
+        <rect x="106" y="72" width="12" height="6" fill="#042f2e"/>
+        <rect x="100" y="90" width="6" height="18" fill="#042f2e"/>
+        <rect x="118" y="96" width="6" height="18" fill="#042f2e"/>
+        <rect x="48" y="108" width="18" height="12" fill="#042f2e"/>
+        <rect x="72" y="114" width="12" height="6" fill="#042f2e"/>
+      </g>
+      <text x="100" y="235" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="11" font-weight="bold" fill="#0f766e" text-anchor="middle">امسح للتحقق اللحظي</text>
+
+      <!-- نصوص الشارة والبيانات -->
+      <g transform="translate(195, 40)">
+        <text x="535" y="22" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="end">منصة نبيه | NABIEH</text>
+        <text x="535" y="44" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="12" fill="#99f6e4" text-anchor="end">منظومة توثيق السلع والالتزامات المالية قبل التحويل البنكي</text>
+
+        <!-- وسم الحالة المعتمدة -->
+        <rect x="385" y="62" width="150" height="25" rx="6" fill="#0d9488"/>
+        <text x="460" y="79" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">● ملكية معتمدة وموثقة</text>
+
+        <!-- تصنيف السلعة -->
+        <text x="535" y="115" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="15" font-weight="600" fill="#f8fafc" text-anchor="end">دراجة نارية موديل 2026</text>
+
+        <!-- صندوق رقم الاستفسار الموحد -->
+        <rect x="95" y="132" width="440" height="50" rx="9" fill="#042f2e" stroke="#14b8a6" stroke-width="1.5"/>
+        <text x="515" y="163" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="12" fill="#5eead4" text-anchor="end">رقم الاستفسار الموحد:</text>
+        <text x="120" y="167" font-family="'Fira Code', monospace" font-size="21" font-weight="bold" fill="#ffffff" letter-spacing="2" text-anchor="start" direction="ltr">NB-ELV49H5</text>
+
+        <text x="535" y="208" font-family="'IBM Plex Sans Arabic', sans-serif" font-size="10.5" fill="#ccfbf1" text-anchor="end">⚠️ تحذير: لا تحوّل أي مبالغ بنكية إلا بعد مطابقة هذا الرقم وكود استقبل وحوّل في تطبيق نبيه.</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3>2. سند توثيق الاتفاق المالي القابل للطباعة A4 / PDF (AC-14 و القاعدة 23):</h3>
+  <p>يتم إصدار السند عبر <code>GET /api/Studio/voucher/agreement/{AG-XXXXXX}</code>، وهو مصمم بقواعد CSS الطباعية (<code>@page { size: A4; }</code> و <code>@media print</code>) ليتيح للأطراف تنزيله كملف PDF رسمي بضغطة زر واحدة:</p>
+
+  <div class="card highlight">
+    <b>هيكل السند الرقمي المعتمد:</b>
+    <ol>
+      <li><b>الترويسة:</b> شعار المنصة، رمز التوثيق (<code>AG-658BA6</code>)، ورمز QR المتجه للتحقق المباشر بالكاميرا.</li>
+      <li><b>التنبيه النظامي (القاعدة 23):</b> إشعار قانوني صريح بأن الوثيقة هي «سند توثيق اتفاق» وليست إقراراً قضائياً ملزماً.</li>
+      <li><b>بطاقة المبلغ والحالة:</b> إجمالي المبلغ بالريال السعودي (<code>SAR 50,000.00</code>) وحالة الاتفاق (<code>ACTIVE</code>).</li>
+      <li><b>بيانات الأطراف والآيبان:</b> تثبيت آيبان المستفيد المعتمد (<code>SA•• 9137</code>) ونموذج العلاقة ونوع المعاملة.</li>
+      <li><b>حماية الخصوصية:</b> حجب الشروط وهوية المدين في حال تصفح الوثيقة من قبل مستعلم خارجي (معيار AC-14).</li>
+    </ol>
+  </div>
+
+  <!-- معاينة بصرية حية لنموذج السند كما يصدر من السيرفر -->
+  <div style="border: 2px solid #0f766e; border-radius: 10px; padding: 18px; margin: 15px 0; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #ccfbf1; padding-bottom: 12px; margin-bottom: 12px;">
+      <div>
+        <h3 style="margin: 0; color: #0f766e; font-size: 16pt;">سند توثيق اتفاق مالي</h3>
+        <div style="color: #64748b; font-size: 8.5pt; margin-top: 4px;">منصة نبيه | رمز التوثيق الموحد: <b>AG-658BA6</b> | التاريخ: معتمد رسمياً</div>
+      </div>
+      <!-- رمز QR مصغر للمعاينة -->
+      <div style="background: #ffffff; padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px;">
+        <svg width="70" height="70" viewBox="0 0 130 130">
+          <rect width="130" height="130" fill="#ffffff"/>
+          <rect x="0" y="0" width="42" height="42" fill="#042f2e"/>
+          <rect x="6" y="6" width="30" height="30" fill="#ffffff"/>
+          <rect x="12" y="12" width="18" height="18" fill="#042f2e"/>
+          <rect x="88" y="0" width="42" height="42" fill="#042f2e"/>
+          <rect x="94" y="6" width="30" height="30" fill="#ffffff"/>
+          <rect x="100" y="12" width="18" height="18" fill="#042f2e"/>
+          <rect x="0" y="88" width="42" height="42" fill="#042f2e"/>
+          <rect x="6" y="94" width="30" height="30" fill="#ffffff"/>
+          <rect x="12" y="100" width="18" height="18" fill="#042f2e"/>
+          <rect x="48" y="12" width="12" height="12" fill="#042f2e"/>
+          <rect x="66" y="24" width="12" height="12" fill="#042f2e"/>
+          <rect x="48" y="66" width="12" height="12" fill="#042f2e"/>
+          <rect x="66" y="78" width="12" height="12" fill="#042f2e"/>
+          <rect x="100" y="90" width="12" height="18" fill="#042f2e"/>
+        </svg>
+      </div>
+    </div>
+
+    <div style="background: #f0fdfa; border-right: 4px solid #0d9488; padding: 6px 10px; font-size: 8pt; color: #0f766e; margin-bottom: 12px; border-radius: 4px;">
+      📌 <b>تنبيه نظامي (القاعدة 23):</b> هذه الوثيقة هي «سند توثيق اتفاق» تم تراضيه وتوثيقه إلكترونياً عبر منصة نبيه، والمنصة لا تستلم مبالغ الصفقات ولا تنفّذ التحويلات البنكية.
+    </div>
+
+    <div style="background: linear-gradient(135deg, #042f2e, #0f766e); color: #fff; padding: 12px 18px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-size: 8.5pt; color: #ccfbf1;">إجمالي المبلغ المتفق عليه:</div>
+        <div style="font-size: 16pt; font-weight: bold; font-family: monospace; color: #5eead4;">SAR 50,000.00</div>
+      </div>
+      <div style="text-align: left;">
+        <div style="font-size: 8pt; color: #ccfbf1;">حالة السند الحالية:</div>
+        <div style="font-size: 11pt; font-weight: bold; color: #fff;">ACTIVE ●</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 9pt; margin-bottom: 12px;">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px;">
+        <b style="color: #64748b; font-size: 8pt; display: block;">المستفيد المعتمد من الدفع (Payee):</b>
+        <span>أحمد خ***</span>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px;">
+        <b style="color: #64748b; font-size: 8pt; display: block;">الآيبان البنكي المعتمد للتحويل:</b>
+        <span style="font-family: monospace; direction: ltr; display: inline-block;">SA•• •••• •••• •••• 9137</span>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px;">
+        <b style="color: #64748b; font-size: 8pt; display: block;">نموذج العلاقة:</b>
+        <span>IND_TO_IND</span>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px;">
+        <b style="color: #64748b; font-size: 8pt; display: block;">نوع المعاملة المالية:</b>
+        <span>LOAN (سلفة)</span>
+      </div>
+    </div>
+
+    <div style="background: #fffbeb; border-right: 4px solid #f59e0b; padding: 6px 10px; font-size: 8pt; color: #92400e; border-radius: 4px;">
+      <b>ملاحظة خصوصية (معيار AC-14 / القاعدة 17):</b> الشروط الخاصة وهوية الطرف الملتزم محجوبة لغير أطراف الاتفاق المعتمدين.
+    </div>
+  </div>
+
+  <span class="badge badge-dark">StudioService.cs - دوال توليد الـ SVG والـ HTML</span>
+  <pre><code>// 1. توليد شارة الإعلان المائية (SVG Vector):
+public async Task&lt;string&gt; GenerateAdBadgeSvgAsync(string inquiryCode)
+{{
+    // رابط التحقق المشفر داخل QR
+    var verifyUrl = $"http://localhost:5135/api/Verification/lookup?query={{code}}";
+    var qrSvg = GenerateSimpleQrSvg(verifyUrl, 130);
+    ...
+}}
+
+// 2. فحص صلاحية رؤية الشروط (AC-14 / القاعدة 17):
+bool isParty = viewerUserId.HasValue &amp;&amp; 
+    (ag.CreatorId == viewerUserId.Value || ag.Parties.Any(p =&gt; p.UserId == viewerUserId.Value));
+
+// إذا كان خارجياً تُقنع البيانات، وإذا كان طرفاً تظهر كاملة:
+string termsSection = isParty 
+    ? $"&lt;div class='terms-box'&gt;{{ag.Terms}}&lt;/div&gt;" 
+    : "&lt;div class='info-notice'&gt;ملاحظة خصوصية (AC-14): الشروط وهوية الملتزم محجوبة لغير الأطراف.&lt;/div&gt;";</code></pre>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 8: نماذج العلاقات الـ 7 والاتفاقات المالية -->
+  <h2>📖 ملحق هندسي: نماذج العلاقات المالية الـ 7 وإدارة الفواتير الجماعية</h2>
+
+  <table style="font-size: 8.5pt;">
+    <thead>
+      <tr>
+        <th style="width: 25%;">نموذج العلاقة (RelationModel)</th>
+        <th style="width: 20%;">نوع العملية (OperationType)</th>
+        <th>المعنى والتطبيق العملي في نبيه</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>IND_TO_IND</code></td>
+        <td><code>LOAN</code> / <code>DEBT</code></td>
+        <td>فرد مع فرد (سلفة شخصية، مديونية سابقة، سعي وساطة).</td>
+      </tr>
+      <tr>
+        <td><code>IND_TO_GROUP</code></td>
+        <td><code>GROUP_BILL</code></td>
+        <td>فرد مع مجموعة (قطة سفر، فاتورة استراحة، تقاسم مصاريف). <b>يُشترط تماثل مجموع الحصص مع الإجمالي (AC-11).</b></td>
+      </tr>
+      <tr>
+        <td><code>GROUP_TO_GROUP</code></td>
+        <td><code>INVESTMENT</code></td>
+        <td>مجموعة مع مجموعة (حصص شراكة استثمارية، محافظ مشتركة).</td>
+      </tr>
+      <tr>
+        <td><code>IND_TO_ORG</code></td>
+        <td><code>SERVICE_FEE</code></td>
+        <td>فرد مع منشأة (سداد أتعاب مهنية، فواتير مكاتب استشارات).</td>
+      </tr>
+      <tr>
+        <td><code>ORG_TO_IND</code></td>
+        <td><code>COMMISSION</code></td>
+        <td>منشأة مع أفراد (صرف عمولات تسويق، دفعات مستحقة).</td>
+      </tr>
+      <tr>
+        <td><code>ORG_TO_ORG</code></td>
+        <td><code>SALE_PURCHASE</code></td>
+        <td>منشأة مع منشأة (صفقات B2B، توريد بضائع، عقود مقاولات).</td>
+      </tr>
+      <tr>
+        <td><code>SERVICE_PROVIDER</code></td>
+        <td><code>SUBSCRIPTION</code></td>
+        <td>مقدم خدمة دورية مع مستفيدين (اشتراكات مراكز، رسوم خدمات سنوية).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card purple">
+    <b>قاعدة تفعيل الاتفاق الذهبية (AC-09 و القاعدة 11):</b>
+    الاتفاق المالي لا يصبح نافذاً (<code>ACTIVE</code>) بمجرد إنشائه من الطرف الأول، بل يشترط قبول وموافقة جميع الأطراف المقابلة المدعوة (<code>PartyAcceptance.ACCEPTED</code>). وقبل ذلك تظهر حالة الاتفاق في كل الفحوصات: <i>«تحذير: غير مؤكد من الطرف الثاني»</i> لحماية المجتمع من ادعاءات الديون الوهمية.
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 9: ربط الواجهة التفاعلية بخادم الباك-إند (المرحلة الخامسة) -->
+  <h2>🌐 اليوم التاسع (المرحلة الخامسة): ربط الواجهة التفاعلية بخادم ASP.NET Core الحي</h2>
+
+  <div class="card teal">
+    <b>الهدف المعماري للمرحلة الخامسة (Phase 5):</b>
+    تحويل النموذج الأولي التفاعلي (<code>index.html</code>) من مجرد محاكاة محلية تخزن في متصفح العميل (<code>localStorage</code>) إلى واجهة حية مربوطة بنسبة 100% بخادم منصة نبيه الحقيقي المكتوب بـ ASP.NET Core (.NET 10) وقاعدة بيانات SQLite عبر بروتوكول HTTP/RESTful APIs.
+  </div>
+
+  <h3>1. معضلة أمان المتصفحات (CORS) وحلها البرمجي في ASP.NET Core</h3>
+  <p>
+    عند فتح صفحة الويب كملف محلي (<code>file:///...</code>) ومحاولتها إجراء طلبات <code>fetch</code> إلى الخادم (<code>http://localhost:5135</code>)، يقوم المتصفح بحظر الطلب تلقائياً وفق سياسة <b>Same-Origin Policy</b> لحماية المستخدم. لحل ذلك، قمنا بإعداد سياسة CORS مفتوحة ومرنة في <code>Program.cs</code>:
+  </p>
+
+  <pre><code>// C# (Program.cs): تفعيل سياسة السماح بالربط للواجهة الأمامية
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+var app = builder.Build();
+app.UseCors("AllowAll"); // تفعيل الوسيط البرمجي لـ CORS</code></pre>
+
+  <h3>2. تصميم المعمارية المزدوجة الذكية (Dual-Mode Architecture)</h3>
+  <p>
+    تم بناء الواجهة الأمامية لتعمل بنظام استشعار حيوي لحالة الخادم (Heartbeat):
+  </p>
+  <ul>
+    <li><b>الوضع الحي (Live Online Mode):</b> يستشعر وجود خادم .NET تلقائياً في ثوانٍ، ويحوّل شريط التنبيه إلى اللون الأخضر، ويجري كافة عمليات الاستعلام الموحد، ومطابقة الحوالة، واستخراج كود التحويل (<code>ST-XXXX</code>)، وتوليد السندات الرسمية والشارات المائية مباشرة من قاعدة البيانات.</li>
+    <li><b>وضع المحاكاة الاحتياطي (Fallback Mode):</b> في حال إيقاف الخادم للصيانة، لا تتعطل الواجهة، بل تعرض شريطاً تحذيرياً أصفر ينبه المستخدم مع استمرار عمل العرض التوضيحي بالبيانات المحلية.</li>
+  </ul>
+
+  <h3>3. تدفق البيانات التفاعلي المكتمل في المرحلة الخامسة (End-to-End Flow)</h3>
+  <table style="font-size: 8.5pt;">
+    <thead>
+      <tr>
+        <th style="width: 25%;">الإجراء في الواجهة</th>
+        <th style="width: 25%;">نقطة نهاية الـ API المستهدفة</th>
+        <th>المعيار المحقق والنتيجة الحية</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>البحث والاستفسار الموحد</b></td>
+        <td><code>GET /api/Verification/lookup?query={code}</code></td>
+        <td><b>AC-07 / AC-08:</b> استرجاع فوري لبيانات السلعة أو الاتفاق المالي مع حجب الهوية والآيبان (<code>AC-16</code>)، وتنبيه فوري باللون الأحمر إذا كانت المعاملة موقوفة احترازياً (<code>AC-17</code>).</td>
+      </tr>
+      <tr>
+        <td><b>فحص ومطابقة الحوالة الآمنة</b></td>
+        <td><code>POST /api/Verification/transfer-code</code></td>
+        <td><b>AC-15:</b> مطابقة الآيبان والمبلغ والحالة النشطة وخلو السجل من البلاغات، وإصدار كود التحويل الآمن الفوري <code>ST-DUFR</code> مع إرشاد بإدراجه في خانة الغرض من الحوالة بالبنك.</td>
+      </tr>
+      <tr>
+        <td><b>طباعة سند توثيق الاتفاق الرسمي</b></td>
+        <td><code>GET /api/Studio/voucher/agreement/{code}</code></td>
+        <td><b>AC-14 / القاعدة 23:</b> فتح مستند A4/PDF مهيأ للطباعة يحمل عنوان "سند توثيق اتفاق" وشعار نبيه و QR كود رسمي مع قناع الخصوصية.</td>
+      </tr>
+      <tr>
+        <td><b>تنزيل شارة التوثيق المائية</b></td>
+        <td><code>GET /api/Studio/watermark/{code}</code></td>
+        <td><b>AC-20:</b> توليد شارة مائية فكتورية (SVG عالية الدقة) تتضمن رمز QR وكود الاستفسار الموحد وحالة التوثيق لوضعها على إعلانات السلع.</td>
+      </tr>
+      <tr>
+        <td><b>رفع بلاغ احتيال / تعليق</b></td>
+        <td><code>POST /api/Reports</code></td>
+        <td><b>AC-17 / القاعدة 17:</b> تسجيل بلاغ رسمي فوري لدى إدارة الامتثال لإجراء التحقيق وتعليق المعاملة احترازياً عند ثبوت المخالفة.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 30px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 14px; color: #64748b; font-size: 8.5pt;">
+    منصة نبيه | الدرس التاسع: اكتمال المرحلة الخامسة (ربط الواجهة الأمامية بنسبة 100% بخادم ASP.NET Core الحي).
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- درس اليوم 10: حزمة الاختبارات الآلية الشاملة (المرحلة السادسة) -->
+  <h2>🧪 اليوم العاشر (المرحلة السادسة): حزمة الاختبارات الآلية الشاملة (xUnit) وتغطية معايير القبول الـ 21</h2>
+
+  <div class="card teal">
+    <b>الهدف المعماري للمرحلة السادسة (Phase 6):</b>
+    بناء حزام أمان برمجي صارم مؤتمت عبر مكتبة <b>xUnit</b> و <b>Entity Framework Core SQLite In-Memory</b> لاختبار جميع قواعد النظام الـ 24 ومعايير القبول الـ 21 (من <code>AC-01</code> إلى <code>AC-21</code>) الواردة في وثيقة مواصفات نبيه (SRS v0.2). يضمن هذا الإنجاز مناعة النظام بنسبة 100% ضد أي أخطاء تراجع (Regression Protection) قبل الانتقال للمرحلة السابعة (تطوير تطبيق الهواتف الذكية عبر Flutter).
+  </div>
+
+  <h3>1. الاستراتيجية المعمارية لاختبار الخدمات دون تزييف (Zero Mocking & SQLite In-Memory)</h3>
+  <p>
+    بدلاً من تزييف قواعد البيانات (Mocking)، اعتمدنا تقنية <b>قاعدة بيانات SQLite في الذاكرة (In-Memory Database)</b>. هذه التقنية تضمن تشغيل المنطق البرمجي الحقيقي، وقيود المفاتيح الأجنبية، والمعاملات، وسجلات التدقيق كما هي تماماً في بيئة الإنتاج:
+  </p>
+
+  <pre><code>// C# (nabieh.Tests/TestHelper.cs): إعداد قاعدة بيانات الذاكرة اللحظية
+public static (NabihDbContext context, SqliteConnection connection) CreateInMemoryDbContext()
+{
+    // ملاحظة برمجية حرجة: يجب إبقاء الاتصال مفتوحاً طوال عمر الاختبار 
+    // لأن SQLite يمسح قاعدة بيانات الذاكرة فور إغلاق الاتصال!
+    var connection = new SqliteConnection("DataSource=:memory:");
+    connection.Open();
+
+    var options = new DbContextOptionsBuilder<NabihDbContext>()
+        .UseSqlite(connection)
+        .Options;
+
+    var context = new NabihDbContext(options);
+    context.Database.EnsureCreated(); // بناء الجداول وهيكلية البيانات فوراً
+    
+    // تلقيم أولي للمستخدمين المعتمدين (أحمد الخالدي وسعد القحطاني)
+    // ...
+    return (context, connection);
+}</code></pre>
+
+  <h3>2. مصفوفة تغطية معايير القبول الـ 21 (AC-01 إلى AC-21):</h3>
+  <table style="font-size: 8pt;">
+    <thead>
+      <tr>
+        <th style="width: 10%;">المعيار</th>
+        <th style="width: 32%;">القاعدة النظامية المختبرة</th>
+        <th style="width: 38%;">دالة الاختبار في حزمة xUnit</th>
+        <th style="width: 20%;">النتيجة الآلية</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>AC-01</b></td>
+        <td>حظر إصدار فاتورة بيع لسلعة غير معتمدة الملكية</td>
+        <td><code>AC01_CannotIssueSaleInvoice_ForUnverifiedItem</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-02</b></td>
+        <td>احتساب رسم التحقق (10 ريال + 1.50 ضريبة = 11.50) وفاتورة SVC-</td>
+        <td><code>AC02_VerificationFeeInvoice_Calculates10SarPlusVat</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-03</b></td>
+        <td>حماية SSRF وتطبيع روابط الإعلانات بحذف وسوم التتبع</td>
+        <td><code>AC03_AdUrlNormalization_And_SSRFProtection</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-04</b></td>
+        <td>كود استفسار السلعة NB- يتكون من 7 خانات Base-32 خالية من (0, 1, O, I)</td>
+        <td><code>AC04_ItemInquiryCode_Generated_UsingBase32</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-05</b></td>
+        <td>رفض إثبات الملكية يشترط إدخال سبب الرفض إجبارياً</td>
+        <td><code>AC05_RejectOwnershipProof_RequiresRejectionReason</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-06</b></td>
+        <td>منع مالك السلعة أو منشئ الاتفاق من دفع رسم التحقق على نفسه</td>
+        <td><code>AC06_ItemOwner_CannotPayVerificationFee_ForOwnItem</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-07 / 08</b></td>
+        <td>الاستفسار الموحد وإرجاع DTO عام نظيف بدون كشف الهوية الحساسة</td>
+        <td><code>AC07_UnifiedLookup_FindsItem_And_Agreement_And_AdUrl</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-09</b></td>
+        <td>الاتفاق لا يصبح ACTIVE إلا بقبول الأطراف، ويتحول لـ REJECTED عند الرفض</td>
+        <td><code>AC09_Agreement_TransitionsToActive_WhenAllPartiesAccept</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-10</b></td>
+        <td>كود استفسار الاتفاق AG- يتكون من 6 خانات Base-32 خالية من الالتباس</td>
+        <td><code>AC10_AgreementCode_Generated_UsingBase32</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-11</b></td>
+        <td>في الفواتير الجماعية: مجموع حصص المشاركين يطابق إجمالي الفاتورة بدقة</td>
+        <td><code>AC11_GroupBill_SumOfSharesMustEqualTotalAmount</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-12</b></td>
+        <td>دعم أدوار الأطراف المتعددة (دائن، مدين، مستفيد، عضو مجموعة)</td>
+        <td><code>AC12_AgreementParties_SupportDifferentRoles</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-13</b></td>
+        <td>تثبيت آيبان المستفيد المعتمد وقت تفعيل الاتفاق ومنع تعديله إطلاقاً</td>
+        <td><code>AC13_PayeeIban_LockedAndImmutable_OnceActivated</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-14</b></td>
+        <td>حجب شروط الاتفاق وهوية الطرف الملتزم في السند عن غير الأطراف</td>
+        <td><code>AC14_Rule23_AgreementVoucher_MasksNonParties</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-15</b></td>
+        <td>محرك «استقبل وحوّل» يرجع VERIFIED عند التطابق و MISMATCH عند التباين</td>
+        <td><code>AC15_SafeTransfer_ReturnsVerified_And_Mismatch</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-16</b></td>
+        <td>حجب الآيبان (SA•• 9137) وحجب الاسم القانوني (أحمد خ***)</td>
+        <td><code>AC16_Masking_AppliesCorrectMaskToIbanAndLegalName</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-17</b></td>
+        <td>قبول البلاغ يعلّق السلعة ويظهر تحذيراً فورياً، ورفع التعليق يعيد تفعيلها</td>
+        <td><code>AC17_AdministrativeReport_SuspendsItem_AndLiftRestores</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-18</b></td>
+        <td>سجل التدقيق الرقابي Append-only غير قابل للتعديل ويسجل الأحداث الحرجة</td>
+        <td><code>AC18_AuditLog_IsAppendOnly_RecordsCriticalEvents</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-19</b></td>
+        <td>المعرفات الأساسية UUIDs والمبالغ المالية بدقة DECIMAL(12,2)</td>
+        <td><code>AC19_PrimaryKeysAreGuids_AndMonetaryAmountsHaveTwoDecimals</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-20</b></td>
+        <td>توليد شارة الإعلان المتجهية SVG مع رمز QR متوافق قياسياً وكود NB-</td>
+        <td><code>AC20_AdWatermarkBadge_GeneratesValidSvg</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>AC-21</b></td>
+        <td>تخزين الطوابع الزمنية بـ UTC وعرضها بتوقيت الرياض (UTC+3)</td>
+        <td><code>AC21_Timestamps_AreStoredInUtc_AndCanBeDisplayedInRiyadh</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+      <tr>
+        <td><b>القاعدة 23</b></td>
+        <td>التسمية النظامية المعتمدة هي «سند توثيق اتفاق» وتجنب المسميات القضائية</td>
+        <td><code>AC14_Rule23_AgreementVoucher_MasksNonParties_AndUsesOfficialTitle</code></td>
+        <td><span class="badge badge-teal">PASSED (100%)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3. تقرير التنفيذ اللحظي للحزمة (Test Execution Summary):</h3>
+  <div class="card dark">
+    <pre style="margin: 0; color: #a7f3d0;"><code>$ dotnet test C:\Users\LENOVO\nabieh\nabieh.Tests\nabieh.Tests.csproj
+
+Test run for C:\Users\LENOVO\nabieh\nabieh.Tests\bin\Debug\net10.0\nabieh.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed: 0, Passed: 23, Skipped: 0, Total: 23, Duration: 1 s - nabieh.Tests.dll (net10.0)</code></pre>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 14px; color: #64748b; font-size: 8.5pt;">
+    منصة نبيه | الدرس العاشر: اكتمال المرحلة السادسة (حزمة الاختبارات الآلية الشاملة عبر xUnit بنسبة نجاح 100% لكافة معايير القبول الـ 21).
+  </div>
+
+</body>
+</html>

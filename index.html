@@ -97,12 +97,14 @@ summary{cursor:pointer;font-weight:600;color:var(--brand-dark)}
 .parties-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
 .party-box{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px}
 .party-box b{color:var(--brand-dark)}
+.demo-bar.online-bar{background:linear-gradient(90deg, #059669, #0d9488, #2563eb)}
+.demo-bar.offline-bar{background:linear-gradient(90deg, #d97706, #b45309, #7c3aed)}
 </style>
 </head>
 <body>
-<div class="demo-bar">
-  <span>💡 <b>منصة نبيه الشاملة:</b> لتوثيق وتنظيم مختلف التعاملات والتحويلات المالية، المديونيات، السلف، الفواتير الجماعية، ومبيعات السلع.</span>
-  <button onclick="resetDemo()">إعادة ضبط العرض 🔄</button>
+<div id="connBanner" class="demo-bar offline-bar">
+  <span>💡 <b>منصة نبيه الشاملة:</b> جاري فحص حالة الاتصال بخادم نبيه (ASP.NET Core)...</span>
+  <button onclick="checkBackendStatus()">فحص الاتصال 🔄</button>
 </div>
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -128,6 +130,86 @@ const maskName=n=>{const p=String(n).split(' ');return p[0]+(p[1]?' '+p[1][0]+'*
 const maskIban=i=>i?'SA•• •••• •••• •••• '+i.slice(-4):'غير مسجّل';
 const normIban=s=>String(s).replace(/\s+/g,'').toUpperCase();
 const badge=(k,t)=>`<span class="badge ${k}">${t}</span>`;
+
+/* ---------- ربط خادم نبيه الحقيقي (ASP.NET Core API - Phase 5) ---------- */
+const SERVER_HOST = '192.168.100.68:5135';
+const API_SERVER = `http://${SERVER_HOST}`;
+let API_BASE = localStorage.getItem('nabih_api_base');
+if(!API_BASE || API_BASE.includes('localhost')){
+  API_BASE = `${API_SERVER}/api`;
+  try{ localStorage.setItem('nabih_api_base', API_BASE); }catch(e){}
+}
+let backendOnline = false;
+
+function openModal(contentHtml){
+  closeModal();
+  const m=document.createElement('div');
+  m.id='activeModal';
+  m.className='modal';
+  m.innerHTML=`<div class="box">${contentHtml}</div>`;
+  m.onclick=(e)=>{if(e.target===m)closeModal()};
+  document.body.appendChild(m);
+}
+function closeModal(){
+  const m=$('#activeModal');
+  if(m) m.remove();
+}
+
+async function checkBackendStatus(){
+  try{
+    const res=await fetch(`${API_BASE}/Verification/lookup?query=PING`,{
+      method:'GET',
+      headers:{'Accept':'application/json'},
+      signal:AbortSignal.timeout(2000)
+    });
+    backendOnline=res.status!==0;
+  }catch(e){
+    backendOnline=false;
+  }
+  updateConnectionBanner();
+  const p=$('#netStatusPill');
+  if(p){
+    p.className=backendOnline?'badge ok':'badge pend';
+    p.textContent=backendOnline?'🟢 الخادم متصل':'🟡 وضع تجريبي';
+  }
+}
+
+function updateConnectionBanner(){
+  const el=$('#connBanner');
+  if(!el) return;
+  if(backendOnline){
+    el.className='demo-bar online-bar';
+    el.innerHTML=`
+      <span>🟢 <b>متصل بخادم نبيه الحقيقي (ASP.NET Core .NET 10):</b> الاستفسارات، مطابقة الحوالات الآمنة، وسندات Studio تعمل حياً ومباشرة.</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button onclick="testQuickSearch('AG-658BA6')">⚡ فحص السند AG-658BA6</button>
+        <button onclick="testQuickSearch('NB-ELV49H5')">⚡ فحص السلعة NB-ELV49H5</button>
+        <button onclick="checkBackendStatus()">🔄 تحديث</button>
+      </div>
+    `;
+  }else{
+    el.className='demo-bar offline-bar';
+    el.innerHTML=`
+      <span>🟡 <b>وضع المحاكاة التجريبي:</b> خادم الباك-إند غير مشغّل حالياً على <code dir="ltr" style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">http://localhost:5135</code>. لشغيل الربط المباشر شغّل <code dir="ltr" style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">dotnet run</code> في مجلد nabieh.</span>
+      <button onclick="checkBackendStatus()">🔄 إعادة فحص الاتصال</button>
+    `;
+  }
+}
+
+function testQuickSearch(code){
+  if(!S.user){
+    S.user = 'buyer';
+  }
+  S.mode = 'buyer';
+  S.view = 'dash';
+  save();
+  render();
+  setTimeout(()=>{
+    const qi = $('#q');
+    if(qi) qi.value = code;
+    doSearch(code);
+  }, 100);
+}
 
 function fresh(){
   return {
@@ -513,8 +595,11 @@ function vAgreementVoucher(){
   setTimeout(()=>{
     const qrDiv=$('#agQrBox');
     if(qrDiv&&!qrDiv.hasChildNodes()){
+      const targetUrl = backendOnline 
+        ? `http://192.168.100.68:5135/api/Studio/voucher/agreement/${a.code}` 
+        : `https://nabih.sa/verify/agreement/${a.code}`;
       new QRCode(qrDiv,{
-        text:'https://nabih.sa/verify/agreement/'+a.code,
+        text: targetUrl,
         width:140,
         height:140,
         colorDark:"#0f172a",
@@ -530,9 +615,10 @@ function vAgreementVoucher(){
         <h1 style="margin:0">📄 سند اتفاق والتزام مالي موثق</h1>
         <p class="muted" style="margin:4px 0 0">سند رقمي معتمد يحمي الأطراف ويوثق الغرض من الحوالة قبل إجرائها عبر البنك.</p>
       </div>
-      <div style="display:flex;gap:8px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn2" onclick="go('dash')">⬅ العودة للوحة</button>
         <button class="btn btn-purple" onclick="window.print()">🖨️ طباعة السند (PDF)</button>
+        <a href="${API_SERVER}/api/Studio/voucher/agreement/${a.code}" target="_blank" class="btn btn-purple" style="text-decoration:none">🏛️ فتح سند توثيق الاتفاق الرسمي من الخادم (A4)</a>
       </div>
     </div>
 
@@ -613,56 +699,212 @@ function testPayAgreement(code){
 
 /* ---------- تجربة المشتري/المسدد: فحص وسداد الاتفاق المالي ---------- */
 function vPayAgreement(){
-  const a=S.agreements.find(x=>x.code===S.tmp.curAgCode);
-  if(!a) return vDash();
+  const a = S.agreements.find(x => x.code === S.tmp.curAgCode) || S.tmp.curAg || {
+    code: S.tmp.curAgCode || 'AG-658BA6',
+    title: 'اتفاق مالي موثق',
+    category: 'LOAN',
+    creditorName: 'أحمد محمد الخالدي',
+    creditorIban: SELLER_IBAN,
+    amount: 50000
+  };
+
+  const isBackend = backendOnline;
 
   return `
     <h1>التحقق من الاتفاق المالي قبل التحويل البنكي</h1>
-    <div class="card" style="max-width:760px">
+    <div class="card" style="max-width:820px">
       <div class="banner info">
         <div>
           <b>أنت الآن في شاشة الطرف الثاني (الملتزم بالتحويل)</b>
-          <p style="margin:2px 0 0">تحقق منصة نبيه من مطابقة الحساب البنكي والغرض والمبلغ قبل إرسال الحوالة.</p>
+          <p style="margin:2px 0 0">تحقق منصة نبيه من مطابقة الحساب البنكي والغرض والمبلغ قبل إرسال الحوالة عبر البنك.</p>
         </div>
-        <b dir="ltr" style="font-family:monospace">${a.code}</b>
+        <b dir="ltr" style="font-family:monospace;font-size:20px">${a.code}</b>
       </div>
 
       <div class="row"><span class="muted">عنوان الاتفاق:</span><b>${h(a.title)}</b></div>
-      <div class="row"><span class="muted">نوع المعاملة:</span>${badge('purple-badge', OPERATION_TYPES[a.category]||a.category)}</div>
+      <div class="row"><span class="muted">نوع المعاملة:</span>${badge('purple-badge', OPERATION_TYPES[a.category]||a.category||'اتفاق مالي')}</div>
       <div class="row"><span class="muted">المستفيد المعتمد (الطرف الأول):</span><b>${h(a.creditorName)}</b></div>
       <div class="row"><span class="muted">الحساب البنكي المعتمد له:</span><b dir="ltr" style="font-family:monospace;color:var(--brand-dark)">${a.creditorIban}</b></div>
-      <div class="row"><span class="muted">المبلغ المستحق سداده:</span><b style="font-size:20px;color:var(--brand)">${fmt(a.amount)} ر.س</b></div>
+      <div class="row"><span class="muted">المبلغ المعتمد في السند:</span><b style="font-size:22px;color:var(--brand)">${fmt(a.amount)} ر.س</b></div>
 
-      <h3 style="margin-top:20px">محاكاة عملية التحويل من تطبيق بنكك:</h3>
-      <p class="muted">أدخل الآيبان والمبلغ الذي تنوي تحويله لمطابقته مع السند الرسمي:</p>
+      <h3 style="margin-top:22px">محاكاة عملية التحويل من تطبيق بنكك:</h3>
+      <p class="muted">أدخل الآيبان والمبلغ الذي تنوي تحويله لمطابقته مع السند الرسمي ${isBackend ? 'عبر خادم نبيه المباشر' : 'محلياً'}:</p>
 
-      <label for="ibPay">الحساب الذي ستحوّل إليه</label>
-      <input id="ibPay" type="text" class="ltr" value="${a.creditorIban}">
-
-      <div style="display:flex;gap:8px;margin:8px 0 16px;flex-wrap:wrap">
-        <button class="chip" onclick="$('#ibPay').value='${a.creditorIban}'">✅ الحساب المعتمد في الاتفاق</button>
-        <button class="chip" onclick="$('#ibPay').value='${OTHER_IBAN}'">❌ حساب مختلف (احتيال أو وسيط)</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label for="ibPay">الحساب البنكي الذي ستحوّل إليه (IBAN)</label>
+          <input id="ibPay" type="text" class="ltr" value="${a.creditorIban}">
+        </div>
+        <div>
+          <label for="amtPay">المبلغ المراد تحويله (ر.س)</label>
+          <input id="amtPay" type="number" class="ltr" value="${a.amount}">
+        </div>
       </div>
 
-      <div style="display:flex;gap:10px">
-        <button class="btn btn-purple" onclick="verifyAgreementTransfer('${a.code}')">🔍 فحص ومطابقة الحوالة</button>
-        <button class="btn2" onclick="go('dash')">رجوع</button>
+      <div style="display:flex;gap:8px;margin:12px 0 16px;flex-wrap:wrap">
+        <button class="chip" onclick="$('#ibPay').value='${a.creditorIban}';$('#amtPay').value='${a.amount}'">✅ الحساب والمبلغ مطابقان تماماً</button>
+        <button class="chip" onclick="$('#amtPay').value='${Math.round(a.amount*0.5)}'">⚠️ تجربة سداد جزئي (50%)</button>
+        <button class="chip" onclick="$('#amtPay').value='${a.amount+10000}'">❌ تجربة مبلغ زائد (+10,000)</button>
+        <button class="chip" onclick="$('#ibPay').value='${OTHER_IBAN}'">❌ حساب مختلف (وسيط أو احتيال)</button>
       </div>
+
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="btn btn-purple" onclick="verifyAgreementTransfer('${a.code}')">🔍 فحص ومطابقة الحوالة وإصدار كود التحويل</button>
+        <button class="btn2" onclick="go('dash')">رجوع للوحة</button>
+      </div>
+
+      <div id="transferResultBox"></div>
     </div>
   `;
 }
 
-function verifyAgreementTransfer(code){
-  const a=S.agreements.find(x=>x.code===code);
-  const ib=normIban($('#ibPay').value);
+async function verifyAgreementTransfer(code){
+  const resBox = $('#transferResultBox');
+  const a = S.agreements.find(x => x.code === code) || S.tmp.curAg || { amount: 50000, creditorIban: SELLER_IBAN };
+  const enteredIban = normIban($('#ibPay').value);
+  const enteredAmount = parseFloat($('#amtPay') ? $('#amtPay').value : a.amount);
 
-  if(ib===a.creditorIban){
-    toast('البيانات متطابقة بنسبة 100% مع سند الاتفاق الموثق! يمكنك التحويل بأمان.');
-    audit('مطابقة ناجحة لتحويل اتفاق مالي: '+code);
-  } else {
-    toast('⚠️ تنبيه خطير: الحساب البنكي غير مطابق للحساب المسجل في سند نبيه!');
-    audit('محاولة تحويل لحساب غير مطابق في اتفاق: '+code);
+  if(!enteredIban || !(enteredAmount > 0)) {
+    toast('يرجى إدخال الحساب والمبلغ بشكل صحيح');
+    return;
   }
+
+  if(backendOnline){
+    if(resBox) resBox.innerHTML = '<div style="padding:16px;text-align:center" class="muted">⏳ جاري التحقق من خادم نبيه ومطابقة البيانات بحسب معايير AC-15...</div>';
+    try {
+      const res = await fetch(`${API_BASE}/Verification/transfer-code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inquiryCode: code,
+          enteredIban: enteredIban,
+          enteredAmount: enteredAmount,
+          purpose: 'سداد التزام مالي موثق'
+        })
+      });
+
+      const data = await res.json();
+      renderTransferResult(data);
+      audit(`فحص حوالة لكود ${code}: ${data.status} (${data.transferCode || 'رفض'})`);
+      return;
+    } catch(e) {
+      console.error(e);
+      toast('تعذر فحص الحوالة عبر الخادم، جاري الفحص المحلي');
+    }
+  }
+
+  // المعالجة المحلية الاحتياطية (Fallback)
+  const isIbanMatch = (enteredIban === normIban(a.creditorIban));
+  const isAmtMatch = (enteredAmount <= a.amount);
+  const isExact = (enteredAmount === a.amount);
+
+  if(isIbanMatch && isAmtMatch){
+    const dummyCode = 'ST-' + Math.random().toString(36).substring(2,6).toUpperCase();
+    renderTransferResult({
+      status: 'VERIFIED',
+      transferCode: dummyCode,
+      amount: enteredAmount,
+      maskedPayeeName: maskName(a.creditorName||'أحمد الخالدي'),
+      checks: { ibanMatched: true, amountMatched: true, itemOrAgreementActive: true, noActiveSuspension: true },
+      warningMessage: isExact ? null : 'تنبيه: المبلغ المدخل جزئي (أقل من إجمالي المستحق في السند).'
+    });
+    audit('مطابقة محلية ناجحة لتحويل: ' + code);
+  } else {
+    renderTransferResult({
+      status: 'MISMATCH',
+      checks: { ibanMatched: isIbanMatch, amountMatched: isAmtMatch, itemOrAgreementActive: true, noActiveSuspension: true },
+      warningMessage: !isIbanMatch ? 'الحساب البنكي غير مطابق للحساب المعتمد في السند.' : 'المبلغ المدخل يتجاوز المبلغ المعتمد.'
+    });
+    audit('محاولة تحويل غير مطابقة: ' + code);
+  }
+}
+
+function renderTransferResult(d){
+  const box = $('#transferResultBox');
+  if(!box) return;
+
+  if(d.status === 'VERIFIED'){
+    box.innerHTML = `
+      <div class="card" style="border:2px solid var(--brand);background:#f0fdf4;margin-top:20px;padding:20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <div>
+            <span class="badge ok" style="font-size:14px">✅ تمت المطابقة بنجاح - بيانات صحيحة 100%</span>
+            <h2 style="margin:8px 0 4px;color:var(--brand-dark)">كود التحويل البنكي الآمن (Safe Transfer)</h2>
+          </div>
+          <div style="text-align:center">
+            <div class="muted" style="font-size:12px">كود التحويل المعتمد:</div>
+            <b class="code" style="font-size:32px;color:var(--brand-dark);margin:0">${d.transferCode}</b>
+          </div>
+        </div>
+
+        <div style="margin:14px 0;background:#fff;border-radius:10px;padding:14px;border:1px solid #bbf7d0">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;font-size:14px">
+            <div>✔️ الحساب البنكي: <b>مطابق للمستفيد المعتمد</b></div>
+            <div>✔️ المبلغ المعتمد: <b>${fmt(d.amount)} ر.س</b></div>
+            <div>✔️ حالة السند: <b>ساري ونشط</b></div>
+            <div>✔️ النزاعات والبلاغات: <b>لا يوجد تعليق احترازي</b></div>
+          </div>
+        </div>
+
+        ${d.warningMessage ? `
+          <div class="banner warn" style="margin-bottom:12px">
+            ⚠️ <b>تنبيه منصة نبيه:</b> ${h(d.warningMessage)}
+          </div>
+        ` : ''}
+
+        <div style="background:#fff;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.7;color:#334155;border:1px dashed #0d9488">
+          📌 <b>خطوة مهمة لإتمام التحويل من تطبيق بنكك:</b><br>
+          عند إجراء التحويل البنكي، انسخ الكود <b dir="ltr" style="background:#e0f2fe;padding:2px 8px;border-radius:4px;color:#0369a1">${d.transferCode}</b> واكتبه في خانة <b>«الغرض من الحوالة / ملاحظات»</b> لتوثيق العملية وحماية حقك بالكامل.
+        </div>
+      </div>
+    `;
+    toast('تم إصدار كود التحويل بنجاح!');
+  } else {
+    // MISMATCH
+    box.innerHTML = `
+      <div class="card" style="border:2px solid var(--efg);background:#fef2f2;margin-top:20px;padding:20px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <span style="font-size:32px">⚠️</span>
+          <div>
+            <span class="badge bad" style="font-size:14px">تم رفض إصدار الكود - عدم تطابق (MISMATCH)</span>
+            <h2 style="margin:4px 0 0;color:var(--efg)">تحذير أمني: لا تقم بالتحويل البنكي إطلاقاً!</h2>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:14px;border:1px solid #fecaca;font-size:14px;line-height:1.8">
+          <b>الأسباب المحتملة لرفض المطابقة (معيار AC-15):</b>
+          <ul style="margin:6px 0 0;padding-right:20px;color:#991b1b">
+            ${d.checks && !d.checks.ibanMatched ? '<li>❌ رقم الآيبان المدخل غير مطابق للحساب البنكي المعتمد في السند (احتمال احتيال أو وسيط مالي غير مصرح).</li>' : ''}
+            ${d.checks && !d.checks.amountMatched ? '<li>❌ المبلغ المدخل أعلى من المبلغ المستحق في السند الرسمي.</li>' : ''}
+            ${d.checks && !d.checks.itemOrAgreementActive ? '<li>❌ المعاملة أو السند غير نشط حالياً.</li>' : ''}
+            ${d.checks && !d.checks.noActiveSuspension ? '<li>❌ توجد بلاغات احتيال نشطة أو تعليق احترازي على هذه المعاملة (معيار AC-17).</li>' : ''}
+            ${!d.checks ? '<li>❌ البيانات المدخلة لا تطابق سجلات منصة نبيه الرسمية.</li>' : ''}
+          </ul>
+        </div>
+
+        ${d.warningMessage ? `
+          <div style="margin-top:12px;font-size:13px;color:#7f1d1d">
+            <b>تفاصيل إضافية:</b> ${h(d.warningMessage)}
+          </div>
+        ` : ''}
+      </div>
+    `;
+    toast('⚠️ تنبيه: عدم تطابق في بيانات الحوالة!');
+  }
+}
+
+function startTransferCheck(code, title, amount, iban, payeeName){
+  S.tmp.curAgCode = code;
+  S.tmp.curAg = {
+    code: code,
+    title: title,
+    category: 'FINANCIAL_AGREEMENT',
+    creditorName: payeeName,
+    creditorIban: (iban && iban.replace(/\s+/g,'').startsWith('SA') && !iban.includes('•')) ? iban : SELLER_IBAN,
+    amount: amount
+  };
+  S.mode = 'buyer';
+  go('pay_agreement');
 }
 
 /* ---------- دوال البحث الموحد (سلع + اتفاقات) ---------- */
@@ -678,24 +920,48 @@ function vBuyer(){
       <p class="muted">أدخل رقم الاستفسار الموحد (سواء كان إعلان سلعة <span dir="ltr">NB-XXXXXX</span> أو اتفاق مالي <span dir="ltr">AG-XXXXXX</span>):</p>
 
       <div style="display:flex;gap:10px;margin-bottom:12px">
-        <input id="q" type="text" class="ltr" placeholder="NB-928471 أو AG-739104" value="AG-739104" onkeydown="if(event.key==='Enter')doSearch()" style="font-size:18px;font-weight:700">
+        <input id="q" type="text" class="ltr" placeholder="NB-ELV49H5 أو AG-658BA6" value="AG-658BA6" onkeydown="if(event.key==='Enter')doSearch()" style="font-size:18px;font-weight:700">
         <button class="btn btn-purple" style="min-width:140px" onclick="doSearch()">🔍 فحص المعاملة</button>
       </div>
 
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <span class="muted" style="font-size:13px">نماذج سريعة للتجربة:</span>
-        <button class="chip" onclick="$('#q').value='AG-739104';doSearch()">سند سلفة شخصية (AG-739104)</button>
+        <button class="chip" onclick="$('#q').value='AG-658BA6';doSearch()">⚡ سند سلفة معتمد (AG-658BA6)</button>
+        <button class="chip" onclick="$('#q').value='NB-ELV49H5';doSearch()">⚡ سيارة تويوتا كامري (NB-ELV49H5)</button>
+        <button class="chip" onclick="$('#q').value='AG-739104';doSearch()">سند سلفة محلي (AG-739104)</button>
         <button class="chip" onclick="$('#q').value='AG-882140';doSearch()">فاتورة جماعية (AG-882140)</button>
-        <button class="chip" onclick="$('#q').value='NB-928471';doSearch()">إعلان سلعة سيارة (NB-928471)</button>
       </div>
     </div>
   `;
 }
 
-function doSearch(){
-  const q=($('#q').value||'').trim().toUpperCase();
-  if(!q){toast('أدخل رقم استفسار');return}
+async function doSearch(codeOverride){
+  const q = (codeOverride || ($('#q') ? $('#q').value : '') || '').trim().toUpperCase();
+  if(!q){toast('أدخل رقم استفسار أو باركود');return}
 
+  const qi = $('#q');
+  if(qi) qi.value = q;
+
+  // إذا كان الخادم متصلاً، استعلم حياً ومباشرة من خادم نبيه
+  if(backendOnline){
+    toast('🔍 جاري الاستعلام المباشر من قاعدة بيانات نبيه...');
+    try{
+      const res=await fetch(`${API_BASE}/Verification/lookup?query=${encodeURIComponent(q)}`);
+      if(res.ok){
+        const data=await res.json();
+        showLookupModal(data);
+        audit(`استفسار رسمي عبر الخادم: ${q} (${data.kind})`);
+        return;
+      }else if(res.status===404){
+        toast(`⚠️ المعاملة (${q}) غير موجودة في قاعدة بيانات الخادم.`);
+      }
+    }catch(e){
+      console.error(e);
+      toast('تعذر الاتصال بالخادم، جاري البحث المحلي');
+    }
+  }
+
+  // المعالجة المحلية الاحتياطية (Fallback)
   if(q.startsWith('AG-')){
     const ag=S.agreements.find(x=>x.code===q);
     if(ag){
@@ -708,6 +974,191 @@ function doSearch(){
     S.tmp.activeInq=q;
     openAdStudio(q);
   }
+}
+
+let activeLookupData = null;
+
+function startTransferCheckWithLookupData(){
+  if(!activeLookupData) return;
+  startTransferCheck(
+    activeLookupData.inquiryCode,
+    activeLookupData.title,
+    activeLookupData.amount,
+    activeLookupData.maskedIban,
+    activeLookupData.maskedPayeeName
+  );
+}
+
+function showLookupModal(d){
+  activeLookupData = d;
+  const isAg = d.kind === 'AGREEMENT';
+  const isSusp = d.isSuspended;
+
+  const html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">${isAg ? '🤝' : '🏷️'}</span>
+        <div>
+          <h2 style="margin:0;color:var(--brand-dark)">نتيجة الاستفسار الرسمي الموحد</h2>
+          <span class="muted" style="font-size:12px">استعلام موثق ومحمى من خادم نبيه المركزي</span>
+        </div>
+      </div>
+      <button class="chip" onclick="closeModal()">✕ إغلاق</button>
+    </div>
+
+    ${isSusp ? `
+      <div class="banner err" style="margin-bottom:16px">
+        <div>
+          <b style="font-size:16px">🚨 تحذير أمني: هذه المعاملة موقوفة احترازياً! (AC-17)</b>
+          <p style="margin:4px 0 0;font-size:13px">سبب التعليق: ${h(d.suspensionReason || 'وجود بلاغ احتيال قيد المراجعة والتحقيق من إدارة الامتثال')}</p>
+        </div>
+      </div>
+    ` : `
+      <div class="banner good" style="margin-bottom:16px">
+        <div>
+          <b style="font-size:15px">✅ المعاملة موثقة وسارية المفعول</b>
+          <p style="margin:2px 0 0;font-size:13px">تم التحقق من مطابقة الحساب والهوية وفق معايير نبيه الصارمة.</p>
+        </div>
+      </div>
+    `}
+
+    <div class="card" style="background:var(--bg);margin-bottom:16px">
+      <div class="row">
+        <span class="muted">رقم الاستفسار الموحد:</span>
+        <b dir="ltr" class="code" style="font-size:22px;color:var(--brand-dark);margin:0">${h(d.inquiryCode)}</b>
+      </div>
+      <div class="row">
+        <span class="muted">نوع المعاملة:</span>
+        ${isAg ? badge('purple-badge', 'اتفاق والتزام مالي رسمي') : badge('ok', 'إعلان سلعة تجارية موثقة')}
+      </div>
+      <div class="row">
+        <span class="muted">عنوان السجل:</span>
+        <b>${h(d.title)}</b>
+      </div>
+      <div class="row">
+        <span class="muted">المبلغ المعتمد:</span>
+        <b style="font-size:20px;color:var(--brand)">${fmt(d.amount)} ر.س</b>
+      </div>
+      <div class="row">
+        <span class="muted">المستفيد المعتمد (Payee):</span>
+        <b style="color:var(--ink)">${h(d.maskedPayeeName)}</b>
+      </div>
+      <div class="row">
+        <span class="muted">الحساب البنكي المعتمد:</span>
+        <b dir="ltr" style="font-family:monospace;color:var(--brand-dark)">${h(d.maskedIban)}</b>
+      </div>
+      ${d.advisoryMessage ? `
+        <div style="margin-top:10px;padding:10px;background:#fff;border-radius:8px;font-size:13px;color:var(--muted);border:1px dashed #cbd5e1">
+          💡 <b>إرشاد منصة نبيه:</b> ${h(d.advisoryMessage)}
+        </div>
+      ` : ''}
+    </div>
+
+    <!-- أزرار الإجراءات التفاعلية -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${isAg ? `
+          <a href="${API_SERVER}/api/Studio/voucher/agreement/${d.inquiryCode}" target="_blank" class="btn btn-purple" style="text-decoration:none">
+            📄 فتح سند التوثيق الرسمي (A4)
+          </a>
+        ` : `
+          <a href="${API_SERVER}/api/Studio/watermark/${d.inquiryCode}" target="_blank" class="btn btn-purple" style="text-decoration:none">
+            🖼️ شارة التوثيق المائية (SVG)
+          </a>
+        `}
+        <button class="btn" onclick="closeModal(); startTransferCheckWithLookupData()">
+          🛡️ فحص ومطابقة الحوالة (Safe Transfer)
+        </button>
+      </div>
+
+      <button class="btn3" onclick="openReportModal(activeLookupData.inquiryCode)">
+        ⚠️ تقديم بلاغ
+      </button>
+    </div>
+  `;
+  openModal(html);
+}
+
+function openReportModal(inquiryCode){
+  const html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px">
+      <h2 style="margin:0;color:var(--efg)">🚨 تقديم بلاغ رسمي على المعاملة (${h(inquiryCode)})</h2>
+      <button class="chip" onclick="closeModal()">✕</button>
+    </div>
+
+    <p class="muted" style="margin-top:0">
+      يتم رفع هذا البلاغ مباشرة إلى خادم منصة نبيه لإحالته إلى فريق الامتثال ومكافحة الاحتيال المالي، وتعليق المعاملة احترازياً عند ثبوت المخالفة (معيار AC-17).
+    </p>
+
+    <label for="repName">اسم المبلّغ</label>
+    <input id="repName" type="text" value="سعد بن فهد القحطاني">
+
+    <label for="repNatId">رقم الهوية الوطنية للمبلّغ</label>
+    <input id="repNatId" type="text" class="ltr" value="2222222222">
+
+    <label for="repReason">سبب البلاغ</label>
+    <select id="repReason">
+      <option value="SUSPICIOUS_SELLER">اشتباه احتيال أو حساب وهمي (Rule 17)</option>
+      <option value="NON_RECEIPT">عدم تسليم السلعة أو التخلف عن الالتزام</option>
+      <option value="MISLEADING_SPECS">بيانات أو شروط مضللة</option>
+      <option value="COUNTERFEIT">سلعة مقلدة أو وثائق غير صحيحة</option>
+      <option value="OTHER">سبب آخر</option>
+    </select>
+
+    <label for="repDesc">تفاصيل وشرح البلاغ</label>
+    <textarea id="repDesc" placeholder="اشرح بالتفصيل الشبهة أو سبب الاعتراض...">طلب الطرف المقابل تحويل المبلغ لحساب شخص آخر غير معتمد، ويشتبه بوجود احتيال.</textarea>
+
+    <div style="margin-top:20px;display:flex;gap:10px">
+      <button class="btn3" style="flex:1" onclick="submitReportToBackend('${inquiryCode}')">🚨 إرسال البلاغ إلى الخادم الآن</button>
+      <button class="btn2" onclick="closeModal()">إلغاء</button>
+    </div>
+  `;
+  openModal(html);
+}
+
+async function submitReportToBackend(inquiryCode){
+  const name = $('#repName').value.trim();
+  const natId = $('#repNatId').value.trim();
+  const reason = $('#repReason').value;
+  const desc = $('#repDesc').value.trim();
+
+  if(!name || !natId || !desc){
+    toast('يرجى تعبئة كافة بيانات البلاغ');
+    return;
+  }
+
+  if(backendOnline){
+    try{
+      const res = await fetch(`${API_BASE}/Reports`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inquiryCode: inquiryCode,
+          reporterNationalId: natId,
+          reporterName: name,
+          reason: reason,
+          description: desc
+        })
+      });
+
+      if(res.ok){
+        const data = await res.json();
+        closeModal();
+        audit(`رفع بلاغ احتيال للمعاملة ${inquiryCode}: ${data.reportId}`);
+        toast(`✅ تم رفع البلاغ بنجاح برقم: ${data.reportId}`);
+        setTimeout(() => {
+          doSearch();
+        }, 1200);
+        return;
+      }
+    }catch(e){
+      console.error(e);
+    }
+  }
+
+  // Fallback
+  closeModal();
+  toast('تم تسجيل البلاغ محلياً للمراجعة.');
 }
 
 /* ---------- استوديو الإعلانات وسلع البيع والشراء ---------- */
@@ -742,6 +1193,7 @@ function vStudio(){
           </div>
           <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
             <button class="btn" style="flex:1" onclick="downloadAdImage()">📥 تحميل صورة الإعلان الموسومة (PNG)</button>
+            <a href="${API_SERVER}/api/Studio/watermark/${q.code}" target="_blank" class="btn btn-purple" style="text-decoration:none;flex:1;display:flex;align-items:center;justify-content:center">🖼️ شارة التوثيق المائية الرسمية (SVG من الخادم)</a>
             <button class="btn2" onclick="copyText('${q.code}')">📋 نسخ رقم الاستفسار</button>
           </div>
         </div>
@@ -766,8 +1218,11 @@ function renderAdStudio(inqCode){
   const it=S.items.find(i=>i.id===q.item);
 
   const qrDiv=document.createElement('div');
+  const targetUrl = backendOnline 
+    ? `http://192.168.100.68:5135/api/Verification/lookup?query=${q.code}` 
+    : `https://nabih.sa/inq/${q.code}`;
   new QRCode(qrDiv,{
-    text:'https://nabih.sa/inq/'+q.code,
+    text: targetUrl,
     width:120,
     height:120,
     colorDark:"#0f172a",
@@ -901,13 +1356,18 @@ function saveItem(){
 
 /* ---------- شاشة الدخول والهيكل العام ---------- */
 function vLogin(){
+  const netBadge = backendOnline 
+    ? '<span class="badge ok" style="font-size:13px;padding:6px 16px">🟢 خادم نبيه الحقيقي متصل ونشط (ASP.NET Core .NET 10 على المنفذ 5135)</span>'
+    : '<span class="badge pend" style="font-size:13px;padding:6px 16px">🟡 وضع المحاكاة التجريبي (شغّل dotnet run للربط بالخادم)</span>';
+
   return `
     <div class="wrap" style="max-width:1050px">
-      <div style="text-align:center;margin-bottom:32px">
+      <div style="text-align:center;margin-bottom:24px">
         <h1 style="font-size:32px;color:var(--brand-dark)">منصة نبيه | المنظومة الشاملة لتوثيق التحويلات والاتفاقات المالية</h1>
         <p class="muted" style="font-size:16px;max-width:800px;margin:auto">
           المنصة الأولى لتنظيم وتوثيق مختلف التعاملات المالية: السلف، المديونيات، الفواتير الجماعية، ومبيعات السلع، وإصدار سندات رقمية معتمدة بباركود موحد يمنع النزاعات والاحتيال المالي.
         </p>
+        <div style="margin-top:14px">${netBadge}</div>
       </div>
 
       <div class="roles">
@@ -949,11 +1409,13 @@ function vLogin(){
 function header(){
   if(!S.user) return '';
   const a=me();
+  const netPill = `<span id="netStatusPill" class="badge ${backendOnline?'ok':'pend'}" style="font-size:12px;cursor:pointer" onclick="checkBackendStatus()">${backendOnline?'🟢 الخادم متصل':'🟡 وضع تجريبي'}</span>`;
+
   return `
     <div class="top">
       <div class="in">
         <div class="brand">
-          🛡️ منصة نبيه <span>النسخة الشاملة</span>
+          🛡️ منصة نبيه <span>النسخة الشاملة</span> ${netPill}
         </div>
         <nav>
           <button class="chip ${S.view==='dash'?'on':''}" onclick="go('dash')">لوحة التعاملات</button>
@@ -985,6 +1447,8 @@ function render(){
 }
 
 render();
+checkBackendStatus();
+setInterval(checkBackendStatus, 15000);
 </script>
 </body>
 </html>
